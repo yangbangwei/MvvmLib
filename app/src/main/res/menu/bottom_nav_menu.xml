@@ -12,11 +12,6 @@
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_discover"
-        android:icon="@mipmap/icon_home_tab_discover_normal"
-        android:title="@string/title_discover" />
-
-    <item
         android:id="@+id/navigation_notifications"
         android:icon="@mipmap/icon_home_tab_mine_normal"
         android:title="@string/title_notifications" />
