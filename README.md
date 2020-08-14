@@ -6,10 +6,10 @@
 
 ## jetPack系列思维导图
 1. [DataBinding]
-1. [LiveData]
-1. [Room]
-1. [Paging3]
-1. [ViewModel]
+2. [LiveData]
+3. [Room]
+4. [Paging3]
+5. [ViewModel]
 
 ## 效果截图 
 <img src="images/snapshot1.png" width="50%"/><img src="images/snapshot2.png" width="50%"/>
@@ -33,25 +33,25 @@
 - [x] 重新调整快速开发模板
 - [x] glide 工具类基本用法使用
 - [x] banner 基本功能使用
-- [] 无网络，异常问题
-- [] 单页面多个请求问题
-- [] 重构网络通用处理部分
-- [] 工具类整理
-- [] 首页仿美团饿了么，多列表效果
-- [] 商品页面仿购物类型APP，分类样式
-- [] tabLayout+ViewPager2效果
-- [] photoView控件
-- [] 更新控件
-- [] 图片上传控件
-- [] Paging3使用
-- [] 相机功能
-- [] gsyVideoPlayer使用
-- [] 单元测试
-- [] 功能完善后，将lib提交jtcent
+- [ ] 无网络，异常问题
+- [ ] 单页面多个请求问题
+- [ ] 重构网络通用处理部分
+- [ ] 工具类整理
+- [ ] 首页仿美团饿了么，多列表效果
+- [ ] 商品页面仿购物类型APP，分类样式
+- [ ] tabLayout+ViewPager2效果
+- [ ] photoView控件
+- [ ] 更新控件
+- [ ] 图片上传控件
+- [ ] Paging3使用
+- [ ] 相机功能
+- [ ] gsyVideoPlayer使用
+- [ ] 单元测试
+- [ ] 功能完善后，将lib提交jcenter,jitpack
 ## 常用开发平台封装
-- [] ShareSdk
-- [] 个推
-- [] 等等
+- [ ] ShareSdk
+- [ ] 个推
+- [ ] 等等
 
 ## 使用步骤
 
@@ -72,7 +72,7 @@
 - [MVVMArchitectureSample](https://github.com/imyyq-star/MVVMArchitectureSample)
 - [brick](https://github.com/xiazunyang/brick)
 - [Jetpack-MVVM-Best-Practice](https://github.com/KunMinX/Jetpack-MVVM-Best-Practice)
-- [more] 借鉴众多开源项目，如有不妥之处，不吝赐教。
+- [More] 借鉴众多开源项目，如有不妥之处，不吝赐教。
 
 ## License
 
