@@ -26,7 +26,7 @@ class MsgFragment : BaseListFragment<MsgViewModel, FragmentMsgBinding,
 
     override fun getLayoutId() = R.layout.fragment_msg
 
-    override fun getReplaceView(): View = fragment_msg
+    override fun getReplaceView(): View = smartRefreshLayout
 
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
@@ -42,8 +42,6 @@ class MsgFragment : BaseListFragment<MsgViewModel, FragmentMsgBinding,
     override fun getSmartRefreshLayout(): SmartRefreshLayout = smartRefreshLayout
 
     override fun getRecyclerView(): RecyclerView = recyclerView
-
-    override fun getLayoutManager(): RecyclerView.LayoutManager = LinearLayoutManager(mContext)
 
     override fun getAdapter() {
         mAdapter = MsgAdapter()

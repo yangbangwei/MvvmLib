@@ -22,7 +22,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:scaleType="fitCenter"
-            app:imageUrl="@{data.img}"
+            app:loadRoundImage="@{data.img}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />

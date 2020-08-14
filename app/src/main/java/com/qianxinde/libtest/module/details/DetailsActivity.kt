@@ -39,6 +39,9 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
     override fun init(savedInstanceState: Bundle?) {
         mId = intent.getStringExtra(ID)
         ActionBarUtils.setCenterTitleText(toolbar, "测试")
+        ActionBarUtils.setSupportActionBarWithBack(toolbar, null, View.OnClickListener {
+            finish()
+        })
         mViewModel.mDetails.observe(this, Observer {
             mBinding!!.detail = it
         })

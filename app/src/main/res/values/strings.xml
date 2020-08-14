@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">仆仆</string>
+    <string name="app_name">朴朴</string>
 
     <string name="title_home">首页</string>
-    <string name="title_dashboard">消息</string>
+    <string name="title_dashboard">商品</string>
+    <string name="title_discover">发现</string>
     <string name="title_notifications">我的</string>
-    <string name="test">测试</string>
 </resources>

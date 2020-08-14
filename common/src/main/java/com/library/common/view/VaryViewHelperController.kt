@@ -4,7 +4,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.android.hulk.R
+import com.library.common.R
 
 /**
  * @author yangbw

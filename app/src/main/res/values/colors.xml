@@ -3,7 +3,7 @@
     <!--主色调，actionBar,Toolbar-->
     <color name="colorPrimary">#21A953</color>
     <!--暗色调-->
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimaryDark">#21A953</color>
     <!--选中效果-->
     <color name="colorAccent">#21A953</color>
 </resources>

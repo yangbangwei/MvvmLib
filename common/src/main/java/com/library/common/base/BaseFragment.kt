@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.launcher.ARouter
-import com.android.hulk.R
+import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.library.common.config.AppConfig
@@ -35,7 +35,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragment(),
     IView {
 
-    //viewmodel
+    //viewModel
     protected lateinit var mViewModel: VM
 
     //databing
@@ -175,11 +175,9 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         })
     }
 
-
     /**
      * 相关view替换
      */
-
     override fun showTips(msg: String) {
         activity?.let {
             val snackBar = TSnackbar.make(

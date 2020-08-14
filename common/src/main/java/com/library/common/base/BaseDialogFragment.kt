@@ -17,7 +17,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.launcher.ARouter
-import com.android.hulk.R
+import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.library.common.config.AppConfig

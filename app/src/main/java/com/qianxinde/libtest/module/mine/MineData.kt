@@ -1,8 +1,7 @@
 package com.qianxinde.libtest.module.mine;
 
-import android.os.Parcel
-import android.os.Parcelable
-import androidx.annotation.Keep;
+import androidx.annotation.Keep
+import com.qianxinde.libtest.module.home.BannerInfo
 
 /**
  * @author yangbw
@@ -11,6 +10,11 @@ import androidx.annotation.Keep;
  * description：
  */
 @Keep
-data class MineData (
-    val img: String? = null
+data class MineData(
+    val name: String? = null,
+    val head: String? = null,
+    val present: String? = null,
+    val discount: String? = null,
+    val blance: String? = null,
+    val banners: List<BannerInfo>? = null
 )

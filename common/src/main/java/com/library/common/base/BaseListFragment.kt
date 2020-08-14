@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -16,10 +17,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.android.hulk.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.library.common.R
 import com.library.common.config.AppConfig
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
@@ -82,8 +83,6 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     abstract fun getSmartRefreshLayout(): SmartRefreshLayout?
 
     abstract fun getRecyclerView(): RecyclerView?
-
-    abstract fun getLayoutManager(): RecyclerView.LayoutManager?
 
     abstract fun getAdapter()
 
@@ -200,10 +199,10 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
                 TSnackbar.LENGTH_SHORT
             )
             val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(resources.getColor(R.color.mCCE4FF))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(it, R.color.mCCE4FF))
             val textView =
                 snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-            textView.setTextColor(resources.getColor(R.color.m177AE6))
+            textView.setTextColor(ContextCompat.getColor(it, R.color.m177AE6))
             snackBar.show()
         }
     }
@@ -360,7 +359,6 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private fun initRefreshLoadMore() {
         getAdapter()
         //设置相关设置
-        getRecyclerView()?.layoutManager = getLayoutManager()
         getRecyclerView()?.adapter = mAdapter
         getSmartRefreshLayout()?.isEnabled = mRefreshEnable
         if (mRefreshEnable) {

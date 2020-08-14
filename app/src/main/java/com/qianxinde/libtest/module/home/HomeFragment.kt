@@ -1,21 +1,19 @@
 package com.qianxinde.libtest.module.home;
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseListFragment
 import com.qianxinde.libtest.R
 import com.qianxinde.libtest.module.common.WebActivity
 import com.qianxinde.libtest.module.details.DetailsActivity
-import com.qianxinde.libtest.utils.GlideImageLoader
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.stx.xhb.androidx.XBanner
+import com.youth.banner.Banner
+import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 import utils.ActionBarUtils
@@ -25,8 +23,6 @@ import utils.ActionBarUtils
  * @date
  */
 class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapter, HomeData>() {
-
-    private lateinit var banner: XBanner
 
     override fun getLayoutId() = R.layout.fragment_home
 
@@ -38,19 +34,22 @@ class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapte
             .init()
         ActionBarUtils.setCenterTitleText(toolbar, "首页")
         //banner
-        banner = XBanner(context)
-        banner.minimumWidth = MATCH_PARENT
-        banner.layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, 400)
-        banner.loadImage(GlideImageLoader())
-        banner.setOnItemClickListener { _, model, _, _ ->
-            mContext?.let { WebActivity.launch(it, null, (model as Banner).url) }
-        }
-        mAdapter!!.addHeaderView(banner)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.fragment_home_head, null)
+        val banner = view.findViewById<Banner<BannerInfo, HomeBannerAdapter>>(R.id.banner)
+        mAdapter!!.addHeaderView(view)
         mAdapter!!.setOnItemClickListener { _, _, position ->
             mContext?.let { DetailsActivity.launch(it, mAdapter!!.getItem(position).id) }
         }
+        //添加生命周期观察者
+        banner.addBannerLifecycleObserver(this)
+            .indicator = CircleIndicator(mContext)
         mViewModel.mBanners.observe(this, Observer {
-            banner.setBannerData(it)
+            banner.adapter = HomeBannerAdapter(it)
+            banner.adapter.setOnBannerListener { data, _ ->
+                mContext?.let { it1 ->
+                    WebActivity.launch(it1, null, (data as BannerInfo).url)
+                }
+            }
         })
         mViewModel.mVersion.observe(this, Observer {
             if (it != null) {
@@ -59,8 +58,8 @@ class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapte
                 showToast("当前为最新版本")
             }
         })
-        mViewModel.onStart()
         mViewModel.updateVersion(2)
+        mViewModel.onStart()
     }
 
     override fun getSmartRefreshLayout(): SmartRefreshLayout? = smartRefreshLayout
@@ -73,8 +72,6 @@ class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapte
     }
 
     override fun getRecyclerView(): RecyclerView? = recyclerView
-
-    override fun getLayoutManager(): RecyclerView.LayoutManager? = LinearLayoutManager(mContext)
 
     override fun getAdapter() {
         mAdapter = HomeAdapter()

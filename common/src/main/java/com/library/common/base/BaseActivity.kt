@@ -2,6 +2,7 @@ package com.library.common.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -13,10 +14,10 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.alibaba.android.arouter.launcher.ARouter
-import com.android.hulk.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
+import com.library.common.R
 import com.library.common.config.AppConfig
 import com.library.common.mvvm.BaseViewModel
 import com.library.common.mvvm.IView
@@ -109,6 +110,8 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
             .fitsSystemWindows(true)
             .statusBarColor(R.color.colorPrimary)
             .init();
+
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     }
 
     private fun initRefresh() {

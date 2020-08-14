@@ -364,16 +364,15 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
      * 网络异常，状态码异常，未设置成功状态码
      */
     private fun onNetWorkError(
-        reTry: () -> Unit = {
-        },
-        merrorMsg: String = errorMsg
+        reTry: () -> Unit = {},
+        errorMsg: String = this.errorMsg
     ) {
         when (type) {
             RequestDisplay.NULL -> {
 
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = merrorMsg
+                viewChange.showToast.value = errorMsg
                 viewChange.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
@@ -381,11 +380,11 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                     this.listener = View.OnClickListener {
                         reTry()
                     }
-                    viewChange.showNetworkError.value = merrorMsg
+                    viewChange.showNetworkError.value = errorMsg
                 } else {
                     viewChange.refreshComplete.call()
                     viewChange.restore.call()
-                    viewChange.showTips.value = merrorMsg
+                    viewChange.showTips.value = errorMsg
                 }
             }
         }

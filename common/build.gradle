@@ -87,6 +87,7 @@ dependencies {
     //图片加载
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["glide-compiler"]
+    api rootProject.ext.dependencies["glide-transformations"]
     //浏览器
     api rootProject.ext.dependencies["agentweb"]
     //通知栏
@@ -95,4 +96,6 @@ dependencies {
     api rootProject.ext.dependencies["autosize"]
     //Banner
     api rootProject.ext.dependencies["banner"]
+
 }
+

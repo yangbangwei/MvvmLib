@@ -28,10 +28,10 @@ class MineViewModel : BaseViewModel<ApiService>() {
             success = {
                 mUserInfo.value = it
             },
-            type = RequestDisplay.REPLACE,
             reTry = {
                 getUserInfo()
-            }
+            },
+            type = RequestDisplay.REPLACE
         )
     }
 

@@ -14,7 +14,7 @@ import com.qianxinde.libtest.api.ApiService
  */
 class HomeViewModel : BaseListViewModel<ApiService>() {
 
-    val mBanners = MutableLiveData<List<Banner>>()
+    val mBanners = MutableLiveData<List<BannerInfo>>()
     val mVersion = MutableLiveData<UpdateVersion>()
 
     public override fun onStart() {

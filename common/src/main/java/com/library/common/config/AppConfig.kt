@@ -1,14 +1,12 @@
 package com.library.common.config
 
+import com.library.common.R
 import com.library.common.http.interceptor.IReturnCodeErrorInterceptor
 import com.library.common.http.interceptor.IVersionDifInterceptor
 import okhttp3.HttpUrl
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
 import retrofit2.Retrofit
-import java.lang.RuntimeException
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 /**
  * @author yangbw
@@ -18,42 +16,62 @@ import kotlin.collections.HashMap
  */
 object AppConfig {
     private var retrofit: Retrofit? = null
+
     //服务地址
     private var baseUrl: String? = null
+
     //returnCode 正常态的值 真对不同接口返回支持单正常态值的返回，也支持增删改查不同正常态值的返回
     private var retSuccess: String? = null
     private var retSuccessList: List<String>? = null
+
     //日志开关
     private var logOpen = false
+
     //连接超时时间 单位秒
     private var connectTimeout = 10L
+
     //读超时时间
     private var readTimeout = 10L
+
     //写超时时间
     private var writeTimeout = 10L
+
     //异常处理的 相关拦截器
     //oKHttp拦截器
     private var okHttpInterceptors: MutableList<Interceptor>? = null
+
     //接口返回ReturnCode不是正常态拦截器
     private var retCodeInterceptors: MutableList<IReturnCodeErrorInterceptor>? = null
+
     //服务端版本和本地版本不一致拦截器
     private var versionDifInterceptors: MutableList<IVersionDifInterceptor>? = null
+
     //是否开启缓存
     private var cacheOpen = false
     private var configBuilder: ConfigBuilder? = null
+
     //是否开启aRouter
     private var aRouterOpen = true
+
     //设置多个BaseUrl，配合默认的DOMAIN_NAME
     private var mDomainNameHub: HashMap<String, HttpUrl>? = null
     private var isMoreBaseUrl = false
+
+    //glide配置
+    private var isSkipMemoryCache = false
+    private var placeholder = R.mipmap.ic_image_loading
+    private var errorImage = R.mipmap.ic_empty_picture
+
     //设置默认的DOMAIN_NAME
     const val DOMAIN_NAME = "BASE_DOMAIN_NAME"
     private const val DOMAIN_NAME_HEADER = "$DOMAIN_NAME: "
+
     /**
      * 如果在 Url 地址中加入此标识符, 意味着您想对此 Url 开启超级模式,
      * 框架会将 '=' 后面的数字作为 PathSize, 来确认最终需要被超级模式替换的 BaseUrl
      */
     const val IDENTIFICATION_PATH_SIZE = "#baseurl_path_size="
+
     //多个baseUrl就对应的不同returnCode 正常态的值
     private var retSuccessMap: HashMap<String, List<String>>? = null
 
@@ -127,7 +145,6 @@ object AppConfig {
         return mDomainNameHub
     }
 
-
     fun getMoreBaseUrl(): Boolean {
         return isMoreBaseUrl
     }
@@ -142,6 +159,18 @@ object AppConfig {
 
     fun getRetSuccessMap(): HashMap<String, List<String>>? {
         return retSuccessMap
+    }
+
+    fun isSkipMemoryCache(): Boolean {
+        return isSkipMemoryCache
+    }
+
+    fun getPlaceholder(): Int {
+        return placeholder
+    }
+
+    fun getErrorImage(): Int {
+        return errorImage
     }
 
     class ConfigBuilder {
@@ -258,6 +287,21 @@ object AppConfig {
             val retSuccessList =
                 listOf(*retSuccess.split(",").toTypedArray())
             retSuccessMap?.put(domainNameKey, retSuccessList)
+            return this
+        }
+
+        fun setIsSkipMemoryCache(isSkipMemoryCache: Boolean): ConfigBuilder {
+            AppConfig.isSkipMemoryCache = AppConfig.isSkipMemoryCache
+            return this
+        }
+
+        fun setPlaceholder(placeholder: Int): ConfigBuilder {
+            AppConfig.placeholder = AppConfig.placeholder
+            return this
+        }
+
+        fun setErrorImage(errorImage: Int): ConfigBuilder {
+            AppConfig.errorImage = AppConfig.errorImage
             return this
         }
 

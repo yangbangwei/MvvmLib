@@ -2,6 +2,7 @@ package com.library.common.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -15,10 +16,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.launcher.ARouter
-import com.android.hulk.R
+import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.gyf.immersionbar.ImmersionBar
 import com.library.common.config.AppConfig
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
@@ -82,8 +84,6 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
 
     abstract fun getRecyclerView(): RecyclerView?
 
-    abstract fun getLayoutManager(): RecyclerView.LayoutManager?
-
     abstract fun getAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +98,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         lifecycle.addObserver(mViewModel)
         registerViewChange()
         initRefreshLoadMore()
+        initBar()
         init(savedInstanceState)
         registerDataChange()
     }
@@ -359,6 +360,15 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         getSmartRefreshLayout()?.isEnabled = mRefreshEnable
     }
 
+    private fun initBar() {
+        ImmersionBar.with(this)
+            .autoStatusBarDarkModeEnable(true)
+            .fitsSystemWindows(true)
+            .statusBarColor(R.color.colorPrimary)
+            .init();
+
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    }
 
     /**
      * 设置刷新加载相关
@@ -366,7 +376,6 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private fun initRefreshLoadMore() {
         getAdapter()
         //设置相关设置
-        getRecyclerView()?.layoutManager = getLayoutManager()
         getRecyclerView()?.adapter = mAdapter
         getSmartRefreshLayout()?.isEnabled = mRefreshEnable
         if (mRefreshEnable) {

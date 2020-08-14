@@ -10,7 +10,8 @@ object Constant {
     //基本配置
     const val OPEN_AROUTER: Boolean = true
     const val OPEN_LOG: Boolean = true
-    const val BASE_URL: String = "http://192.168.1.69:8080/"
+//    const val BASE_URL: String = "http://111.229.84.169:9090/"
+    const val BASE_URL: String = "http://192.168.1.73:9090/"
     const val CODE_SUCCESS: String = "200"
     const val TOKEN: String = "token"
 }

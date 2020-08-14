@@ -3,7 +3,7 @@ package com.qianxinde.libtest.api
 import com.qianxinde.libtest.base.BaseRes
 import com.qianxinde.libtest.module.login.UserData
 import com.qianxinde.libtest.module.details.DetailsData
-import com.qianxinde.libtest.module.home.Banner
+import com.qianxinde.libtest.module.home.BannerInfo
 import com.qianxinde.libtest.module.home.HomeData
 import com.qianxinde.libtest.module.home.UpdateVersion
 import com.qianxinde.libtest.module.mine.MineData
@@ -32,7 +32,7 @@ interface ApiService {
     ): BaseRes<String>
 
     @GET("api/banners")
-    suspend fun banners(): BaseRes<List<Banner>>
+    suspend fun banners(): BaseRes<List<BannerInfo>>
 
     @GET("api/homes")
     suspend fun homes(@Query("pageNo") pageNo: Int): BaseRes<List<HomeData>>
@@ -44,6 +44,5 @@ interface ApiService {
     suspend fun homeDetails(@Query("id") id: String): BaseRes<DetailsData>
 
     @POST("api/userInfo")
-    @FormUrlEncoded
     suspend fun userInfo(): BaseRes<MineData>
 }
