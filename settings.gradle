@@ -1,2 +1,2 @@
 include ':app',':common'
-rootProject.name = "LibTest"
+rootProject.name = "MvvmLib"
