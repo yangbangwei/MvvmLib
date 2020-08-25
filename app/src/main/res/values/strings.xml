@@ -4,5 +4,5 @@
     <string name="title_home">首页</string>
     <string name="title_dashboard">商品</string>
     <string name="title_discover">发现</string>
-    <string name="title_notifications">我的</string>
+    <string name="title_mine">我的</string>
 </resources>

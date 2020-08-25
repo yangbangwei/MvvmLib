@@ -104,15 +104,17 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         return VaryViewHelperController(getReplaceView())
     }
 
-    private fun initBar(){
+    private fun initBar() {
         ImmersionBar.with(this)
             .autoStatusBarDarkModeEnable(true)
             .fitsSystemWindows(true)
-            .statusBarColor(R.color.colorPrimary)
+            .statusBarColor(getStatusBarColor())
             .init();
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     }
+
+    open fun getStatusBarColor() = R.color.colorPrimary
 
     private fun initRefresh() {
         getSmartRefreshLayout()?.run {
@@ -213,10 +215,10 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
             TSnackbar.LENGTH_SHORT
         )
         val snackBarView = snackBar.view
-        snackBarView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.mCCE4FF))
+        snackBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.mCCE4FF))
         val textView =
             snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-        textView.setTextColor(ContextCompat.getColor(mContext,R.color.m177AE6))
+        textView.setTextColor(ContextCompat.getColor(mContext, R.color.m177AE6))
         snackBar.show()
     }
 

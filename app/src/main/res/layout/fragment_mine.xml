@@ -7,9 +7,8 @@
 
         <variable
             name="mineData"
-            type="com.qianxinde.libtest.module.mine.MineData" />
+            type="com.yangbw.libtest.module.mine.MineData" />
     </data>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_mine"

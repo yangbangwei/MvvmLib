@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/white"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/ivHome"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/sel_btn_home"
+        app:layout_constraintBottom_toTopOf="@+id/tvHome"
+        app:layout_constraintEnd_toStartOf="@id/ivGoods"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/title_home"
+        android:textColor="@color/sel_bottom_navigation_bar_radio_color"
+        android:textSize="@dimen/sp10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivHome"
+        app:layout_constraintStart_toStartOf="@id/ivHome"
+        app:layout_constraintTop_toBottomOf="@id/ivHome" />
+
+    <ImageView
+        android:id="@+id/ivGoods"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:padding="2dp"
+        android:src="@drawable/sel_btn_goods"
+        app:layout_constraintBottom_toTopOf="@id/tvGoods"
+        app:layout_constraintEnd_toStartOf="@id/ivMenu"
+        app:layout_constraintStart_toEndOf="@id/ivHome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGoods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/title_dashboard"
+        android:textColor="@color/sel_bottom_navigation_bar_radio_color"
+        android:textSize="@dimen/sp10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivGoods"
+        app:layout_constraintStart_toStartOf="@id/ivGoods"
+        app:layout_constraintTop_toBottomOf="@+id/ivGoods" />
+
+    <ImageView
+        android:id="@+id/ivMenu"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/ic_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivDiscover"
+        app:layout_constraintStart_toEndOf="@id/ivGoods"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivDiscover"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/sel_btn_discover"
+        app:layout_constraintBottom_toTopOf="@id/tvDiscover"
+        app:layout_constraintEnd_toStartOf="@id/ivMine"
+        app:layout_constraintStart_toEndOf="@id/ivMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDiscover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/title_discover"
+        android:textColor="@color/sel_bottom_navigation_bar_radio_color"
+        android:textSize="@dimen/sp10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivDiscover"
+        app:layout_constraintStart_toStartOf="@id/ivDiscover"
+        app:layout_constraintTop_toBottomOf="@+id/ivDiscover" />
+
+    <ImageView
+        android:id="@+id/ivMine"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:padding="2dp"
+        android:src="@drawable/sel_btn_mine"
+        app:layout_constraintBottom_toTopOf="@id/tvMine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivDiscover"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:text="@string/title_mine"
+        android:textColor="@color/sel_bottom_navigation_bar_radio_color"
+        android:textSize="@dimen/sp10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivMine"
+        app:layout_constraintStart_toStartOf="@id/ivMine"
+        app:layout_constraintTop_toBottomOf="@+id/ivMine" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnHome"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHome"
+        app:layout_constraintEnd_toEndOf="@id/ivHome"
+        app:layout_constraintStart_toStartOf="@id/ivHome"
+        app:layout_constraintTop_toTopOf="@+id/ivHome" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnGoods"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGoods"
+        app:layout_constraintEnd_toEndOf="@id/ivGoods"
+        app:layout_constraintStart_toStartOf="@id/ivGoods"
+        app:layout_constraintTop_toTopOf="@+id/ivGoods" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnMenu"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ivMenu"
+        app:layout_constraintStart_toStartOf="@id/ivMenu"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnDiscover"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDiscover"
+        app:layout_constraintEnd_toEndOf="@id/ivDiscover"
+        app:layout_constraintStart_toStartOf="@id/ivDiscover"
+        app:layout_constraintTop_toTopOf="@+id/ivDiscover" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/btnMine"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMine"
+        app:layout_constraintEnd_toEndOf="@id/ivMine"
+        app:layout_constraintStart_toStartOf="@id/ivMine"
+        app:layout_constraintTop_toTopOf="@+id/ivMine" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

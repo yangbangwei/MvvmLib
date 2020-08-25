@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     defaultConfig {
-        applicationId 'com.qianxinde.libtest'
+        applicationId 'com.yangbw.libtest'
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode 1

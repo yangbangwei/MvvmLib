@@ -6,4 +6,7 @@
     <color name="colorPrimaryDark">#21A953</color>
     <!--选中效果-->
     <color name="colorAccent">#21A953</color>
+
+    <color name="colorTextPrimary">#21A953</color>
+    <color name="colorTextSecondary">#888888</color>
 </resources>

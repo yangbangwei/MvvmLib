@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@mipmap/btn_home_selected" android:state_selected="true" />
+    <item android:drawable="@mipmap/btn_home_normal" />
+</selector>

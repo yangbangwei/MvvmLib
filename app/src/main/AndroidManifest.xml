@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.qianxinde.libtest">
+    package="com.yangbw.libtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".App"
+        android:name="com.yangbw.libtest.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_new"
         android:label="@string/app_name"
@@ -14,18 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_new"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.details.DetailsActivity" />
-        <activity android:name=".module.common.StartActivity">
+        <activity android:name="com.yangbw.libtest.module.details.DetailsActivity" />
+        <activity android:name="com.yangbw.libtest.module.common.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.login.LoginActivity" />
-        <activity android:name=".module.register.RegisterActivity" />
-        <activity android:name=".module.common.MainActivity" />
-        <activity android:name=".module.common.WebActivity" />
+        <activity android:name="com.yangbw.libtest.module.login.LoginActivity" />
+        <activity android:name="com.yangbw.libtest.module.register.RegisterActivity" />
+        <activity android:name="com.yangbw.libtest.module.common.MainActivity" />
+        <activity android:name="com.yangbw.libtest.module.common.WebActivity" />
 
         <!--屏幕适配-->
         <meta-data
