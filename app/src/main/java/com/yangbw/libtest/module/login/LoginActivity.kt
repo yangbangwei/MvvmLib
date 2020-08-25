@@ -74,21 +74,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                     mBinding!!.etPassword.setText(it.password)
                 }
             })
-
-        PermissionUtils.permission(*PermissionUtils.getPermissions().toTypedArray())
-            .callback(object : PermissionUtils.FullCallback {
-                override fun onGranted(granted: MutableList<String>) {
-
-                }
-
-                override fun onDenied(
-                    forever: MutableList<String>, denied: MutableList<String>
-                ) {
-
-                }
-
-            })
-            .request()
     }
 
 }

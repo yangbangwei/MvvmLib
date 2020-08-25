@@ -1,4 +1,4 @@
-package com.yangbw.libtest.module.discover
+package com.yangbw.libtest.module.discover.hot
 
 import androidx.annotation.Keep
 
@@ -7,6 +7,6 @@ import androidx.annotation.Keep
  * @date
  */
 @Keep
-class DiscoverListData {
+class HotListData {
 
 }

@@ -47,7 +47,7 @@ class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapte
         //添加生命周期观察者
         banner.addBannerLifecycleObserver(this)
             .indicator = CircleIndicator(mContext)
-        mViewModel.mBanners.observe(this, Observer {
+        mViewModel.mBanners.observe(this, {
             banner.adapter = HomeBannerAdapter(it)
             banner.adapter.setOnBannerListener { data, _ ->
                 mContext?.let { it1 ->
@@ -55,7 +55,7 @@ class HomeFragment : BaseListFragment<HomeViewModel, ViewDataBinding, HomeAdapte
                 }
             }
         })
-        mViewModel.mVersion.observe(this, Observer {
+        mViewModel.mVersion.observe(this, {
             if (it != null) {
                 showToast("当前版本：" + it.verson)
             } else {

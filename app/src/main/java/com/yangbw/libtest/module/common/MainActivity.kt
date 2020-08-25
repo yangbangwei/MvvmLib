@@ -36,9 +36,9 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     private var mHomeFragment: HomeFragment? = null
 
-    private var mMsgFragment: GoodsFragment? = null
+    private var mGoodsFragment: GoodsFragment? = null
 
-    private var mVideoFragment: DiscoverFragment? = null
+    private var mDiscoverFragment: DiscoverFragment? = null
 
     private var mMineFragment: MineFragment? = null
 
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
-            if (this.id == btnMine.id) {
+            if (this.id == btnMenu.id) {
 
             } else {
                 setTabSelection(this.id)
@@ -86,21 +86,21 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
                 btnGoods.id -> {
                     ivGoods.isSelected = true
                     tvGoods.isSelected = true
-                    if (mMsgFragment == null) {
-                        mMsgFragment = GoodsFragment.newInstance()
-                        add(R.id.homeActivityFragContainer, mMsgFragment!!)
+                    if (mGoodsFragment == null) {
+                        mGoodsFragment = GoodsFragment.newInstance()
+                        add(R.id.homeActivityFragContainer, mGoodsFragment!!)
                     } else {
-                        show(mMsgFragment!!)
+                        show(mGoodsFragment!!)
                     }
                 }
                 btnDiscover.id -> {
                     ivDiscover.isSelected = true
                     tvDiscover.isSelected = true
-                    if (mVideoFragment == null) {
-                        mVideoFragment = DiscoverFragment.newInstance()
-                        add(R.id.homeActivityFragContainer, mVideoFragment!!)
+                    if (mDiscoverFragment == null) {
+                        mDiscoverFragment = DiscoverFragment.newInstance()
+                        add(R.id.homeActivityFragContainer, mDiscoverFragment!!)
                     } else {
-                        show(mVideoFragment!!)
+                        show(mDiscoverFragment!!)
                     }
                 }
                 btnMine.id -> {
@@ -123,8 +123,8 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     private fun hideFragments(transaction: FragmentTransaction) {
         transaction.run {
             if (mHomeFragment != null) hide(mHomeFragment!!)
-            if (mMsgFragment != null) hide(mMsgFragment!!)
-            if (mVideoFragment != null) hide(mVideoFragment!!)
+            if (mGoodsFragment != null) hide(mGoodsFragment!!)
+            if (mDiscoverFragment != null) hide(mDiscoverFragment!!)
             if (mMineFragment != null) hide(mMineFragment!!)
         }
     }

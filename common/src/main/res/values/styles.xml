@@ -28,11 +28,17 @@
         <item name="actionMenuTextColor">@color/m444444</item>
     </style>
 
-
     <!-- 横线 -->
     <style name="div_hor">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.8dp</item>
+        <item name="android:background">#ebedf0</item>
+    </style>
+
+    <!-- 竖线 -->
+    <style name="div_ver">
+        <item name="android:layout_width">0.8dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">#ebedf0</item>
     </style>
 
@@ -47,12 +53,5 @@
     <style name="CustomProgressDialog" parent="@style/CustomDialog">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
-    </style>
-
-    <!-- 竖线 -->
-    <style name="div_ver">
-        <item name="android:layout_width">0.8dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">#ebedf0</item>
     </style>
 </resources>

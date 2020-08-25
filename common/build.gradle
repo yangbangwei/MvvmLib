@@ -96,6 +96,9 @@ dependencies {
     api rootProject.ext.dependencies["autosize"]
     //Banner
     api rootProject.ext.dependencies["banner"]
-
+    //tab标签
+    api rootProject.ext.dependencies["flycoTabLayout"]
+    //权限管理
+    api rootProject.ext.dependencies["permissionx"]
 }
 

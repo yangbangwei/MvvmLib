@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="com.yangbw.libtest.App"
@@ -15,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.yangbw.libtest.module.details.DetailsActivity" />
-        <activity android:name="com.yangbw.libtest.module.common.StartActivity">
+        <activity android:name="com.yangbw.libtest.module.common.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

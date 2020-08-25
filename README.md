@@ -27,19 +27,23 @@
 10. [`autosize` 屏幕适配](https://github.com/jackmoore/autosize)
 11. [`banner` Banner广告控件](https://github.com/youth5201314/banner)
 12. [`Leakcanary` 内存检测功能](https://github.com/square/leakcanary)
+13. [`FlycoTabLayout` tabLayout页签](https://github.com/H07000223/FlycoTabLayout)
+14. [`PermissionX` 动态权限管理](https://github.com/guolindev/PermissionX)
 
 ## 后续完善部分
 - [x] 重新调整，优化流程，精简代码
 - [x] 重新调整快速开发模板
 - [x] glide 工具类基本用法使用
 - [x] banner 基本功能使用
+- [x] 首页tab功能实现
+- [x] 发现页面，FlycoTabLayout+ViewPager2效果
+- [x] 动态权限使用PermissionX
 - [ ] 无网络，异常问题
 - [ ] 单页面多个请求问题
 - [ ] 重构网络通用处理部分
 - [ ] 工具类整理
 - [ ] 首页仿美团饿了么，多列表效果
 - [ ] 商品页面仿购物类型APP，分类样式
-- [ ] tabLayout+ViewPager2效果
 - [ ] photoView控件
 - [ ] 更新控件
 - [ ] 图片上传控件
@@ -48,6 +52,7 @@
 - [ ] gsyVideoPlayer使用
 - [ ] 单元测试
 - [ ] 功能完善后，将lib提交jcenter,jitpack
+
 ## 常用开发平台封装
 - [ ] ShareSdk
 - [ ] 个推

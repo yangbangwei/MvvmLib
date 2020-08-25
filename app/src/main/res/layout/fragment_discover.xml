@@ -1,43 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/fragment_discover"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/tbar"
-            layout="@layout/toolbar" />
+        <include layout="@layout/layout_main_page_title_bar"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_video"
+        <View
+            android:id="@+id/viewHorizontalLine"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="1px"
+            android:background="@color/gray" />
 
-            <com.scwang.smartrefresh.layout.SmartRefreshLayout
-                android:id="@+id/smartRefreshLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?actionBarSize">
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

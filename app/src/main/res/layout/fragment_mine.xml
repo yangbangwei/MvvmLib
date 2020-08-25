@@ -4,7 +4,6 @@
     xmlns:banner="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="mineData"
             type="com.yangbw.libtest.module.mine.MineData" />
