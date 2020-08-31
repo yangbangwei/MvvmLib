@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module：
  * description：
  */
@@ -49,9 +49,6 @@ object AppConfig {
     //是否开启缓存
     private var cacheOpen = false
     private var configBuilder: ConfigBuilder? = null
-
-    //是否开启aRouter
-    private var aRouterOpen = true
 
     //设置多个BaseUrl，配合默认的DOMAIN_NAME
     private var mDomainNameHub: HashMap<String, HttpUrl>? = null
@@ -103,10 +100,6 @@ object AppConfig {
 
     fun getRetSuccessList(): List<String> {
         return retSuccessList ?: ArrayList()
-    }
-
-    fun isARouterOpen(): Boolean {
-        return aRouterOpen
     }
 
     fun getConnectTimeout(): Long {
@@ -202,11 +195,6 @@ object AppConfig {
 
         fun setLogOpen(logOpen: Boolean): ConfigBuilder {
             AppConfig.logOpen = logOpen
-            return this
-        }
-
-        fun setARouterOpen(aRouterOpen: Boolean): ConfigBuilder {
-            AppConfig.aRouterOpen = aRouterOpen
             return this
         }
 

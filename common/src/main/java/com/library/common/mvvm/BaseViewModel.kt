@@ -4,6 +4,8 @@ import android.view.View
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.library.common.R
+import com.library.common.base.BaseApplication
 import com.library.common.config.AppConfig
 import com.library.common.em.RequestDisplay
 import com.library.common.http.exception.NetWorkException
@@ -19,7 +21,7 @@ import java.lang.reflect.ParameterizedType
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module：
  * description：
  */
@@ -32,9 +34,9 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     private var type: RequestDisplay? = null
 
     //默认相关错误提示
-    private val emptyMsg: String = "暂无数据"
-    private val errorMsg: String = "网络错误"
-    private val codeNullMsg: String = "未设置成功状态码"
+    private lateinit var emptyMsg: String
+    private lateinit var errorMsg: String
+    private lateinit var codeNullMsg: String
 
     //重试的监听
     var listener: View.OnClickListener? = null
@@ -47,13 +49,16 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 视图变化
      */
-    val viewChange: ViewChange by lazy { ViewChange() }
+    val viewChange: ViewState by lazy { ViewState() }
 
     /**
      * 获取接口操作类
      */
     fun getApiService(): API {
         if (apiService == null) {
+            emptyMsg = BaseApplication.context.getString(R.string.no_data)
+            errorMsg = BaseApplication.context.getString(R.string.no_data)
+            codeNullMsg = BaseApplication.context.getString(R.string.network_error)
             apiService = AppConfig.getRetrofit().create(
                 (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<API>
             )

@@ -19,7 +19,7 @@
             android:id="@+id/tbar"
             layout="@layout/toolbar" />
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
             android:id="@+id/smartRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -65,7 +65,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
     </LinearLayout>
 </layout>

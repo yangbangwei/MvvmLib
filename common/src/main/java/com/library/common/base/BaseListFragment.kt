@@ -16,12 +16,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.alibaba.android.arouter.launcher.ARouter
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.library.common.R
-import com.library.common.config.AppConfig
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
 import com.library.common.utils.ListUtils
@@ -29,7 +27,7 @@ import com.library.common.view.IVaryViewHelperController
 import com.library.common.view.LoadingDialog
 import com.library.common.view.VaryViewHelperController
 import com.library.common.view.baseviewholder.CommonViewHolder
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -101,9 +99,6 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (AppConfig.isARouterOpen()) {
-            ARouter.getInstance().inject(this)
-        }
         createViewModel()
         mViewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
@@ -143,35 +138,35 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 注册视图变化事件
      */
     private fun registerViewChange() {
-        mViewModel.viewChange.showLoading.observe(this, Observer {
+        mViewModel.viewState.showLoading.observe(this, Observer {
             mViewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewChange.showDialogProgress.observe(this, Observer {
+        mViewModel.viewState.showDialogProgress.observe(this, Observer {
             showDialogProgress(it)
         })
-        mViewModel.viewChange.dismissDialog.observe(this, Observer {
+        mViewModel.viewState.dismissDialog.observe(this, Observer {
             dismissDialog()
         })
-        mViewModel.viewChange.showToast.observe(this, Observer {
+        mViewModel.viewState.showToast.observe(this, Observer {
             showToast(it)
         })
-        mViewModel.viewChange.showTips.observe(this, Observer {
+        mViewModel.viewState.showTips.observe(this, Observer {
             showTips(it)
         })
-        mViewModel.viewChange.showEmpty.observe(this, Observer {
+        mViewModel.viewState.showEmpty.observe(this, Observer {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewChange.showNetworkError.observe(this, Observer {
+        mViewModel.viewState.showNetworkError.observe(this, Observer {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewChange.restore.observe(this, Observer {
+        mViewModel.viewState.restore.observe(this, Observer {
             mViewController?.restore()
         })
-        mViewModel.viewChange.refreshComplete.observe(this, Observer {
+        mViewModel.viewState.refreshComplete.observe(this, Observer {
             refreshComplete()
         })
     }
@@ -326,14 +321,14 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         ToastUtils.showShort(msg)
     }
 
-    override val mActivity: Activity?
-        get() = activity
+    override val mActivity: Activity
+        get() = activity!!
 
-    override val mContext: Context?
-        get() = context
+    override val mContext: Context
+        get() = context!!
 
-    override val mAppContext: Context?
-        get() = activity?.applicationContext
+    override val mAppContext: Context
+        get() = activity!!.applicationContext
 
     /**
      *

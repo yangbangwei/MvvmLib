@@ -38,6 +38,7 @@ class DiscoverFragment : BaseFragment<CommonViewModel, FragmentDiscoverBinding>(
 
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
+            .statusBarDarkFont(false)
             .titleBar(tabLayout)
             .init()
         viewPager.offscreenPageLimit = offscreenPageLimit

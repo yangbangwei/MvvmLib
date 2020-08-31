@@ -3,12 +3,19 @@
     <!--主色调，actionBar,Toolbar-->
     <color name="colorPrimary">#21A953</color>
     <!--暗色调-->
-    <color name="colorPrimaryDark">#21A953</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
     <!--选中效果-->
     <color name="colorAccent">#21A953</color>
 
     <color name="windowBackground">#888888</color>
 
+    <color name="main_color">#21A953</color>
+
     <color name="colorTextPrimary">#21A953</color>
     <color name="colorTextSecondary">#888888</color>
+
+    <color name="bg_default">#F9F9F9</color>
+
+    <color name="text_gray">#AFAFAF</color>
+    <color name="text_red">#FC363E</color>
 </resources>

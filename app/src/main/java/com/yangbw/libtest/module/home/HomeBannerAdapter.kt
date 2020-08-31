@@ -14,7 +14,7 @@ class HomeBannerAdapter(mDatas: List<BannerInfo>) : BannerAdapter<BannerInfo, Ho
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        imageView.scaleType=ImageView.ScaleType.FIT_XY
+        imageView.scaleType=ImageView.ScaleType.CENTER_INSIDE
         return BannerViewHolder(imageView)
     }
 

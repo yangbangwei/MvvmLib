@@ -5,11 +5,10 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseListFragment
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.databinding.FragmentDiscoverBinding
 import kotlinx.android.synthetic.main.fragment_goods.*
-import kotlinx.android.synthetic.main.toolbar.*
 import utils.ActionBarUtils
 
 /**
@@ -28,10 +27,11 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
     override fun getReplaceView(): View = smartRefreshLayout
 
     override fun init(savedInstanceState: Bundle?) {
+        ActionBarUtils.setToolBarTitleText(toolbar, "分类")
         ImmersionBar.with(this)
+            .statusBarDarkFont(true)
             .titleBar(toolbar)
             .init()
-        ActionBarUtils.setCenterTitleText(toolbar, "消息")
     }
 
     override fun loadPageListData(pageNo: Int) {

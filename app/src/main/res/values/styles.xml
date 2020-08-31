@@ -5,6 +5,19 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/bg_default</item>
+    </style>
+
+
+    <!-- Toolbar -->
+    <style name="MToolbar" parent="Toolbar">
+        <item name="titleTextAppearance">@style/MToolbarText</item>
+    </style>
+
+    <!--ToolBar 文本属性-->
+    <style name="MToolbarText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/m444444</item>
     </style>
 
 </resources>

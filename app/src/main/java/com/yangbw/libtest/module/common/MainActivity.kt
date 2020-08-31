@@ -8,6 +8,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentTransaction
 import com.android.aachulk.consts.LiveEventBusKey
 import com.blankj.utilcode.util.ToastUtils
+import com.gyf.immersionbar.ImmersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
@@ -18,6 +19,7 @@ import com.yangbw.libtest.module.discover.DiscoverFragment
 import com.yangbw.libtest.module.goods.GoodsFragment
 import com.yangbw.libtest.module.home.HomeFragment
 import com.yangbw.libtest.module.login.LoginActivity
+import com.yangbw.libtest.module.menu.MenuActivity
 import com.yangbw.libtest.module.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_bottom_navigation_bar.*
@@ -49,13 +51,12 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     override fun init(savedInstanceState: Bundle?) {
         setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
             if (this.id == btnMenu.id) {
-
+                MenuActivity.launch(mContext)
             } else {
                 setTabSelection(this.id)
             }
         }
         setTabSelection(btnHome.id)
-
         //强制登出
         LiveEventBus
             .get(LiveEventBusKey.LOGIN_OUT, String::class.java)

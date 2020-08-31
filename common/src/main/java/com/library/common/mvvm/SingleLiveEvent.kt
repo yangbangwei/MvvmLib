@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.library.common.http
+package com.library.common.mvvm
 
 
 import androidx.annotation.MainThread
@@ -24,7 +24,9 @@ import com.library.common.utils.LogUtils
 
 import java.util.concurrent.atomic.AtomicBoolean
 
-
+/**
+ *
+ */
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private val mPending = AtomicBoolean(false)

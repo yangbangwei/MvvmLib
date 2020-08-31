@@ -8,7 +8,7 @@ import com.library.common.R
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module：变化view的默认辅助控制类（如果不使用默认的可实现IVaryViewHelperController自定义）
  * description：View替换：loading显示隐藏、无数据的展示view、网络异常的view、简单自定义的view
  */

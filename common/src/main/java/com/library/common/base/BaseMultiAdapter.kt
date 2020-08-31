@@ -6,9 +6,7 @@ import com.library.common.view.baseviewholder.CommonViewHolder
 
 /**
  * @author yangbw
- * @date 2020/3/23.
- * module：继承BaseQuickAdapter，自定义通用方法
- * description：
+ * @date 2020/8/31
  */
 abstract class BaseMultiAdapter<T : MultiItemEntity>(data: MutableList<T>) :
 

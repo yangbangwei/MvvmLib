@@ -70,14 +70,12 @@ dependencies {
     api rootProject.ext.dependencies["retrofit"]
     api rootProject.ext.dependencies["retrofit-converter-gson"]
     api rootProject.ext.dependencies["retrofit-adapter-kt"]
-    //aRouter
-    api rootProject.ext.dependencies["arouter"]
-    kapt rootProject.ext.dependencies["arouter-compiler"]
     //brvah
     api rootProject.ext.dependencies["brvah"]
     //SmartRefreshLayout
     api rootProject.ext.dependencies["SmartRefreshLayout"]
-    api rootProject.ext.dependencies["SmartRefreshHeader"]
+    api rootProject.ext.dependencies["SmartRefreshHeaderMaterial"]
+    api rootProject.ext.dependencies["SmartRefreshHeaderClassics"]
     //topSnackBar
     api rootProject.ext.dependencies["topsnackbar"]
     //LiveEventBus
@@ -100,5 +98,7 @@ dependencies {
     api rootProject.ext.dependencies["flycoTabLayout"]
     //权限管理
     api rootProject.ext.dependencies["permissionx"]
+    //图片缩放
+    api rootProject.ext.dependencies["photoView"]
 }
 

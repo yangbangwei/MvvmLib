@@ -1,14 +1,12 @@
 package com.library.common.mvvm
 
-import com.library.common.http.SingleLiveEvent
-
 /**
  * @author yangbw
  * @date 2020/3/24.
  * module：
  * description：view的改变
  */
-class ViewChange {
+class ViewState {
     //加载的loading
     val showLoading by lazy { SingleLiveEvent<String>() }
     //对话框显示

@@ -13,26 +13,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.alibaba.android.arouter.launcher.ARouter
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.R
-import com.library.common.config.AppConfig
 import com.library.common.mvvm.BaseViewModel
 import com.library.common.mvvm.IView
 import com.library.common.utils.ActivityUtils
 import com.library.common.view.IVaryViewHelperController
 import com.library.common.view.LoadingDialog
 import com.library.common.view.VaryViewHelperController
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
  * @author yangbw
  * @date 2020/3/16.
- * module：
- * description：
  */
 abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCompatActivity(),
     IView {
@@ -83,9 +79,6 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         ActivityUtils.get()?.addActivity(this)
-        if (AppConfig.isARouterOpen()) {
-            ARouter.getInstance().inject(this)
-        }
         super.onCreate(savedInstanceState)
         initViewDataBinding()
         createViewModel()

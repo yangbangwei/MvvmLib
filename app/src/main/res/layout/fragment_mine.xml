@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:banner="http://schemas.android.com/apk/res-auto">
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
 
     <data>
+
         <variable
             name="mineData"
             type="com.yangbw.libtest.module.mine.MineData" />
@@ -11,6 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_mine"
+        android:background="@color/bg_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -61,7 +65,7 @@
             app:srcCompat="@mipmap/ic_arrow_right_white" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/iv_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -73,14 +77,14 @@
             app:srcCompat="@mipmap/ic_msg_light" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/iv_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:padding="9dp"
-            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintEnd_toStartOf="@+id/iv_msg"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/icon_setting" />
 
@@ -101,32 +105,32 @@
             app:layout_constraintTop_toTopOf="@+id/imageView2">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_payment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@mipmap/ic_fragment_mine_wait_payment"
                 android:drawablePadding="3dp"
-                android:text="待支付"
+                android:text="@string/mine_wait"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintEnd_toStartOf="@+id/tv_receiving"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tv_receiving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableTop="@mipmap/ic_fragment_mine_wait_receiving"
                 android:drawablePadding="3dp"
-                android:text="待收货"
+                android:text="@string/mine_wait_receiving"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_payment"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toTopOf="@+id/textView3" />
+                app:layout_constraintStart_toEndOf="@+id/tv_payment"
+                app:layout_constraintTop_toTopOf="@+id/tv_payment" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -134,13 +138,13 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@mipmap/ic_fragment_mine_wait_comment"
                 android:drawablePadding="3dp"
-                android:text="待评价"
+                android:text="@string/mine_remain"
                 android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_receiving"
                 app:layout_constraintEnd_toStartOf="@+id/textView6"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/textView4" />
+                app:layout_constraintStart_toEndOf="@+id/tv_receiving"
+                app:layout_constraintTop_toTopOf="@+id/tv_receiving" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -148,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:drawableTop="@mipmap/ic_fragment_mine_wait_all_order"
                 android:drawablePadding="3dp"
-                android:text="全部订单"
+                android:text="@string/mine_order_all"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/textView5"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +196,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{mineData.present,default=1}}"
+                android:text="@{mineData.present,default=1}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp18"
                 app:layout_constraintEnd_toStartOf="@+id/tv_balance"
@@ -205,7 +209,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{mineData.blance,default=1}}"
+                android:text="@{mineData.blance,default=1}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp18"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="优惠券"
+                android:text="@string/mine_discount"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tv_discount"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -230,7 +234,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="礼品卡"
+                android:text="@string/mine_gift_card"
                 app:layout_constraintEnd_toEndOf="@+id/tv_present"
                 app:layout_constraintStart_toStartOf="@+id/tv_present"
                 app:layout_constraintTop_toBottomOf="@+id/tv_present" />
@@ -240,7 +244,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="余额(元)"
+                android:text="@string/mine_balance"
                 app:layout_constraintEnd_toEndOf="@+id/tv_balance"
                 app:layout_constraintStart_toStartOf="@+id/tv_balance"
                 app:layout_constraintTop_toBottomOf="@+id/tv_balance" />
@@ -288,7 +292,7 @@
                 android:drawableTop="@mipmap/ic_fragment_mine_invite"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="邀请有礼"
+                android:text="@string/mine_invite_reward"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"
                 app:layout_constraintEnd_toStartOf="@+id/textView7"
@@ -303,7 +307,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_address"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="收货地址"
+                android:text="@string/mine_address"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView9"
                 app:layout_constraintEnd_toStartOf="@+id/textView9"
@@ -318,7 +322,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_receipt"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="发票与报销"
+                android:text="@string/mine_invoice"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toStartOf="@+id/textView10"
@@ -336,7 +340,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_service"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="联系客服"
+                android:text="@string/mine_service"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -351,7 +355,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_collection"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="我的收藏"
+                android:text="@string/mine_collcetion"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintEnd_toEndOf="@+id/textView10"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -365,7 +369,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_reminder"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="到货提醒"
+                android:text="@string/mine_arrival"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toStartOf="@+id/textView11"
@@ -380,7 +384,7 @@
                 android:drawableTop="@mipmap/icon_mine_page_help"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="帮助与反馈"
+                android:text="@string/mine_help"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toStartOf="@+id/textView12"
@@ -395,7 +399,7 @@
                 android:drawableTop="@mipmap/ic_gift_card"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="电子卡订单"
+                android:text="@string/mine_card"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView13"
                 app:layout_constraintEnd_toStartOf="@+id/textView13"
@@ -411,7 +415,7 @@
                 android:layout_marginBottom="20dp"
                 android:drawableTop="@mipmap/icon_mine_page_service"
                 android:drawablePadding="3dp"
-                android:text="联系客服"
+                android:text="@string/mine_service"
                 android:textSize="@dimen/sp10"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -427,7 +431,7 @@
                 android:drawableTop="@mipmap/ic_share_pupu"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="分享朴朴"
+                android:text="@string/mine_share"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView15"
                 app:layout_constraintEnd_toStartOf="@+id/textView15"
@@ -442,7 +446,7 @@
                 android:drawableTop="@mipmap/ic_mine_fragment_about_pupu"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="关于朴朴"
+                android:text="@string/mine_about"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView16"
                 app:layout_constraintEnd_toStartOf="@+id/textView16"
@@ -457,7 +461,7 @@
                 android:drawableTop="@mipmap/ic_recruit"
                 android:drawablePadding="3dp"
                 android:gravity="center"
-                android:text="朴朴招募"
+                android:text="@string/mine_bring_in"
                 android:textSize="@dimen/sp10"
                 app:layout_constraintBottom_toBottomOf="@+id/textView17"
                 app:layout_constraintEnd_toStartOf="@+id/textView17"
@@ -465,6 +469,15 @@
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_user_info"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_img" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

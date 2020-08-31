@@ -20,18 +20,17 @@ import java.util.concurrent.TimeUnit
 
 /**
  * @author yangbw
- * @date 2020/3/13.
- * module：
- * description：
+ * @date 2020/8/31
  */
 class ApiClient {
+
     /**
      * @param interceptors
      * @return
      */
     fun getOkHttpClient(interceptors: List<Interceptor>): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        //处理新增加的多个baseurl,当设置了多个baseurl再做这个的处理
+        //处理新增加的多个baseUrl,当设置了多个baseUrl再做这个的处理
         if (AppConfig.getMoreBaseUrl()) {
             builder.addInterceptor(BaseUrlInterceptor())
         }
@@ -77,7 +76,9 @@ class ApiClient {
         }
     }
 
-    //对String类型 返回为null  解析为""
+    /**
+     * 对String类型 返回为null  解析为""
+     */
     private class StringNullAdapter : TypeAdapter<String?>() {
         @Throws(IOException::class)
         override fun read(reader: JsonReader): String? {

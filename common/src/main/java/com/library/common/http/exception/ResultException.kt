@@ -2,9 +2,7 @@ package com.library.common.http.exception
 
 /**
  * @author yangbw
- * @date 2020/3/13.
- * module：
- * description： 自定义数据返回异常类,制定api接口调用时返回的BaseRes中的泛型T为null或者ListSize为0这两种情况为异常情况
+ * @date 2020/8/31
  */
 class ResultException : Exception {
     /**

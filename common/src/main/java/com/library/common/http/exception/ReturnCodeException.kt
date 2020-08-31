@@ -2,9 +2,7 @@ package com.library.common.http.exception
 
 /**
  * @author yangbw
- * @date 2020/3/13.
- * module：
- * description：自定义响应码异常类：api接口调用时服务器操作异常，返回异常响应码
+ * @date 2020/8/31
  */
 class ReturnCodeException
 /**

@@ -20,7 +20,7 @@ import java.lang.reflect.ParameterizedType
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module：
  * description：
  */
@@ -66,7 +66,6 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
      */
     protected open fun onStart() {}
 
-
     /**
      * 网络相关工具
      */
@@ -75,7 +74,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 视图变化
      */
-    val viewChange: ViewChange by lazy { ViewChange() }
+    val viewState: ViewState by lazy { ViewState() }
 
     /**
      * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
@@ -159,10 +158,10 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                 RequestDisplay.NULL -> {
                 }
                 RequestDisplay.TOAST -> {
-                    viewChange.showDialogProgress.value = msg
+                    viewState.showDialogProgress.value = msg
                 }
                 RequestDisplay.REPLACE -> {
-                    viewChange.showLoading.call()
+                    viewState.showLoading.call()
                 }
             }
         }
@@ -217,7 +216,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                                 //返回结果null
                                 throw ResultException(response.getBaseMsg())
                             } else {
-                                viewChange.showEmpty.call()
+                                viewState.showEmpty.call()
                             }
                         } else {
                             //接口数据赋值
@@ -227,10 +226,10 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                             success(response.getBaseResult())
                             if (pageNo == 1) {
                                 //完成的回调所有弹窗消失
-                                viewChange.dismissDialog.call()
-                                viewChange.restore.call()
+                                viewState.dismissDialog.call()
+                                viewState.restore.call()
                             } else {
-                                viewChange.refreshComplete.call()
+                                viewState.refreshComplete.call()
                             }
                         }
                     } else {
@@ -254,7 +253,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                             //返回结果null
                             throw ResultException(response.getBaseMsg())
                         } else {
-                            viewChange.showEmpty.call()
+                            viewState.showEmpty.call()
                         }
                     } else {
                         //接口数据赋值
@@ -264,10 +263,10 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                         success(response.getBaseResult())
                         if (pageNo == 1) {
                             //完成的回调所有弹窗消失
-                            viewChange.dismissDialog.call()
-                            viewChange.restore.call()
+                            viewState.dismissDialog.call()
+                            viewState.restore.call()
                         } else {
-                            viewChange.refreshComplete.call()
+                            viewState.refreshComplete.call()
                         }
                     }
                 } else {
@@ -286,7 +285,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                             //返回结果null
                             throw ResultException(response.getBaseMsg())
                         } else {
-                            viewChange.showEmpty.call()
+                            viewState.showEmpty.call()
                         }
                     } else {
                         //接口数据赋值
@@ -296,10 +295,10 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                         success(response.getBaseResult())
                         if (pageNo == 1) {
                             //完成的回调所有弹窗消失
-                            viewChange.dismissDialog.call()
-                            viewChange.restore.call()
+                            viewState.dismissDialog.call()
+                            viewState.restore.call()
                         } else {
-                            viewChange.refreshComplete.call()
+                            viewState.refreshComplete.call()
                         }
                     }
                 } else {
@@ -346,14 +345,14 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                 RequestDisplay.NULL -> {
                 }
                 RequestDisplay.TOAST -> {
-                    viewChange.showToast.value = emptyMsg
-                    viewChange.dismissDialog.call()
+                    viewState.showToast.value = emptyMsg
+                    viewState.dismissDialog.call()
                 }
                 RequestDisplay.REPLACE -> {
                     this.listener = View.OnClickListener {
                         reTry()
                     }
-                    viewChange.showEmpty.value = emptyMsg
+                    viewState.showEmpty.value = emptyMsg
 
                 }
             }
@@ -372,19 +371,19 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
 
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = errorMsg
-                viewChange.dismissDialog.call()
+                viewState.showToast.value = errorMsg
+                viewState.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
                 if (pageNo == 1) {
                     this.listener = View.OnClickListener {
                         reTry()
                     }
-                    viewChange.showNetworkError.value = errorMsg
+                    viewState.showNetworkError.value = errorMsg
                 } else {
-                    viewChange.refreshComplete.call()
-                    viewChange.restore.call()
-                    viewChange.showTips.value = errorMsg
+                    viewState.refreshComplete.call()
+                    viewState.restore.call()
+                    viewState.showTips.value = errorMsg
                 }
             }
         }
@@ -403,19 +402,19 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
             RequestDisplay.NULL -> {
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = message
-                viewChange.dismissDialog.call()
+                viewState.showToast.value = message
+                viewState.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
                 if (pageNo == 1) {
                     this.listener = View.OnClickListener {
                         reTry()
                     }
-                    viewChange.showNetworkError.value = errorMsg
+                    viewState.showNetworkError.value = errorMsg
                 } else {
-                    viewChange.refreshComplete.call()
-                    viewChange.restore.call()
-                    viewChange.showTips.value = errorMsg
+                    viewState.refreshComplete.call()
+                    viewState.restore.call()
+                    viewState.showTips.value = errorMsg
                 }
             }
         }

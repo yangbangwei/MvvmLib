@@ -19,8 +19,6 @@ import java.util.concurrent.Executors
 /**
  * @author yangbw
  * @date 2020/3/18.
- * module：
- * description：
  */
 class NetworkUtils {
 
@@ -57,7 +55,8 @@ class NetworkUtils {
      */
     private fun getActiveNetworkInfo(): NetworkInfo? {
         if (Utils.getContext()?.getSystemService(Context.CONNECTIVITY_SERVICE) != null) {
-            return (Utils.getContext()?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+            return (Utils.getContext()
+                ?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
         } else {
             return null
         }
@@ -167,7 +166,8 @@ class NetworkUtils {
      */
     fun getWifiEnabled(): Boolean {
         val wifiManager =
-            Utils.getContext()?.getApplicationContext()?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            Utils.getContext()?.getApplicationContext()
+                ?.getSystemService(Context.WIFI_SERVICE) as WifiManager
         return wifiManager.isWifiEnabled
     }
 
@@ -180,7 +180,8 @@ class NetworkUtils {
      */
     fun setWifiEnabled(enabled: Boolean) {
         val wifiManager =
-            Utils.getContext()?.getApplicationContext()?.getSystemService(Context.WIFI_SERVICE) as WifiManager
+            Utils.getContext()?.getApplicationContext()
+                ?.getSystemService(Context.WIFI_SERVICE) as WifiManager
         if (enabled) {
             if (!wifiManager.isWifiEnabled) {
                 wifiManager.isWifiEnabled = true

@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * @author yangbw
- * @date 2020/3/23.
+ * @date 2020/8/31
  * module：
  * description：继承BaseViewHolder，自定义通用方法
  *

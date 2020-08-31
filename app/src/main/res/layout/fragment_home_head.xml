@@ -6,16 +6,205 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            banner:layout_constraintBottom_toBottomOf="@+id/textView4"
+            banner:layout_constraintEnd_toEndOf="@+id/imageView20"
+            banner:layout_constraintStart_toStartOf="@+id/imageView19"
+            banner:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/location"
+            banner:layout_constraintStart_toStartOf="parent"
+            banner:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
+            android:text="东海国际中心B座"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp16"
+            banner:layout_constraintBottom_toBottomOf="@+id/imageView19"
+            banner:layout_constraintStart_toEndOf="@+id/imageView19"
+            banner:layout_constraintTop_toTopOf="@+id/imageView19" />
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginLeft="2dp"
+            banner:layout_constraintBottom_toBottomOf="@+id/imageView19"
+            banner:layout_constraintStart_toEndOf="@+id/textView4"
+            banner:layout_constraintTop_toTopOf="@+id/imageView19"
+            banner:srcCompat="@mipmap/ic_arrow_right_white" />
+
+        <ImageView
+            android:id="@+id/imageView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            banner:layout_constraintBottom_toBottomOf="@+id/imageView19"
+            banner:layout_constraintEnd_toEndOf="parent"
+            banner:layout_constraintTop_toTopOf="@+id/imageView19"
+            banner:srcCompat="@mipmap/ic_msg_light" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group11"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_search_bg"
+            banner:layout_constraintEnd_toEndOf="parent"
+            banner:layout_constraintStart_toStartOf="parent"
+            banner:layout_constraintTop_toBottomOf="@+id/imageView19" />
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:padding="6dp"
+            android:text="1元起送，30分钟达"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/sp12"
+            banner:layout_constraintBottom_toBottomOf="@+id/imageView22"
+            banner:layout_constraintEnd_toEndOf="@+id/group11"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintStart_toEndOf="@+id/imageView22"
+            banner:layout_constraintTop_toTopOf="@+id/imageView22" />
+
+        <ImageView
+            android:id="@+id/imageView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            banner:layout_constraintBottom_toBottomOf="@+id/group11"
+            banner:layout_constraintEnd_toStartOf="@+id/textView45"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintHorizontal_chainStyle="packed"
+            banner:layout_constraintStart_toStartOf="@+id/group11"
+            banner:layout_constraintTop_toTopOf="@+id/group11"
+            banner:srcCompat="@mipmap/icon_search_gray_big" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="3dp"
+            android:background="@drawable/shape_hot_bg"
+            android:gravity="center"
+            android:text="朴朴礼品卡"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp10"
+            banner:layout_constraintEnd_toStartOf="@+id/textView47"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintStart_toStartOf="parent"
+            banner:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/shape_hot_bg"
+            android:gravity="center"
+            android:text="小姐姐必买"
+            android:padding="3dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp10"
+            banner:layout_constraintBottom_toBottomOf="@+id/textView46"
+            banner:layout_constraintEnd_toStartOf="@+id/textView48"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintStart_toEndOf="@+id/textView46"
+            banner:layout_constraintTop_toTopOf="@+id/textView46" />
+
+        <TextView
+            android:id="@+id/textView48"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/shape_hot_bg"
+            android:gravity="center"
+            android:text="开海热门榜"
+            android:textColor="@color/white"
+            android:padding="3dp"
+            android:textSize="@dimen/sp10"
+            banner:layout_constraintBottom_toBottomOf="@+id/textView47"
+            banner:layout_constraintEnd_toStartOf="@+id/textView49"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintStart_toEndOf="@+id/textView47"
+            banner:layout_constraintTop_toTopOf="@+id/textView47" />
+
+        <TextView
+            android:id="@+id/textView49"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_hot_bg"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="88元礼包"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp10"
+            banner:layout_constraintBottom_toBottomOf="@+id/textView48"
+            banner:layout_constraintEnd_toEndOf="parent"
+            banner:layout_constraintHorizontal_bias="0.5"
+            banner:layout_constraintStart_toEndOf="@+id/textView48"
+            banner:layout_constraintTop_toTopOf="@+id/textView48" />
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             banner:banner_indicator_normal_color="@android:color/white"
-            banner:banner_indicator_selected_color="@color/colorPrimary"/>
-    </LinearLayout>
+            banner:banner_indicator_selected_color="@color/colorPrimary"
+            banner:layout_constraintBottom_toBottomOf="parent"
+            banner:layout_constraintEnd_toEndOf="parent"
+            banner:cardCornerRadius="10dp"
+            banner:layout_constraintStart_toStartOf="parent"
+            banner:layout_constraintTop_toBottomOf="@+id/textView46">
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -18,7 +18,7 @@
 1. [`Okhttp` Okhttp网络访问框架](https://github.com/square/okhttp)
 2. [`AgentWeb` 轻量级WebView框架](https://github.com/Justson/AgentWeb)
 3. [`Retrofit` RESTful 的 HTTP 网络请求框架的封装](https://github.com/square/retrofit)
-4. [`ARouter` 阿里开源的组件化通讯框架](https://github.com/alibaba/ARouter)
+4. [`vlayout` RecyclerView的LayoutManager扩展](https://github.com/chrisbanes/PhotoView)
 5. [`SmartRefreshLayout` Android智能下拉刷新框架](https://github.com/scwang90/SmartRefreshLayout)
 6. [`BaseRecyclerViewAdapterHelper` 一个强大并且灵活的RecyclerViewAdapter](https://github.com/CymChad/BaseRecyclerViewAdapterHelper)
 7. [`glide` Android图片加载框架](https://github.com/bumptech/glide)
@@ -36,8 +36,9 @@
 - [x] glide 工具类基本用法使用
 - [x] banner 基本功能使用
 - [x] 首页tab功能实现
-- [x] 发现页面，FlycoTabLayout+ViewPager2效果
+- [x] 发现页面，FlyCoTabLayout+ViewPager2效果
 - [x] 动态权限使用PermissionX
+- [x] autoSize屏幕适配
 - [ ] 无网络，异常问题
 - [ ] 单页面多个请求问题
 - [ ] 重构网络通用处理部分

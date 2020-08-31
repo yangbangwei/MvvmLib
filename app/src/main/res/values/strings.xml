@@ -5,4 +5,24 @@
     <string name="title_dashboard">商品</string>
     <string name="title_discover">发现</string>
     <string name="title_mine">我的</string>
+
+    <string name="srl_footer_nothing">没有更多数据了</string>
+    <string name="mine_bring_in">朴朴招募</string>
+    <string name="mine_about">关于朴朴</string>
+    <string name="mine_share">分享朴朴</string>
+    <string name="mine_service">联系客服</string>
+    <string name="mine_card">电子卡订单</string>
+    <string name="mine_help">帮助与反馈</string>
+    <string name="mine_arrival">到货提醒</string>
+    <string name="mine_collcetion">我的收藏</string>
+    <string name="mine_invoice">发票与报销</string>
+    <string name="mine_address">收货地址</string>
+    <string name="mine_invite_reward">邀请有礼</string>
+    <string name="mine_wait">待支付</string>
+    <string name="mine_wait_receiving">待收货</string>
+    <string name="mine_remain">待评价</string>
+    <string name="mine_order_all">全部订单</string>
+    <string name="mine_discount">优惠券</string>
+    <string name="mine_gift_card">礼品卡</string>
+    <string name="mine_balance">余额(元)</string>
 </resources>

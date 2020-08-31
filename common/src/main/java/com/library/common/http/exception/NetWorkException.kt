@@ -2,9 +2,7 @@ package com.library.common.http.exception
 
 /**
  * @author yangbw
- * @date 2020/3/13.
- * module： 自定义网络错误异常
- * description：
+ * @date 2020/8/31
  */
 class NetWorkException : Exception {
     /**

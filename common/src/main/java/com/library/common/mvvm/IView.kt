@@ -7,7 +7,7 @@ import com.library.common.view.IVaryViewHelperController
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module：
  * description：
  */
@@ -62,18 +62,18 @@ interface IView : IVaryViewHelperController {
      * 获取activity
      * @return
      */
-    val mActivity: Activity?
+    val mActivity: Activity
 
     /**
      * 获取activity的context
      * @return
      */
-    val mContext: Context?
+    val mContext: Context
 
     /**
      * 获取app的context
      * @return
      */
-    val mAppContext: Context?
+    val mAppContext: Context
 
 }

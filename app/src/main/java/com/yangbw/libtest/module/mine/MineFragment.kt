@@ -2,11 +2,14 @@ package com.yangbw.libtest.module.mine;
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
+import com.library.common.extension.setOnClickListener
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentMineBinding
+import com.yangbw.libtest.module.msg.MsgActivity
+import com.yangbw.libtest.module.set.SetActivity
+import com.yangbw.libtest.module.userInfo.UserInfoActivity
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -28,11 +31,29 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
+            .transparentStatusBar()
+            .statusBarDarkFont(false)
             .fitsSystemWindows(false)
             .init()
+        //点击事件
+        mBinding?.run {
+            setOnClickListener(groupUserInfo, ivSet,ivMsg) {
+                when (this) {
+                    groupUserInfo -> {
+                        UserInfoActivity.launch(mContext)
+                    }
+                    ivSet -> {
+                        SetActivity.launch(mContext)
+                    }
+                    ivMsg -> {
+                        MsgActivity.launch(mContext)
+                    }
+                }
+            }
+        }
         banner.let {
             it.addBannerLifecycleObserver(this)
-            it.indicator = RectangleIndicator (mContext)
+            it.indicator = RectangleIndicator(mContext)
             it.setIndicatorSelectedWidth(BannerUtils.dp2px(12f).toInt())
             it.setIndicatorSpace(BannerUtils.dp2px(4f).toInt())
             it.setIndicatorRadius(0)
@@ -42,5 +63,6 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
             mBinding!!.mineData = it
         })
         mViewModel.getUserInfo()
+
     }
 }

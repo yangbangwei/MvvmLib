@@ -6,33 +6,48 @@
 
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/colorAccent"
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/tbar"
-            layout="@layout/toolbar" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_home"
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.scwang.smartrefresh.layout.SmartRefreshLayout
-                android:id="@+id/smartRefreshLayout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 
-            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/MToolbar"
+            android:layout_marginBottom="0dp"
+            android:visibility="gone"
+            android:background="@android:color/transparent"
+            app:layout_collapseMode="pin">
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/buttonBarLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="菜谱大全"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </FrameLayout>
+
 </layout>

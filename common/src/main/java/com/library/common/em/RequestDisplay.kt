@@ -6,7 +6,6 @@ package com.library.common.em
  * module：
  * description：网络请求展示
  */
-
 enum class RequestDisplay {
     NULL, TOAST, REPLACE
     // NULL //无交互

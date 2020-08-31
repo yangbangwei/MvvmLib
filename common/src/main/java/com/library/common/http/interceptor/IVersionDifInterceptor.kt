@@ -2,7 +2,7 @@ package com.library.common.http.interceptor
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module： 请求接口返回的versino版本和本地版本不一致拦截处理
  * description：
  */

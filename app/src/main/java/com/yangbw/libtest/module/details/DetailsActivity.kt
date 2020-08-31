@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import com.library.common.base.BaseActivity
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.ActivityDetailsBinding
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.toolbar.*
 import utils.ActionBarUtils

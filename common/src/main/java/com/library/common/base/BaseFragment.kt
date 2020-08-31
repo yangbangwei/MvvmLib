@@ -11,19 +11,16 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.alibaba.android.arouter.launcher.ARouter
-import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
-import com.library.common.config.AppConfig
+import com.library.common.R
 import com.library.common.mvvm.BaseViewModel
 import com.library.common.mvvm.IView
 import com.library.common.view.IVaryViewHelperController
 import com.library.common.view.LoadingDialog
 import com.library.common.view.VaryViewHelperController
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -88,9 +85,6 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (AppConfig.isARouterOpen()) {
-            ARouter.getInstance().inject(this)
-        }
         createViewModel()
         viewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
@@ -100,7 +94,6 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         init(savedInstanceState)
     }
 
-
     /***
      * view
      */
@@ -108,6 +101,9 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         return VaryViewHelperController(getReplaceView())
     }
 
+    /**
+     * 刷新
+     */
     private fun initRefresh() {
         if (getSmartRefreshLayout() != null) {
             getSmartRefreshLayout()?.isEnabled = mRefreshEnable
@@ -122,13 +118,11 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     }
 
     /**
-     *
-     *     actualTypeArguments[0]  BaseViewModel
-     *     actualTypeArguments[1]  ViewDataBinding
-     *
+     *  创建viewModel
+     *  actualTypeArguments[0]  BaseViewModel
+     *  actualTypeArguments[1]  ViewDataBinding
      */
     private fun createViewModel() {
-        //创建viewmodel
         val type = javaClass.genericSuperclass
         if (type is ParameterizedType) {
             val tp = type.actualTypeArguments[0]
@@ -141,32 +135,32 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
      * 注册 UI 事件
      */
     private fun registerViewChange() {
-        mViewModel.viewChange.showLoading.observe(this, Observer {
+        mViewModel.viewChange.showLoading.observe(this, {
             viewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewChange.showDialogProgress.observe(this, Observer {
+        mViewModel.viewChange.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewChange.dismissDialog.observe(this, Observer {
+        mViewModel.viewChange.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewChange.showToast.observe(this, Observer {
+        mViewModel.viewChange.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewChange.showTips.observe(this, Observer {
+        mViewModel.viewChange.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewChange.showEmpty.observe(this, Observer {
+        mViewModel.viewChange.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewChange.showNetworkError.observe(this, Observer {
+        mViewModel.viewChange.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewChange.restore.observe(this, Observer {
+        mViewModel.viewChange.restore.observe(this, {
             viewController?.restore()
             //代表有设置刷新
             if (getSmartRefreshLayout() != null) {
@@ -270,14 +264,14 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         ToastUtils.showShort(msg)
     }
 
-    override val mActivity: Activity?
-        get() = activity
+    override val mActivity: Activity
+        get() = activity!!
 
-    override val mContext: Context?
-        get() = context
+    override val mContext: Context
+        get() = context!!
 
-    override val mAppContext: Context?
-        get() = activity?.applicationContext
+    override val mAppContext: Context
+        get() = activity!!.applicationContext
 
     /**
      *  @param refreshEnable 设置是否刷新操作

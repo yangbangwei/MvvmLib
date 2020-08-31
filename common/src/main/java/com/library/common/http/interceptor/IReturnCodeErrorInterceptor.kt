@@ -2,7 +2,7 @@ package com.library.common.http.interceptor
 
 /**
  * @author yangbw
- * @date 2020/3/13.
+ * @date 2020/8/31
  * module： 接口请求ReturnCode不正确的情况拦截处理
  * description：
  */

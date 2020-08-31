@@ -11,7 +11,7 @@ object Constant {
     const val OPEN_AROUTER: Boolean = true
     const val OPEN_LOG: Boolean = true
 //    const val BASE_URL: String = "http://111.229.84.169:9090/"
-    const val BASE_URL: String = "http://192.168.1.76:9090/"
+    const val BASE_URL: String = "http://192.168.1.67:9090/"
     const val CODE_SUCCESS: String = "200"
     const val TOKEN: String = "token"
 }
