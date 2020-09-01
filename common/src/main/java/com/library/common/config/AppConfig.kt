@@ -58,8 +58,8 @@ object AppConfig {
 
     //glide配置
     private var isSkipMemoryCache = false
-    private var placeholder = R.mipmap.ic_image_loading
-    private var errorImage = R.mipmap.ic_empty_picture
+    private var placeholder = R.mipmap.ic_pic_load
+    private var errorImage = R.mipmap.ic_pic_error
 
     //设置默认的DOMAIN_NAME
     const val DOMAIN_NAME = "BASE_DOMAIN_NAME"

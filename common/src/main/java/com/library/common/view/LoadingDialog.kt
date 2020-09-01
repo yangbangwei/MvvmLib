@@ -35,7 +35,7 @@ class LoadingDialog(private val mContext: Context) {
      */
     fun show(msg: String?, cancelable: Boolean) {
         val view = View.inflate(mContext, R.layout.dialog_loading, null)
-        val loadingText = view.findViewById<View>(R.id.id_tv_loading_dialog_text) as TextView
+        val loadingText = view.findViewById<View>(R.id.tv_tips) as TextView
         if (!TextUtils.isEmpty(msg)) {
             loadingText.text = msg
         }

@@ -3,6 +3,8 @@
     <color name="colorPrimary">#FF000000</color>
     <color name="colorPrimaryDark">#cccccc</color>
     <color name="colorAccent">@color/black</color>
+
+    <color name="main_color">#21A953</color>
     <color name="m494949">#494949</color>
     <color name="m444444">#444444</color>
     <color name="m484848">#484848</color>

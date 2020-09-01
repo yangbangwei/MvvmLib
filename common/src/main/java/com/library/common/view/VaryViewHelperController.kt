@@ -44,9 +44,9 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
 
     override fun showEmpty(emptyMsg: String?, listener: View.OnClickListener?) {
         hasRestore = false
-        val layout = helper.inflate(R.layout.page_no_data_click)
-        val againBtn = layout.findViewById<Button>(R.id.pager_error_loadingAgain)
-        val textView = layout.findViewById<TextView>(R.id.tv_no_data)
+        val layout = helper.inflate(R.layout.page_empty)
+        val againBtn = layout.findViewById<Button>(R.id.btn_reload)
+        val textView = layout.findViewById<TextView>(R.id.tv_empty)
         if (!TextUtils.isEmpty(emptyMsg)) {
             textView.text = emptyMsg
         }
@@ -70,9 +70,7 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
         hasRestore = false
         val layout = helper.inflate(R.layout.page_error)
         val againBtn =
-            layout.findViewById<Button>(R.id.pager_error_loadingAgain)
-        val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
-        tvTitle.visibility = View.GONE
+            layout.findViewById<Button>(R.id.btn_reload)
         val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
         tvMsg.text = msg
         if (null != listener) {
