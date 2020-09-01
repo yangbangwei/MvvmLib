@@ -1,4 +1,4 @@
-package com.yangbw.libtest.base
+package com.yangbw.libtest.common
 
 import androidx.annotation.Keep
 import com.library.common.mvvm.IRes

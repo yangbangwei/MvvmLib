@@ -1,6 +1,6 @@
 package com.yangbw.libtest
 
-import com.android.aachulk.consts.Constant
+import com.yangbw.libtest.common.Constant
 import com.android.aachulk.interceptor.RequestHeaderInterceptor
 import com.library.common.base.BaseApplication
 import com.library.common.config.AppConfig

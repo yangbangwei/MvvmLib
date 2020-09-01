@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.library.common.base.BaseActivity
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.ActivityDetailsBinding
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.toolbar.*
 import utils.ActionBarUtils
@@ -39,10 +39,10 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
     override fun init(savedInstanceState: Bundle?) {
         mId = intent.getStringExtra(ID)
         ActionBarUtils.setCenterTitleText(toolbar, "测试")
-        ActionBarUtils.setSupportActionBarWithBack(toolbar, null, View.OnClickListener {
+        ActionBarUtils.setSupportActionBarWithBack(toolbar) {
             finish()
-        })
-        mViewModel.mDetails.observe(this, Observer {
+        }
+        mViewModel.mDetails.observe(this, {
             mBinding!!.detail = it
         })
         mViewModel.getHomeDetails(mId)

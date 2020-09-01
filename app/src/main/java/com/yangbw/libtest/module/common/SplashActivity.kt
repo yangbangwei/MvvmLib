@@ -8,15 +8,22 @@ import android.os.CountDownTimer
 import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.android.aachulk.consts.Constant
 import com.blankj.utilcode.util.SPUtils
 import com.library.common.base.BaseActivity
 import com.permissionx.guolindev.PermissionX
 import com.yangbw.libtest.R
-import com.yangbw.libtest.base.CommonViewModel
+import com.yangbw.libtest.common.CommonViewModel
+import com.yangbw.libtest.common.Constant
 import com.yangbw.libtest.module.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
+
+/**
+ * 启动页
+ *
+ * @author yangbw
+ * @date 2020/9/1
+ */
 class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     companion object {
@@ -62,11 +69,16 @@ class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
         PermissionX.init(this@SplashActivity)
             .permissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             .onExplainRequestReason { scope, deniedList ->
-                scope.showRequestReasonDialog(deniedList, "当前应用缺少必要权限,请打开所需权限。", "确定")
+                scope.showRequestReasonDialog(
+                    deniedList, getString(R.string.set_limits_tips),
+                    getString(R.string.confirm)
+                )
             }
             .onForwardToSettings { scope, deniedList ->
-                scope.showForwardToSettingsDialog(deniedList, "当前应用缺少必要权限，" +
-                        "请点击\"设置\"-\"权限\"-打开所需权限。", "去设置")
+                scope.showForwardToSettingsDialog(
+                    deniedList, getString(R.string.go_set_tips),
+                    getString(R.string.go_set)
+                )
             }
             .request { _, _, _ ->
                 mCountDownTimer.start()

@@ -6,15 +6,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentTransaction
-import com.android.aachulk.consts.LiveEventBusKey
+import com.yangbw.libtest.common.LiveEventBusKey
 import com.blankj.utilcode.util.ToastUtils
-import com.gyf.immersionbar.ImmersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
 import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
-import com.yangbw.libtest.base.CommonViewModel
+import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.module.discover.DiscoverFragment
 import com.yangbw.libtest.module.goods.GoodsFragment
 import com.yangbw.libtest.module.home.HomeFragment
@@ -24,6 +23,12 @@ import com.yangbw.libtest.module.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_bottom_navigation_bar.*
 
+/**
+ * 首页
+ *
+ * @author yangbw
+ * @date 2020/9/1
+ */
 class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     companion object {
@@ -150,7 +155,7 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     override fun onBackPressed() {
         val now = System.currentTimeMillis()
         if (now - mBackPressTime > 2000) {
-            ToastUtils.showShort("再点击一次退出朴朴超市")
+            ToastUtils.showShort(R.string.out_tip)
             mBackPressTime = now
         } else {
             super.onBackPressed()

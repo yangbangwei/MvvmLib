@@ -7,9 +7,12 @@ import androidx.appcompat.widget.Toolbar
 import com.yangbw.libtest.R
 
 /**
+ * ToolBar工具类
+ *
  * @author yangbw
- * @date 2020/3/25
+ * @date 2020/9/1
  */
+@Suppress("unused")
 class ActionBarUtils {
 
     companion object {
@@ -21,10 +24,10 @@ class ActionBarUtils {
          * @param listener
          */
         fun setSupportActionBarWithBack(
-            toolbar: Toolbar, backIconId: Int?, listener: View.OnClickListener
+            toolbar: Toolbar, backIconId: Int = R.mipmap.ic_back, listener: View.OnClickListener
         ) {
             toolbar.title = ""
-            toolbar.setNavigationIcon(backIconId ?: R.mipmap.ic_back)
+            toolbar.setNavigationIcon(backIconId)
             toolbar.setNavigationOnClickListener(listener)
         }
 

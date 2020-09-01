@@ -5,6 +5,7 @@
     <string name="title_dashboard">商品</string>
     <string name="title_discover">发现</string>
     <string name="title_mine">我的</string>
+    <string name="out_tip">再点击一次退出朴朴超市</string>
 
     <string name="srl_footer_nothing">没有更多数据了</string>
     <string name="mine_bring_in">朴朴招募</string>
@@ -25,4 +26,8 @@
     <string name="mine_discount">优惠券</string>
     <string name="mine_gift_card">礼品卡</string>
     <string name="mine_balance">余额(元)</string>
+    <string name="confirm">确定</string>
+    <string name="set_limits_tips">当前应用缺少必要权限,请打开所需权限。</string>
+    <string name="go_set">去设置</string>
+    <string name="go_set_tips">当前应用缺少必要权限，请点击"设置"-"权限"-打开所需权限。</string>
 </resources>

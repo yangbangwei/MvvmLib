@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.android.aachulk.consts.LiveEventBusKey
+import com.yangbw.libtest.common.LiveEventBusKey
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.yangbw.libtest.R
@@ -34,9 +34,9 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
     override fun getReplaceView(): View = activity_register
 
     override fun init(savedInstanceState: Bundle?) {
-        ActionBarUtils.setSupportActionBarWithBack(toolbar, null, View.OnClickListener {
+        ActionBarUtils.setSupportActionBarWithBack(toolbar) {
             finish()
-        })
+        }
         ActionBarUtils.setCenterTitleText(toolbar, "注册")
         mViewModel.mResult.observe(this, Observer {
             showToast("注册成功")

@@ -4,9 +4,12 @@ import android.graphics.drawable.Drawable
 import android.widget.TextView
 
 /**
+ * TextView设置图片
+ *
  * @author yangbw
- * @date 2020/3/27.
+ * @date 2020/9/1
  */
+@Suppress("unused")
 class DrawableUtils {
     companion object {
         fun setDrawableTop(

@@ -50,7 +50,7 @@ class MenuActivity : BaseActivity<MenuViewModel, ActivityMenuBinding>() {
         StatusBarUtil.setPaddingSmart(this, toolbar)
         StatusBarUtil.setMargin(this, header)
         //toolbar
-        ActionBarUtils.setSupportActionBarWithBack(toolbar, null) {
+        ActionBarUtils.setSupportActionBarWithBack(toolbar) {
             finish()
         }
         refreshLayout.setOnMultiListener(object : OnMultiListener {

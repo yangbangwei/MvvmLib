@@ -5,9 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.android.aachulk.consts.Constant
-import com.android.aachulk.consts.LiveEventBusKey
-import com.blankj.utilcode.util.PermissionUtils
+import com.yangbw.libtest.common.Constant
+import com.yangbw.libtest.common.LiveEventBusKey
 import com.blankj.utilcode.util.SPUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity

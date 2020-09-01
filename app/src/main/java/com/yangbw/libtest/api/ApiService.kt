@@ -1,19 +1,19 @@
 package com.yangbw.libtest.api
 
-import com.yangbw.libtest.base.BaseRes
-import com.yangbw.libtest.module.login.UserData
+import com.yangbw.libtest.common.BaseRes
 import com.yangbw.libtest.module.details.DetailsData
 import com.yangbw.libtest.module.home.BannerInfo
 import com.yangbw.libtest.module.home.HomeData
 import com.yangbw.libtest.module.home.UpdateVersion
+import com.yangbw.libtest.module.login.UserData
 import com.yangbw.libtest.module.mine.MineData
 import retrofit2.http.*
 
 /**
+ * API接口
+ *
  * @author yangbw
  * @date 2020-03-16.
- * module：接口
- * description： 这里用的接口来自https://github.com/MZCretin/RollToolsApi，感谢MZCretin
  */
 interface ApiService {
 

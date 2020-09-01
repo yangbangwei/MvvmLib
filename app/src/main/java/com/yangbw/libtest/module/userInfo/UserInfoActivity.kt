@@ -15,8 +15,10 @@ import kotlinx.android.synthetic.main.layout_set_toolbar.*
 import utils.ActionBarUtils
 
 /**
- * @author yangbw
- * @date
+ * 用户信息
+ *
+ * @author :yangbw
+ * @date :2020/9/1
  */
 class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding>() {
 

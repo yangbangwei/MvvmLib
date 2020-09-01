@@ -1,14 +1,15 @@
-package com.android.aachulk.consts
+package com.yangbw.libtest.common
 
 /**
+ * 通知标识符
+ *
  * @author yangbw
- * @date 2020/5/18.
- * module：LiveEventBu传递参数的key
- * description：
+ * @date 2020/9/1
  */
 object LiveEventBusKey {
+
     const val LOGIN_OUT = "login_out"
 
-
     const val REGISTER_SUC = "register_suc"
+
 }

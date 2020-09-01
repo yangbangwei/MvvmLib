@@ -11,7 +11,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
 import com.yangbw.libtest.R
-import com.yangbw.libtest.base.CommonViewModel
+import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.databinding.FragmentDiscoverBinding
 import com.yangbw.libtest.module.discover.hot.HotFragment
 import com.yangbw.libtest.module.discover.hot.TabEntity

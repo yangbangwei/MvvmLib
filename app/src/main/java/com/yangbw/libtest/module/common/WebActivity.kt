@@ -15,15 +15,17 @@ import com.just.agentweb.WebChromeClient
 import com.just.agentweb.WebViewClient
 import com.library.common.base.BaseActivity
 import com.yangbw.libtest.R
-import com.yangbw.libtest.base.CommonViewModel
+import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.databinding.ActivityDetailsBinding
 import kotlinx.android.synthetic.main.activity_web.*
 import kotlinx.android.synthetic.main.toolbar.*
 import utils.ActionBarUtils
 
 /**
+ * 通用webView
+ *
  * @author yangbw
- * @date
+ * @date 2020/9/1
  */
 class WebActivity : BaseActivity<CommonViewModel, ActivityDetailsBinding>() {
 
@@ -44,7 +46,7 @@ class WebActivity : BaseActivity<CommonViewModel, ActivityDetailsBinding>() {
         }
     }
 
-    override fun getLayoutId() = R.layout.activity_web;
+    override fun getLayoutId() = R.layout.activity_web
 
     override fun getReplaceView(): View = ll_content
 
@@ -54,9 +56,9 @@ class WebActivity : BaseActivity<CommonViewModel, ActivityDetailsBinding>() {
         mTitle?.let {
             ActionBarUtils.setCenterTitleText(toolbar, it)
         }
-        ActionBarUtils.setSupportActionBarWithBack(toolbar, null, View.OnClickListener {
+        ActionBarUtils.setSupportActionBarWithBack(toolbar) {
             finish()
-        })
+        }
         mAgentWeb = AgentWeb.with(this)
             .setAgentWebParent(ll_content!!, LinearLayout.LayoutParams(-1, -1))
             .useDefaultIndicator()
@@ -70,6 +72,7 @@ class WebActivity : BaseActivity<CommonViewModel, ActivityDetailsBinding>() {
     }
 
     private val mWebViewClient: WebViewClient = object : WebViewClient() {
+        @Suppress("RedundantOverride")
         override fun shouldOverrideUrlLoading(
             view: WebView?,
             request: WebResourceRequest?
