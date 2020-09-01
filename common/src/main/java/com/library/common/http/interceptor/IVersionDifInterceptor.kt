@@ -1,11 +1,12 @@
 package com.library.common.http.interceptor
 
 /**
+ * 版本异常处理
+ *
  * @author yangbw
  * @date 2020/8/31
- * module： 请求接口返回的versino版本和本地版本不一致拦截处理
- * description：
  */
+@Suppress("unused")
 interface IVersionDifInterceptor {
     /**
      * 根据返回的version，判断是否进行拦截

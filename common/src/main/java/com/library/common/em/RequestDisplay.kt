@@ -1,10 +1,10 @@
 package com.library.common.em
 
 /**
+ * 页面显示效果
+ *
  * @author yangbw
  * @date 2020/3/17.
- * module：
- * description：网络请求展示
  */
 enum class RequestDisplay {
     NULL, TOAST, REPLACE

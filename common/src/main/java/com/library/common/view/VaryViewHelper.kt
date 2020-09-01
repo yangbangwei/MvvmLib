@@ -1,16 +1,16 @@
 package com.library.common.view
 
-import android.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.library.common.R
 
 /**
+ * 变化view辅助类用于增删view
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：变化view辅助类用于增删view
  */
 class VaryViewHelper(
     /**
@@ -28,14 +28,14 @@ class VaryViewHelper(
     //夫容器的布局参数
     private var params: ViewGroup.LayoutParams? = null
     //当前显示的view
-    private var mcurrentView: View? = null
+    private var mCurrentView: View? = null
 
     /**
      * 当前显示的view
      * @return
      */
     override val currentView: View
-        get() = currentView
+        get() = mCurrentView!!
 
 
     /**
@@ -53,7 +53,7 @@ class VaryViewHelper(
         if (parentView == null) {
             init()
         }
-        mcurrentView = view
+        mCurrentView = view
         if (parentView?.getChildAt(viewIndex) != view) {
             if (view.parent != null) {
                 val parent: ViewGroup = view.parent as ViewGroup
@@ -98,7 +98,7 @@ class VaryViewHelper(
                 break
             }
         }
-        mcurrentView = replaceView
+        mCurrentView = replaceView
     }
 
 }

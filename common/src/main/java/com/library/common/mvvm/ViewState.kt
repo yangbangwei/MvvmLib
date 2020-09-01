@@ -1,28 +1,55 @@
 package com.library.common.mvvm
 
 /**
+ * 界面UI显示处理
+ *
  * @author yangbw
- * @date 2020/3/24.
- * module：
- * description：view的改变
+ * @date 2020/9/1
  */
 class ViewState {
-    //加载的loading
-    val showLoading by lazy { SingleLiveEvent<String>() }
-    //对话框显示
+
+    /**
+     *  显示Loading弹窗
+     */
     val showDialogProgress by lazy { SingleLiveEvent<String>() }
-    //对话框消失
+
+    /**
+     *  隐藏Loading弹窗
+     */
     val dismissDialog by lazy { SingleLiveEvent<String>() }
-    //toast
+
+    /**
+     * 吐司显示内容
+     */
     val showToast by lazy { SingleLiveEvent<String>() }
-    //tip提示
+
+    /**
+     * Tip提醒
+     */
     val showTips by lazy { SingleLiveEvent<String>() }
-    //无数据
+
+    /**
+     * 页面loading加载效果
+     */
+    val showLoading by lazy { SingleLiveEvent<String>() }
+
+    /**
+     * 数据为空
+     */
     val showEmpty by lazy { SingleLiveEvent<String>() }
-    //网络错误
+
+    /**
+     * 网络异常
+     */
     val showNetworkError by lazy { SingleLiveEvent<String>() }
-    //是否恢复了
+
+    /**
+     * 恢复初始效果
+     */
     val restore by lazy { SingleLiveEvent<Void>() }
-    //刷新结束
+
+    /**
+     * 刷新结束
+     */
     val refreshComplete by lazy { SingleLiveEvent<Void>() }
 }

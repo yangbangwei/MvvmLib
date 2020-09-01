@@ -5,12 +5,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.library.common.R
+import com.library.common.base.BaseApplication
 
 /**
+ * 变化view的默认辅助控制类
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：变化view的默认辅助控制类（如果不使用默认的可实现IVaryViewHelperController自定义）
- * description：View替换：loading显示隐藏、无数据的展示view、网络异常的view、简单自定义的view
  */
 class VaryViewHelperController private constructor(private val helper: VaryViewHelper) :
     IVaryViewHelperController {
@@ -32,8 +33,8 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
     override fun showLoading(msg: String?) {
         hasRestore = false
         val layout = helper.inflate(R.layout.page_loading)
-        val tv_msg = layout.findViewById<TextView>(R.id.tv_msg)
-        tv_msg.text = msg
+        val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
+        tvMsg.text = msg
         helper.showView(layout)
     }
 
@@ -51,7 +52,7 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
         }
         if (null != listener) {
             againBtn.setOnClickListener(listener)
-            againBtn.visibility = View.VISIBLE;
+            againBtn.visibility = View.VISIBLE
         } else {
             againBtn.visibility = View.GONE
         }
@@ -59,7 +60,7 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
     }
 
     override fun showNetworkError(listener: View.OnClickListener?) {
-        showNetworkError("网络状态异常，请刷新重试", listener)
+        showNetworkError(BaseApplication.context.getString(R.string.network_error_please_refresh), listener)
     }
 
     override fun showNetworkError(
@@ -70,13 +71,13 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
         val layout = helper.inflate(R.layout.page_error)
         val againBtn =
             layout.findViewById<Button>(R.id.pager_error_loadingAgain)
-        val tv_title = layout.findViewById<TextView>(R.id.tv_title)
-        tv_title.visibility = View.GONE
-        val tv_msg = layout.findViewById<TextView>(R.id.tv_msg)
-        tv_msg.text = msg
+        val tvTitle = layout.findViewById<TextView>(R.id.tv_title)
+        tvTitle.visibility = View.GONE
+        val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
+        tvMsg.text = msg
         if (null != listener) {
             againBtn.setOnClickListener(listener)
-            againBtn.visibility = View.VISIBLE;
+            againBtn.visibility = View.VISIBLE
         } else {
             againBtn.visibility = View.GONE
         }

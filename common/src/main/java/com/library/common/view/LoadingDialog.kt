@@ -4,18 +4,18 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.text.TextUtils
-import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
-import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import com.library.common.R
 
 /**
  * 弹出浮动加载进度条
+ *
+ * @author yangbw
+ * @date 2020/8/31
  */
+@Suppress("unused")
 class LoadingDialog(private val mContext: Context) {
     /**
      * 加载数据对话框
@@ -34,7 +34,7 @@ class LoadingDialog(private val mContext: Context) {
      * @param cancelable 对话框是否可以取消
      */
     fun show(msg: String?, cancelable: Boolean) {
-        val view = LayoutInflater.from(mContext).inflate(R.layout.dialog_loading, null)
+        val view = View.inflate(mContext, R.layout.dialog_loading, null)
         val loadingText = view.findViewById<View>(R.id.id_tv_loading_dialog_text) as TextView
         if (!TextUtils.isEmpty(msg)) {
             loadingText.text = msg

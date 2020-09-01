@@ -25,25 +25,32 @@ object ImageViewAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:loadImage")
+    @BindingAdapter("loadImage")
     fun loadImage(imageView: ImageView, url: String?) {
-        GlideUtils.loadImage(imageView, url)
+        url?.let {
+            GlideUtils.loadImage(imageView, it)
+        }
     }
 
     @JvmStatic
-    @BindingAdapter("app:loadCircleImage")
+    @BindingAdapter("loadCircleImage")
     fun loadCircleImage(imageView: ImageView, url: String?) {
-        GlideUtils.loadCircleImage(imageView, url)
+        url?.let {
+            GlideUtils.loadCircleImage(imageView, it)
+        }
     }
 
     @JvmStatic
-    @BindingAdapter("app:loadRoundImage")
+    @BindingAdapter("loadRoundImage")
     fun loadRoundImage(imageView: ImageView, url: String?) {
-        GlideUtils.loadRoundImage(imageView, url)
+        url?.let {
+            GlideUtils.loadRoundImage(imageView, it)
+        }
+
     }
 
     @JvmStatic
-    @BindingAdapter("app:imageUrl", "app:placeHolder", "app:error")
+    @BindingAdapter("imageUrl", "placeHolder", "error")
     fun loadImage(
         imageView: ImageView,
         url: String?,

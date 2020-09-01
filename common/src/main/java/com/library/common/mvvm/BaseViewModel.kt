@@ -4,6 +4,7 @@ import android.view.View
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.NetworkUtils
 import com.library.common.R
 import com.library.common.base.BaseApplication
 import com.library.common.config.AppConfig
@@ -13,52 +14,46 @@ import com.library.common.http.exception.ResultException
 import com.library.common.http.exception.ReturnCodeException
 import com.library.common.http.exception.ReturnCodeNullException
 import com.library.common.http.interceptor.IReturnCodeErrorInterceptor
-import com.library.common.utils.NetworkUtils
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseViewModel封装
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
+@Suppress("UNCHECKED_CAST")
 abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
 
     //接口类
     private var apiService: API? = null
 
     //网络请求展示类型
-    private var type: RequestDisplay? = null
+    protected var type: RequestDisplay? = null
 
     //默认相关错误提示
-    private lateinit var emptyMsg: String
-    private lateinit var errorMsg: String
-    private lateinit var codeNullMsg: String
-
-    //重试的监听
-    var listener: View.OnClickListener? = null
+    protected val emptyMsg: String by lazy { BaseApplication.context.getString(R.string.no_data) }
+    protected val errorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error) }
+    protected val codeNullMsg: String by lazy { BaseApplication.context.getString(R.string.no_suc_code) }
 
     /**
-     * 网络相关工具
+     * 重试的监听
      */
-    private val networkUtils: NetworkUtils by lazy { NetworkUtils() }
+    var listener: View.OnClickListener? = null
 
     /**
      * 视图变化
      */
-    val viewChange: ViewState by lazy { ViewState() }
+    val viewState: ViewState by lazy { ViewState() }
 
     /**
      * 获取接口操作类
      */
     fun getApiService(): API {
         if (apiService == null) {
-            emptyMsg = BaseApplication.context.getString(R.string.no_data)
-            errorMsg = BaseApplication.context.getString(R.string.no_data)
-            codeNullMsg = BaseApplication.context.getString(R.string.network_error)
             apiService = AppConfig.getRetrofit().create(
                 (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<API>
             )
@@ -75,7 +70,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
      * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
      * 调用ViewModel的  #onCleared 方法取消所有协程
      */
-    private fun launchUI(block: suspend CoroutineScope.() -> Unit) =
+    protected fun launchUI(block: suspend CoroutineScope.() -> Unit) =
         viewModelScope.launch { block() }
 
     /**
@@ -102,7 +97,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
         success: (T?) -> Unit = {},
         //错误 根据错误进行不同分类
         error: (Throwable) -> Unit = {
-            if (!networkUtils.isConnected()) {
+            if (!NetworkUtils.isConnected()) {
                 onNetWorkError({ reTry() })//没网
             } else {
                 when (it) {
@@ -112,7 +107,6 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                     is ReturnCodeException -> {
                         isIntercepted(it)
                         onReturnCodeError(
-                            it.returnCode,
                             it.message
                         ) { reTry() }
                     }
@@ -145,10 +139,10 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
             RequestDisplay.NULL -> {
             }
             RequestDisplay.TOAST -> {
-                viewChange.showDialogProgress.value = msg
+                viewState.showDialogProgress.value = msg
             }
             RequestDisplay.REPLACE -> {
-                viewChange.showLoading.call()
+                viewState.showLoading.call()
             }
         }
         //正式请求接口
@@ -198,13 +192,13 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                         ) {
                             success(null)
                             //完成的回调所有弹窗消失
-                            viewChange.dismissDialog.call()
-                            viewChange.restore.call()
+                            viewState.dismissDialog.call()
+                            viewState.restore.call()
                         } else {
                             success(response.getBaseResult())
                             //完成的回调所有弹窗消失
-                            viewChange.dismissDialog.call()
-                            viewChange.restore.call()
+                            viewState.dismissDialog.call()
+                            viewState.restore.call()
                         }
                     } else {
                         //状态码错误
@@ -224,13 +218,13 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                     ) {
                         success(null)
                         //完成的回调所有弹窗消失
-                        viewChange.dismissDialog.call()
-                        viewChange.restore.call()
+                        viewState.dismissDialog.call()
+                        viewState.restore.call()
                     } else {
                         success(response.getBaseResult())
                         //完成的回调所有弹窗消失
-                        viewChange.dismissDialog.call()
-                        viewChange.restore.call()
+                        viewState.dismissDialog.call()
+                        viewState.restore.call()
                     }
                 } else {
                     //状态码错误
@@ -249,13 +243,13 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                     ) {
                         success(null)
                         //完成的回调所有弹窗消失
-                        viewChange.dismissDialog.call()
-                        viewChange.restore.call()
+                        viewState.dismissDialog.call()
+                        viewState.restore.call()
                     } else {
                         success(response.getBaseResult())
                         //完成的回调所有弹窗消失
-                        viewChange.dismissDialog.call()
-                        viewChange.restore.call()
+                        viewState.dismissDialog.call()
+                        viewState.restore.call()
                     }
                 } else {
                     //状态码错误
@@ -277,7 +271,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 异常统一处理
      */
-    private suspend fun <T> handleException(
+    protected suspend fun <T> handleException(
         block: suspend CoroutineScope.() -> IRes<T>,
         success: suspend CoroutineScope.(IRes<T>) -> Unit,
         error: suspend CoroutineScope.(Throwable) -> Unit,
@@ -305,14 +299,14 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
             RequestDisplay.NULL -> {
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = emptyMsg
-                viewChange.dismissDialog.call()
+                viewState.showToast.value = emptyMsg
+                viewState.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
                 this.listener = View.OnClickListener {
                     reTry()
                 }
-                viewChange.showEmpty.value = emptyMsg
+                viewState.showEmpty.value = emptyMsg
 
             }
         }
@@ -330,14 +324,14 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
 
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = errorMsg
-                viewChange.dismissDialog.call()
+                viewState.showToast.value = errorMsg
+                viewState.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
                 this.listener = View.OnClickListener {
                     reTry()
                 }
-                viewChange.showNetworkError.value = errorMsg
+                viewState.showNetworkError.value = errorMsg
             }
         }
     }
@@ -345,8 +339,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 返回code错误
      */
-    private fun onReturnCodeError(
-        returnCode: String,
+    protected fun onReturnCodeError(
         message: String?,
         reTry: () -> Unit = {}
     ) {
@@ -354,14 +347,14 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
             RequestDisplay.NULL -> {
             }
             RequestDisplay.TOAST -> {
-                viewChange.showToast.value = message
-                viewChange.dismissDialog.call()
+                viewState.showToast.value = message
+                viewState.dismissDialog.call()
             }
             RequestDisplay.REPLACE -> {
                 this.listener = View.OnClickListener {
                     reTry()
                 }
-                viewChange.showNetworkError.value = message
+                viewState.showNetworkError.value = message
             }
         }
     }
@@ -369,8 +362,9 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 判断是否被拦截
      */
-    private fun isIntercepted(t: Throwable): Boolean {
-        var isIntercepted = false //是否被拦截了
+    protected fun isIntercepted(t: Throwable): Boolean {
+        //是否被拦截了
+        var isIntercepted = false
         for (interceptor: IReturnCodeErrorInterceptor in AppConfig.getRetCodeInterceptors()) {
             if (interceptor.intercept((t as ReturnCodeException).returnCode)) {
                 isIntercepted = true

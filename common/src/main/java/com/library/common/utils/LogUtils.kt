@@ -3,11 +3,12 @@ package com.library.common.utils
 import android.util.Log
 
 /**
+ * 日志相关工具类
+ *
  * @author yangbw
- * @date 2019-07-04.
- * module： 日志相关工具类
- * description：
+ * @date 2020/9/1
  */
+@Suppress("unused")
 class LogUtils private constructor() {
     class Builder {
         private var logSwitch = true

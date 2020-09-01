@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
@@ -27,9 +26,12 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseActivity封装
+ *
  * @author yangbw
  * @date 2020/3/16.
  */
+@Suppress("UNCHECKED_CAST")
 abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCompatActivity(),
     IView {
 
@@ -102,9 +104,9 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
             .autoStatusBarDarkModeEnable(true)
             .fitsSystemWindows(true)
             .statusBarColor(getStatusBarColor())
-            .init();
+            .init()
 
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     open fun getStatusBarColor() = R.color.colorPrimary
@@ -158,32 +160,32 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
      * 注册视图变化事件
      */
     private fun registerViewChange() {
-        mViewModel.viewChange.showLoading.observe(this, Observer {
+        mViewModel.viewState.showLoading.observe(this, {
             viewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewChange.showDialogProgress.observe(this, Observer {
+        mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewChange.dismissDialog.observe(this, Observer {
+        mViewModel.viewState.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewChange.showToast.observe(this, Observer {
+        mViewModel.viewState.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewChange.showTips.observe(this, Observer {
+        mViewModel.viewState.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewChange.showEmpty.observe(this, Observer {
+        mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewChange.showNetworkError.observe(this, Observer {
+        mViewModel.viewState.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewChange.restore.observe(this, Observer {
+        mViewModel.viewState.restore.observe(this, {
             viewController?.restore()
             //代表有设置刷新
             getSmartRefreshLayout()?.finishRefresh()

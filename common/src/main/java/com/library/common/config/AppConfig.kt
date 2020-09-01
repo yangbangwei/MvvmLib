@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.library.common.config
 
 import com.library.common.R
@@ -9,10 +11,10 @@ import okhttp3.Interceptor
 import retrofit2.Retrofit
 
 /**
+ * APP全局配置
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 object AppConfig {
     private var retrofit: Retrofit? = null
@@ -279,17 +281,17 @@ object AppConfig {
         }
 
         fun setIsSkipMemoryCache(isSkipMemoryCache: Boolean): ConfigBuilder {
-            AppConfig.isSkipMemoryCache = AppConfig.isSkipMemoryCache
+            AppConfig.isSkipMemoryCache = isSkipMemoryCache
             return this
         }
 
         fun setPlaceholder(placeholder: Int): ConfigBuilder {
-            AppConfig.placeholder = AppConfig.placeholder
+            AppConfig.placeholder = placeholder
             return this
         }
 
         fun setErrorImage(errorImage: Int): ConfigBuilder {
-            AppConfig.errorImage = AppConfig.errorImage
+            AppConfig.errorImage = errorImage
             return this
         }
 

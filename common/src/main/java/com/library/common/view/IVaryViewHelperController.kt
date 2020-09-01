@@ -3,10 +3,10 @@ package com.library.common.view
 import android.view.View
 
 /**
+ * 界面效果实现
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 interface IVaryViewHelperController {
     /**
@@ -24,7 +24,7 @@ interface IVaryViewHelperController {
     /**
      * 显示empty View
      *
-     * @param emptyMsg empty View 文字描述
+     * @param listener 点击事件
      */
     fun showEmpty(listener: View.OnClickListener?)
 

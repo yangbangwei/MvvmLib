@@ -1,10 +1,10 @@
 package com.library.common.mvvm
 
 /**
+ * 列表刷新处理
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 interface IListView<T> : IView {
     /**

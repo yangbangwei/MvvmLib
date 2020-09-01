@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -24,11 +25,12 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseFragment封装
+ *
  * @author yangbw
- * @date 2020/3/16.
- * module：
- * description：
+ * @date 2020/9/1
  */
+@Suppress("UNCHECKED_CAST")
 abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragment(),
     IView {
 
@@ -135,32 +137,32 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
      * 注册 UI 事件
      */
     private fun registerViewChange() {
-        mViewModel.viewChange.showLoading.observe(this, {
+        mViewModel.viewState.showLoading.observe(this, {
             viewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewChange.showDialogProgress.observe(this, {
+        mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewChange.dismissDialog.observe(this, {
+        mViewModel.viewState.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewChange.showToast.observe(this, {
+        mViewModel.viewState.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewChange.showTips.observe(this, {
+        mViewModel.viewState.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewChange.showEmpty.observe(this, {
+        mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewChange.showNetworkError.observe(this, {
+        mViewModel.viewState.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewChange.restore.observe(this, {
+        mViewModel.viewState.restore.observe(this, {
             viewController?.restore()
             //代表有设置刷新
             if (getSmartRefreshLayout() != null) {
@@ -180,10 +182,10 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
                 TSnackbar.LENGTH_SHORT
             )
             val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(resources.getColor(R.color.colorAccent))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorAccent))
             val textView =
                 snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-            textView.setTextColor(resources.getColor(R.color.m90EE90))
+            textView.setTextColor(ContextCompat.getColor(mContext,R.color.m90EE90))
             snackBar.show()
         }
     }
@@ -195,7 +197,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     override fun showDialogProgress(msg: String, cancelable: Boolean) {
         try {
             if (mLoadingDialog == null) {
-                mLoadingDialog = LoadingDialog(mContext!!)
+                mLoadingDialog = LoadingDialog(mContext)
             }
             mLoadingDialog?.show(msg, cancelable)
         } catch (e: Exception) {

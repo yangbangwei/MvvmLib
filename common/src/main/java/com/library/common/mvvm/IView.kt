@@ -2,14 +2,13 @@ package com.library.common.mvvm
 
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import com.library.common.view.IVaryViewHelperController
 
 /**
+ * 页面通用方法
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 interface IView : IVaryViewHelperController {
     /**

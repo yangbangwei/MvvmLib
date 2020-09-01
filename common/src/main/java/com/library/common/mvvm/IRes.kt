@@ -1,10 +1,10 @@
 package com.library.common.mvvm
 
 /**
+ * 通用实体
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 interface IRes<T> {
     fun getBaseMsg(): String

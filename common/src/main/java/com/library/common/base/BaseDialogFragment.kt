@@ -1,40 +1,36 @@
 package com.library.common.base
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.alibaba.android.arouter.launcher.ARouter
-import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
-import com.library.common.config.AppConfig
+import com.library.common.R
 import com.library.common.mvvm.BaseViewModel
 import com.library.common.mvvm.IView
 import com.library.common.view.IVaryViewHelperController
 import com.library.common.view.LoadingDialog
 import com.library.common.view.VaryViewHelperController
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseDialogFragment弹窗
+ *
  * @author yangbw
- * @date 2020/3/16.
- * module：
- * description：
+ * @date 2020/9/1
  */
+@Suppress("UNCHECKED_CAST", "unused")
 abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     DialogFragment(),
     IView {
@@ -92,9 +88,6 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (AppConfig.isARouterOpen()) {
-            ARouter.getInstance().inject(this)
-        }
         createViewModel()
         viewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
@@ -127,12 +120,12 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
 
     /**
      *
-     *     actualTypeArguments[0]  BaseViewModel
-     *     actualTypeArguments[1]  ViewDataBinding
+     * actualTypeArguments[0]  BaseViewModel
+     * actualTypeArguments[1]  ViewDataBinding
      *
      */
     private fun createViewModel() {
-        //创建viewmodel
+        //创建viewModel
         val type = javaClass.genericSuperclass
         if (type is ParameterizedType) {
             val tp = type.actualTypeArguments[0]
@@ -145,32 +138,32 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
      * 注册 UI 事件
      */
     private fun registerViewChange() {
-        mViewModel.viewChange.showLoading.observe(this, Observer {
+        mViewModel.viewState.showLoading.observe(this, {
             viewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewChange.showDialogProgress.observe(this, Observer {
+        mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewChange.dismissDialog.observe(this, Observer {
+        mViewModel.viewState.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewChange.showToast.observe(this, Observer {
+        mViewModel.viewState.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewChange.showTips.observe(this, Observer {
+        mViewModel.viewState.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewChange.showEmpty.observe(this, Observer {
-            showEmpty(it,mViewModel.listener)
+        mViewModel.viewState.showEmpty.observe(this, {
+            showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewChange.showNetworkError.observe(this, Observer {
+        mViewModel.viewState.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewChange.restore.observe(this, Observer {
+        mViewModel.viewState.restore.observe(this, {
             viewController?.restore()
             //代表有设置刷新
             if (getSmartRefreshLayout() != null) {
@@ -192,10 +185,10 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
                 TSnackbar.LENGTH_SHORT
             )
             val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(resources.getColor(R.color.colorAccent))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorAccent))
             val textView =
                 snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-            textView.setTextColor(resources.getColor(R.color.m90EE90))
+            textView.setTextColor(ContextCompat.getColor(mContext,R.color.m90EE90))
             snackBar.show()
         }
     }
@@ -207,7 +200,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     override fun showDialogProgress(msg: String, cancelable: Boolean) {
         try {
             if (mLoadingDialog == null) {
-                mLoadingDialog = LoadingDialog(mContext!!)
+                mLoadingDialog = LoadingDialog(mContext)
             }
             mLoadingDialog?.show(msg, cancelable)
         } catch (e: Exception) {
@@ -276,14 +269,14 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
         ToastUtils.showShort(msg)
     }
 
-    override val mActivity: Activity?
-        get() = activity
+    override val mActivity: Activity
+        get() = activity!!
 
-    override val mContext: Context?
-        get() = context
+    override val mContext: Context
+        get() = context!!
 
-    override val mAppContext: Context?
-        get() = activity?.applicationContext
+    override val mAppContext: Context
+        get() = activity?.applicationContext!!
 
 
     /**

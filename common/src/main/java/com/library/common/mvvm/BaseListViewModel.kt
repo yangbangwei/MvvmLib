@@ -1,96 +1,36 @@
 package com.library.common.mvvm
 
 import android.view.View
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.NetworkUtils
 import com.library.common.config.AppConfig
 import com.library.common.em.RequestDisplay
 import com.library.common.http.exception.NetWorkException
 import com.library.common.http.exception.ResultException
 import com.library.common.http.exception.ReturnCodeException
 import com.library.common.http.exception.ReturnCodeNullException
-import com.library.common.http.interceptor.IReturnCodeErrorInterceptor
-import com.library.common.utils.NetworkUtils
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import java.lang.reflect.ParameterizedType
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 
 /**
+ * BaseListViewModel封装
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
-abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
-
-    //接口类
-    private var apiService: API? = null
-
-    //网络请求展示类型
-    private var type: RequestDisplay? = null
-
-    //默认相关错误提示
-    private val emptyMsg: String = "暂无数据"
-    private val errorMsg: String = "网络错误"
-    private val codeNullMsg: String = "未设置成功状态码"
-
-    //重试的监听
-    var listener: View.OnClickListener? = null
+abstract class BaseListViewModel<API> : BaseViewModel<API>() {
 
     /**
      * 对于list的不同展示
      */
-    //list展示数据
     var mResult: MutableLiveData<*>? = null
 
-    //页数
+    /**
+     * 页数
+     */
     private var pageNo = 0
-
-    /**
-     * 获取接口操作类
-     */
-    fun getApiService(): API {
-        if (apiService == null) {
-            apiService = AppConfig.getRetrofit().create(
-                (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<API>
-            )
-        }
-        return apiService ?: throw RuntimeException("Api service is null")
-    }
-
-    /**
-     * 开始执行方法
-     */
-    protected open fun onStart() {}
-
-    /**
-     * 网络相关工具
-     */
-    private val networkUtils: NetworkUtils by lazy { NetworkUtils() }
-
-    /**
-     * 视图变化
-     */
-    val viewState: ViewState by lazy { ViewState() }
-
-    /**
-     * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
-     * 调用ViewModel的  #onCleared 方法取消所有协程
-     */
-    private fun launchUI(block: suspend CoroutineScope.() -> Unit) =
-        viewModelScope.launch { block() }
-
-    /**
-     * 用流的方式进行网络请求
-     */
-    fun <T> launchFlow(block: suspend () -> T): Flow<T> {
-        return flow {
-            emit(block())
-        }
-    }
 
     /**
      * 过滤请求结果，其他全抛异常
@@ -108,7 +48,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
         },
         //错误 根据错误进行不同分类
         error: (Throwable) -> Unit = {
-            if (!networkUtils.isConnected()) {
+            if (!NetworkUtils.isConnected()) {
                 onNetWorkError({ reTry() })//没网
             } else {
                 when (it) {
@@ -118,7 +58,6 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
                     is ReturnCodeException -> {
                         isIntercepted(it)
                         onReturnCodeError(
-                            it.returnCode,
                             it.message
                         ) { reTry() }
                     }
@@ -146,6 +85,7 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
         pageNo: Int = 1,
         //是否为加载列表数据
         isList: Boolean = true,
+        //加载弹窗提醒内容
         msg: String = ""
     ) {
         //接口操作交互类型赋值
@@ -187,7 +127,6 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
         }
     }
 
-
     /**
      * 请求结果过滤
      */
@@ -198,11 +137,10 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
         success: suspend CoroutineScope.(T) -> Unit
     ) {
         coroutineScope {
-            //多baseurl
+            //多baseUrl
             if (AppConfig.getMoreBaseUrl() && currentDomainName != AppConfig.DOMAIN_NAME) {
                 //获取当前baseUrl对应的成功码
-                val retSuccessList =
-                    AppConfig.getRetSuccessMap()?.get(currentDomainName)
+                val retSuccessList = AppConfig.getRetSuccessMap()?.get(currentDomainName)
                 //当前对应的baseUrl对应的code
                 if (retSuccessList != null) {
                     //状态码正确
@@ -313,27 +251,6 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
     }
 
     /**
-     * 异常统一处理
-     */
-    private suspend fun <T> handleException(
-        block: suspend CoroutineScope.() -> IRes<T>,
-        success: suspend CoroutineScope.(IRes<T>) -> Unit,
-        error: suspend CoroutineScope.(Throwable) -> Unit,
-        complete: suspend CoroutineScope.() -> Unit
-    ) {
-        coroutineScope {
-            try {
-                success(block())
-            } catch (e: Throwable) {
-                error(e)
-            } finally {
-                complete()
-            }
-        }
-    }
-
-
-    /**
      * 数据为空
      */
     private fun onTEmpty( //重试
@@ -388,51 +305,4 @@ abstract class BaseListViewModel<API> : ViewModel(), LifecycleObserver {
             }
         }
     }
-
-    /**
-     * 返回code错误
-     */
-    private fun onReturnCodeError(
-        returnCode: String,
-        message: String?,
-        reTry: () -> Unit = {
-        }
-    ) {
-        when (type) {
-            RequestDisplay.NULL -> {
-            }
-            RequestDisplay.TOAST -> {
-                viewState.showToast.value = message
-                viewState.dismissDialog.call()
-            }
-            RequestDisplay.REPLACE -> {
-                if (pageNo == 1) {
-                    this.listener = View.OnClickListener {
-                        reTry()
-                    }
-                    viewState.showNetworkError.value = errorMsg
-                } else {
-                    viewState.refreshComplete.call()
-                    viewState.restore.call()
-                    viewState.showTips.value = errorMsg
-                }
-            }
-        }
-    }
-
-    /**
-     * 判断是否被拦截
-     */
-    private fun isIntercepted(t: Throwable): Boolean {
-        var isIntercepted = false //是否被拦截了
-        for (interceptor: IReturnCodeErrorInterceptor in AppConfig.getRetCodeInterceptors()) {
-            if (interceptor.intercept((t as ReturnCodeException).returnCode)) {
-                isIntercepted = true
-                interceptor.doWork(t.returnCode, t.message)
-                break
-            }
-        }
-        return isIntercepted
-    }
-
 }

@@ -13,7 +13,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.androidadvance.topsnackbar.TSnackbar
@@ -32,10 +31,11 @@ import java.lang.reflect.ParameterizedType
 
 /**
  * @author yangbw
- * @date 2020/3/16.
+ * @date 2020/9/1
  * module：
  * description：
  */
+@Suppress("UNCHECKED_CAST")
 abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(),
     IListView<T> {
@@ -71,10 +71,9 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * list展示相关
      */
     protected var mPageNum: Int = 1
-    private var mLoadMoreEnable = true
     protected var mLoadPageNum = 1 //当前正在加载的page，但是当前page接口还未做出响应
+    private var mLoadMoreEnable = true
     private var mRefreshEnable = true //是否能进行下拉刷新
-
 
     abstract fun loadPageListData(pageNo: Int)
 
@@ -118,14 +117,15 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     }
 
     /**
-     *     创建viewmodel
-     *     actualTypeArguments[0]  BaseViewModel
-     *     actualTypeArguments[1]  ViewDataBinding
-     *     actualTypeArguments[2]  T
+     *  创建viewModel
+     *
+     *  actualTypeArguments[0]  BaseViewModel
+     *  actualTypeArguments[1]  ViewDataBinding
+     *  actualTypeArguments[2]  T
      *
      */
     private fun createViewModel() {
-        //创建viewmodel
+        //创建viewModel
         val type = javaClass.genericSuperclass
         if (type is ParameterizedType) {
             val tp = type.actualTypeArguments[0]
@@ -138,35 +138,35 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 注册视图变化事件
      */
     private fun registerViewChange() {
-        mViewModel.viewState.showLoading.observe(this, Observer {
+        mViewModel.viewState.showLoading.observe(this, {
             mViewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewState.showDialogProgress.observe(this, Observer {
+        mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewState.dismissDialog.observe(this, Observer {
+        mViewModel.viewState.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewState.showToast.observe(this, Observer {
+        mViewModel.viewState.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewState.showTips.observe(this, Observer {
+        mViewModel.viewState.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewState.showEmpty.observe(this, Observer {
+        mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewState.showNetworkError.observe(this, Observer {
+        mViewModel.viewState.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewState.restore.observe(this, Observer {
+        mViewModel.viewState.restore.observe(this, {
             mViewController?.restore()
         })
-        mViewModel.viewState.refreshComplete.observe(this, Observer {
+        mViewModel.viewState.refreshComplete.observe(this, {
             refreshComplete()
         })
     }
@@ -177,7 +177,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private fun registerDataChange() {
         mViewModel.mResult = MutableLiveData<T>()
         //数据变化的监听
-        mViewModel.mResult?.observe(this, Observer {
+        mViewModel.mResult?.observe(this, {
             showListData(it as MutableList<T>, mPageNum)
         })
     }
@@ -212,7 +212,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     override fun showDialogProgress(msg: String, cancelable: Boolean) {
         try {
             if (mLoadingDialog == null) {
-                mLoadingDialog = LoadingDialog(mContext!!)
+                mLoadingDialog = LoadingDialog(mContext)
             }
             mLoadingDialog?.show(msg, cancelable)
         } catch (e: Exception) {
@@ -366,7 +366,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         if (mLoadMoreEnable) {
             getSmartRefreshLayout()?.setOnLoadMoreListener {
                 mLoadPageNum = mPageNum + 1
-                mPageNum = mPageNum + 1
+                mPageNum += 1
                 loadPageListData(mPageNum)
             }
         }
@@ -429,17 +429,6 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     override fun refreshComplete() {
         getSmartRefreshLayout()?.finishLoadMore()
         getSmartRefreshLayout()?.finishRefresh()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //相关销毁，相关事件置空
-        if (mBinding != null) {
-            mBinding == null
-        }
-        if (mViewController != null) {
-            mViewController == null
-        }
     }
 
 }

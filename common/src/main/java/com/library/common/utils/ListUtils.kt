@@ -1,12 +1,14 @@
+@file:Suppress("unused")
+
 package com.library.common.utils
 
 import java.util.*
 
 /**
+ * 集合工具类
+ *
  * @author yangbw
  * @date 2020/3/16.
- * module： 集合判断工具类
- * description：
  */
 object ListUtils {
     /**
@@ -16,7 +18,7 @@ object ListUtils {
      * @return
      */
     fun <T> isEmpty(list: List<*>?): Boolean {
-        return list == null || list.size == 0
+        return list == null || list.isEmpty()
     }
 
     /**

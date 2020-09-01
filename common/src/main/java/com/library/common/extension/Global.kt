@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.library.common.extension
 
 import android.view.View

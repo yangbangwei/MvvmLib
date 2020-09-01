@@ -18,7 +18,7 @@ android {
             variant ->
                 variant.outputs.all {
                     // 此处指定生成的apk文件名
-                    def newName = "test_" + variant.buildType.name + "_v" + rootProject.ext.android["versionName"] + "_" + rootProject.ext.android["versionCode"] + ".apk"
+                    def newName = "libtest_" + variant.buildType.name + "_v" + rootProject.ext.android["versionName"] + "_" + rootProject.ext.android["versionCode"] + ".apk"
                     outputFileName = newName
                 }
         }

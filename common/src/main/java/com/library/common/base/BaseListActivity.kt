@@ -12,14 +12,13 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.library.common.R
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ImmersionBar
+import com.library.common.R
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
 import com.library.common.utils.ActivityUtils
@@ -32,11 +31,12 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseListActivity封装
+ *
  * @author yangbw
- * @date 2020/3/16.
- * module：
- * description：
+ * @date 2020/9/1
  */
+@Suppress("UNCHECKED_CAST", "unused")
 abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         A : BaseQuickAdapter<T, CommonViewHolder>, T> : AppCompatActivity(),
     IListView<T> {
@@ -144,35 +144,35 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 注册视图变化事件
      */
     private fun registerViewChange() {
-        mViewModel.viewState.showLoading.observe(this, Observer {
+        mViewModel.viewState.showLoading.observe(this, {
             mViewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
             }
         })
-        mViewModel.viewState.showDialogProgress.observe(this, Observer {
+        mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewState.dismissDialog.observe(this, Observer {
+        mViewModel.viewState.dismissDialog.observe(this, {
             dismissDialog()
         })
-        mViewModel.viewState.showToast.observe(this, Observer {
+        mViewModel.viewState.showToast.observe(this, {
             showToast(it)
         })
-        mViewModel.viewState.showTips.observe(this, Observer {
+        mViewModel.viewState.showTips.observe(this, {
             showTips(it)
         })
-        mViewModel.viewState.showEmpty.observe(this, Observer {
+        mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewState.showNetworkError.observe(this, Observer {
+        mViewModel.viewState.showNetworkError.observe(this, {
             showNetworkError(it, mViewModel.listener)
         })
-        mViewModel.viewState.restore.observe(this, Observer {
+        mViewModel.viewState.restore.observe(this, {
             mViewController?.restore()
         })
-        mViewModel.viewState.refreshComplete.observe(this, Observer {
+        mViewModel.viewState.refreshComplete.observe(this, {
             refreshComplete()
         })
     }
@@ -183,7 +183,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private fun registerDataChange() {
         mViewModel.mResult = MutableLiveData<T>()
         //数据变化的监听
-        mViewModel.mResult?.observe(this, Observer {
+        mViewModel.mResult?.observe(this, {
             showListData(it as MutableList<T>, mPageNum)
         })
     }
@@ -360,9 +360,9 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
             .autoStatusBarDarkModeEnable(true)
             .fitsSystemWindows(true)
             .statusBarColor(R.color.colorPrimary)
-            .init();
+            .init()
 
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     /**

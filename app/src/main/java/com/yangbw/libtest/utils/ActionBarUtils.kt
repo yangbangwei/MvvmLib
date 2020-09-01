@@ -1,9 +1,9 @@
 package utils
 
+import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import com.library.common.utils.StringUtils
 import com.yangbw.libtest.R
 
 /**
@@ -77,7 +77,7 @@ class ActionBarUtils {
             listener: View.OnClickListener?
         ): TextView? {
             val tvLeft = toolbar.findViewById<TextView>(R.id.tv_left)
-            if (!StringUtils.isEmpty(leftText)) {
+            if (!TextUtils.isEmpty(leftText)) {
                 tvLeft.text = leftText
                 tvLeft.visibility = View.VISIBLE
             } else {
@@ -101,7 +101,7 @@ class ActionBarUtils {
             listener: View.OnClickListener?
         ): TextView? {
             val tvRight = toolbar.findViewById<TextView>(R.id.tv_right)
-            if (!StringUtils.isEmpty(rightText)) {
+            if (!TextUtils.isEmpty(rightText)) {
                 tvRight.text = rightText
                 tvRight.visibility = View.VISIBLE
             } else {

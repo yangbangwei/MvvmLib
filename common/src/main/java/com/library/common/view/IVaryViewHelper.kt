@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.View
 
 /**
+ * 界面效果接口
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：
- * description：
  */
 interface IVaryViewHelper {
     /**

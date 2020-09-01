@@ -7,10 +7,10 @@ import okhttp3.*
 import java.util.*
 
 /**
+ * 多URL处理
+ *
  * @author yangbw
- * @date 2020/4/16.
- * module：
- * description：捕获添加的Headers，然后修改baseURL
+ * @date 2020/9/1
  */
 open class BaseUrlInterceptor : Interceptor {
 
@@ -30,13 +30,14 @@ open class BaseUrlInterceptor : Interceptor {
         newBuilder.headers(addHeaders())
         //多bseurl的逻辑
         val domainName = obtainDomainNameFromHeaders(request)
-        var httpUrl: HttpUrl? = null
-        if (domainName != null) {
-            httpUrl = AppConfig.getMDomainNameHub()?.get(domainName)
-            //设置多baseurl的另外的baseurl,将当前的domainName进行存储，便于
+        val httpUrl: HttpUrl?
+        httpUrl = if (domainName != null) {
+            AppConfig.getMDomainNameHub()?.get(domainName)
+            //设置多baseUrl的另外的baseUrl,将当前的domainName进行存储，便于
         } else {
-            httpUrl = AppConfig.getMDomainNameHub()?.get(
-                AppConfig.getDomainName())
+            AppConfig.getMDomainNameHub()?.get(
+                AppConfig.getDomainName()
+            )
         }
 
         if (null != httpUrl) {
@@ -65,7 +66,8 @@ open class BaseUrlInterceptor : Interceptor {
             }
         } else require(url.pathSize >= pathSize) {
             String.format(
-                "Your final path is %s, the pathSize = %d, but the #baseurl_path_size = %d, #baseurl_path_size must be less than or equal to pathSize of the final path",
+                "Your final path is %s, the pathSize = %d, but the #baseurl_path_size = %d, " +
+                        "#baseurl_path_size must be less than or equal to pathSize of the final path",
                 url.scheme + "://" + url.host + url.encodedPath, url.pathSize, pathSize
             )
         }
@@ -79,7 +81,6 @@ open class BaseUrlInterceptor : Interceptor {
             .port(domainUrl.port)
             .build()
     }
-
 
     private fun resolvePathSize(httpUrl: HttpUrl, builder: HttpUrl.Builder): Int {
         val fragment = httpUrl.fragment

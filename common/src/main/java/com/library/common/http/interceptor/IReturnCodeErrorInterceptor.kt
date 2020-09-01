@@ -1,10 +1,10 @@
 package com.library.common.http.interceptor
 
 /**
+ * 返回Code拦截处理
+ *
  * @author yangbw
  * @date 2020/8/31
- * module： 接口请求ReturnCode不正确的情况拦截处理
- * description：
  */
 interface IReturnCodeErrorInterceptor {
     /**

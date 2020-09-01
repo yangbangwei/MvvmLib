@@ -5,7 +5,6 @@ import com.android.aachulk.interceptor.RequestHeaderInterceptor
 import com.library.common.base.BaseApplication
 import com.library.common.config.AppConfig
 import com.library.common.http.ApiClient
-import com.library.common.utils.Utils
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.interceptor.SessionInterceptor
@@ -19,7 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 class App : BaseApplication() {
 
     init {
-        SmartRefreshLayout.setDefaultRefreshInitializer { context, layout ->
+        SmartRefreshLayout.setDefaultRefreshInitializer { _, layout ->
             layout.setEnableLoadMore(true)
             layout.setEnableLoadMoreWhenContentNotFull(true)
         }
@@ -66,7 +65,5 @@ class App : BaseApplication() {
                 )
             )
             .build()
-        //application 上下文
-        Utils.init(this)
     }
 }

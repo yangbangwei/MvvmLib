@@ -37,14 +37,14 @@ class MenuActivity : BaseActivity<MenuViewModel, ActivityMenuBinding>() {
     private var mOffset = 0
     private var mScrollY = 0
 
-    override fun getLayoutId() = R.layout.activity_menu;
+    override fun getLayoutId() = R.layout.activity_menu
 
     override fun getReplaceView(): View = refreshLayout
 
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
             .fitsSystemWindows(false)
-            .init();
+            .init()
         //状态栏透明和间距处理
         StatusBarUtil.immersive(this)
         StatusBarUtil.setPaddingSmart(this, toolbar)
@@ -133,15 +133,15 @@ class MenuActivity : BaseActivity<MenuViewModel, ActivityMenuBinding>() {
                 v: NestedScrollView?, scrollX: Int,
                 scrollY: Int, oldScrollX: Int, oldScrollY: Int
             ) {
-                var scrollY = scrollY
+                var y = scrollY
                 if (lastScrollY < h) {
-                    scrollY = Math.min(h, scrollY)
-                    mScrollY = if (scrollY > h) h else scrollY
+                    y = Math.min(h, y)
+                    mScrollY = if (y > h) h else y
                     buttonBarLayout.alpha = 1f * mScrollY / h
                     toolbar.setBackgroundColor(255 * mScrollY / h shl 24 or color)
                     parallax.translationY = mOffset - mScrollY.toFloat()
                 }
-                lastScrollY = scrollY
+                lastScrollY = y
             }
         })
         buttonBarLayout.alpha = 0f

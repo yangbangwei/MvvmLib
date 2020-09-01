@@ -19,10 +19,21 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
+ * OkHttpClient封装
+ *
  * @author yangbw
  * @date 2020/8/31
  */
+@Suppress("UNCHECKED_CAST")
 class ApiClient {
+
+    companion object {
+        fun getInstance() = SingletonHolder.INSTANCE
+    }
+
+    private object SingletonHolder {
+        val INSTANCE = ApiClient()
+    }
 
     /**
      * @param interceptors
@@ -100,15 +111,6 @@ class ApiClient {
             }
             writer.value(value)
         }
-    }
-
-    companion object {
-        fun getInstance() =
-            SingletonHolder.INSTANCE
-    }
-
-    private object SingletonHolder {
-        val INSTANCE = ApiClient()
     }
 
 }

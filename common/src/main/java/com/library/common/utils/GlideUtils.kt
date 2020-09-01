@@ -9,12 +9,12 @@ import com.library.common.config.AppConfig
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
 /**
- *
  * glide图片加载
  *
- * @date 2020/5/8
  * @author yangbw
+ * @date 2020/9/1
  */
+@Suppress("unused")
 class GlideUtils {
 
     companion object {

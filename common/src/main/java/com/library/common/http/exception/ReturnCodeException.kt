@@ -1,6 +1,8 @@
 package com.library.common.http.exception
 
 /**
+ * 响应码异常
+ *
  * @author yangbw
  * @date 2020/8/31
  */

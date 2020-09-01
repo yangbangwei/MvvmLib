@@ -4,11 +4,12 @@ import android.app.Activity
 import java.util.*
 
 /**
+ * Activity管理工具类
+ *
  * @author yangbw
- * @date 2019-07-04.
- * module：
- * description：activity 管理工具类
+ * @date 2020/9/1
  */
+@Suppress("unused")
 class ActivityUtils {
     /**
      * 获取activityStack

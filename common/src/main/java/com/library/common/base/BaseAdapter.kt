@@ -4,10 +4,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.library.common.view.baseviewholder.CommonViewHolder
 
 /**
+ * 基础BaseAdapter封装
+ *
  * @author yangbw
  * @date 2020/8/31
- * module：继承BaseQuickAdapter，自定义通用方法
- * description：
  */
 abstract class BaseAdapter<T>(layoutResId: Int, data: MutableList<T>) :
 
