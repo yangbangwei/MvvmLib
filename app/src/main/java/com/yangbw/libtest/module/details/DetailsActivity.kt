@@ -32,7 +32,7 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
 
     private lateinit var mId: String
 
-    override fun getLayoutId() = R.layout.activity_details;
+    override fun getLayoutId() = R.layout.activity_details
 
     override fun getReplaceView(): View = smartRefreshLayout
 

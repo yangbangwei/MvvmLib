@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.vlayout.DelegateAdapter
 import com.alibaba.android.vlayout.VirtualLayoutManager
+import com.alibaba.android.vlayout.layout.GridLayoutHelper
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.gyf.immersionbar.ImmersionBar
@@ -13,9 +14,7 @@ import com.library.common.base.BaseFragment
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.module.common.WebActivity
-import com.yangbw.libtest.utils.StatusBarUtil
 import com.youth.banner.Banner
-import com.youth.banner.listener.OnPageChangeListener
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -40,9 +39,6 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
             .statusBarDarkFont(false)
             .fitsSystemWindows(false)
             .init()
-        //状态栏透明和间距处理
-//        StatusBarUtil.immersive(mActivity)
-//        StatusBarUtil.setPaddingSmart(mActivity, toolbar)
         val layoutManager = VirtualLayoutManager(mContext)
         recyclerView.layoutManager = layoutManager
         val viewPool = RecyclerView.RecycledViewPool()
@@ -60,9 +56,9 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
             }
         })
         mViewModel.mBanners.observe(this, {
-            //类型判断
+            //轮播图
             val bannerAdapter: BaseDelegateAdapter = object : BaseDelegateAdapter(
-                mContext, LinearLayoutHelper(), R.layout.fragment_home_head, 1, 1
+                mContext, LinearLayoutHelper(), R.layout.fragment_home_banner, 1, 1
             ) {
                 override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
                     super.onBindViewHolder(holder, position)
@@ -71,30 +67,23 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
                     banner.adapter.setOnBannerListener { data, _ ->
                         WebActivity.launch(mContext, null, (data as BannerInfo).url)
                     }
-                    //设置图片渐变效果
-//                    banner.addOnPageChangeListener(object :
-//                        OnPageChangeListener {
-//                        override fun onPageScrolled(
-//                            position: Int,
-//                            positionOffset: Float,
-//                            positionOffsetPixels: Int
-//                        ) {
-//                            TODO("Not yet implemented")
-//                        }
-//
-//                        override fun onPageSelected(position: Int) {
-//                            TODO("Not yet implemented")
-//                        }
-//
-//                        override fun onPageScrollStateChanged(state: Int) {
-//                            TODO("Not yet implemented")
-//                        }
-//
-//                    })
                 }
             }
-            //把轮播器添加到集合
             mAdapters.add(bannerAdapter)
+            //分类图
+            val classAdapter: BaseDelegateAdapter = object : BaseDelegateAdapter(
+                mContext, GridLayoutHelper(5), R.layout.fragment_home_class, 10, 2
+            ) {
+                override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+                    super.onBindViewHolder(holder, position)
+//                    val banner = holder.getView<Banner<BannerInfo, HomeBannerAdapter>>(R.id.iv_)
+//                    banner.adapter = HomeBannerAdapter(it)
+//                    banner.adapter.setOnBannerListener { data, _ ->
+//                        WebActivity.launch(mContext, null, (data as BannerInfo).url)
+//                    }
+                }
+            }
+            mAdapters.add(classAdapter)
             //设置适配器
             delegateAdapter.setAdapters(mAdapters)
         })

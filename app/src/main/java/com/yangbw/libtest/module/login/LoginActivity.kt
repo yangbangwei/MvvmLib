@@ -32,14 +32,14 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         }
     }
 
-    override fun getLayoutId() = R.layout.activity_login;
+    override fun getLayoutId() = R.layout.activity_login
 
     override fun getReplaceView(): View = activity_login
 
     override fun init(savedInstanceState: Bundle?) {
         ActionBarUtils.setCenterTitleText(toolbar, "登录")
 
-        mViewModel.mUser.observe(this, Observer {
+        mViewModel.mUser.observe(this, {
             it.let {
                 SPUtils.getInstance().put(Constant.TOKEN,it.token)
                 MainActivity.launch(mContext)
@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             }
         }
         LiveEventBus.get(LiveEventBusKey.REGISTER_SUC, UserData::class.java)
-            .observe(this, Observer<UserData?> {
+            .observe(this, {
                 it?.let {
                     mBinding!!.etUsername.setText(it.username)
                     mBinding!!.etPassword.setText(it.password)

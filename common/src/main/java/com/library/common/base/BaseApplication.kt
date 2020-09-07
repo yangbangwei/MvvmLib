@@ -20,6 +20,7 @@ abstract class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        context = this
         initConfig()
         //分包
         MultiDex.install(this)

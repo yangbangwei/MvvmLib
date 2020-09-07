@@ -39,6 +39,7 @@ class ActionBarUtils {
          */
         fun setToolBarTitleText(toolbar: Toolbar, titleText: String?) {
             toolbar.title = titleText
+            toolbar.title
         }
 
         /**

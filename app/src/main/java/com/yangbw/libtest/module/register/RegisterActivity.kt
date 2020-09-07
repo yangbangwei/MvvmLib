@@ -29,7 +29,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         }
     }
 
-    override fun getLayoutId() = R.layout.activity_register;
+    override fun getLayoutId() = R.layout.activity_register
 
     override fun getReplaceView(): View = activity_register
 
@@ -38,7 +38,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
             finish()
         }
         ActionBarUtils.setCenterTitleText(toolbar, "注册")
-        mViewModel.mResult.observe(this, Observer {
+        mViewModel.mResult.observe(this, {
             showToast("注册成功")
             val username = mBinding!!.etUsername.text.toString()
             val password = mBinding!!.etPassword.text.toString()

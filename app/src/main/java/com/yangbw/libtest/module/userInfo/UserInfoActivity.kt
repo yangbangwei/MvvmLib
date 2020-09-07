@@ -30,7 +30,7 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
         }
     }
 
-    override fun getLayoutId() = R.layout.activity_user_info;
+    override fun getLayoutId() = R.layout.activity_user_info
 
     override fun getReplaceView(): View = activity_user_info
 

@@ -39,9 +39,9 @@
 - [x] 发现页面，FlyCoTabLayout+ViewPager2效果
 - [x] 动态权限使用PermissionX
 - [x] autoSize屏幕适配
-- [ ] 无网络，异常问题
+- [x] 无网络，异常问题
+- [x] 重构网络通用处理部分
 - [ ] 单页面多个请求问题
-- [ ] 重构网络通用处理部分
 - [ ] 工具类整理
 - [ ] 首页仿美团饿了么，多列表效果
 - [ ] 商品页面仿购物类型APP，分类样式
@@ -52,7 +52,7 @@
 - [ ] 相机功能
 - [ ] gsyVideoPlayer使用
 - [ ] 单元测试
-- [ ] 功能完善后，将lib提交jcenter,jitpack
+- [ ] 功能完善后，将lib提交jCenter,jitPack
 
 ## 常用开发平台封装
 - [ ] ShareSdk

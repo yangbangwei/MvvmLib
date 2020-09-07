@@ -29,7 +29,6 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
     override fun init(savedInstanceState: Bundle?) {
         ActionBarUtils.setToolBarTitleText(toolbar, "分类")
         ImmersionBar.with(this)
-            .statusBarDarkFont(true)
             .titleBar(toolbar)
             .init()
     }
