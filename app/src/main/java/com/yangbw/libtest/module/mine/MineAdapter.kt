@@ -8,7 +8,7 @@ import com.yangbw.libtest.module.home.BannerInfo
 import com.yangbw.libtest.module.mine.MineAdapter.BannerViewHolder
 import com.youth.banner.adapter.BannerAdapter
 
-class MineAdapter(mDatas: List<BannerInfo>) : BannerAdapter<BannerInfo, BannerViewHolder>(mDatas) {
+class MineAdapter(mDatas: List<BannerInfo.Data>) : BannerAdapter<BannerInfo.Data, BannerViewHolder>(mDatas) {
 
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         val imageView = ImageView(parent.context)
@@ -23,7 +23,7 @@ class MineAdapter(mDatas: List<BannerInfo>) : BannerAdapter<BannerInfo, BannerVi
     class BannerViewHolder(var imageView: ImageView) :
         RecyclerView.ViewHolder(imageView)
 
-    override fun onBindView(holder: BannerViewHolder, data: BannerInfo, position: Int, size: Int) {
+    override fun onBindView(holder: BannerViewHolder, data: BannerInfo.Data, position: Int, size: Int) {
         //图片加载自己实现
         GlideUtils.loadImage(holder.imageView, data.img)
     }

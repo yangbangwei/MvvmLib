@@ -39,7 +39,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     protected lateinit var mViewModel: VM
 
     //databing
-    protected var mBinding: DB? = null
+    protected lateinit var mBinding: DB
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -82,7 +82,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
             (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<*>
         if (ViewDataBinding::class.java != cls && ViewDataBinding::class.java.isAssignableFrom(cls)) {
             mBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-            return mBinding?.root
+            return mBinding.root
         }
         return inflater.inflate(getLayoutId(), container, false)
     }

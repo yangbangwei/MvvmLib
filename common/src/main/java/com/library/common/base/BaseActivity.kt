@@ -43,7 +43,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     /**
      * dataBing
      */
-    protected var mBinding: DB? = null
+    protected lateinit var mBinding: DB
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -134,7 +134,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
             .actualTypeArguments[1] as Class<*>
         if (ViewDataBinding::class.java != cls && ViewDataBinding::class.java.isAssignableFrom(cls)) {
             mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-            mBinding?.lifecycleOwner = this
+            mBinding.lifecycleOwner = this
         } else {
             setContentView(getLayoutId())
         }

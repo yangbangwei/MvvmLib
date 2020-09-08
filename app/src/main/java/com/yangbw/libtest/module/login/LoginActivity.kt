@@ -48,7 +48,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
             }
 
         })
-        mBinding?.run {
+        mBinding.run {
             btnLogin.setOnClickListener {
                 val username = etUsername.text.toString()
                 if (username.isBlank()) {
@@ -69,8 +69,8 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
         LiveEventBus.get(LiveEventBusKey.REGISTER_SUC, UserData::class.java)
             .observe(this, {
                 it?.let {
-                    mBinding!!.etUsername.setText(it.username)
-                    mBinding!!.etPassword.setText(it.password)
+                    mBinding.etUsername.setText(it.username)
+                    mBinding.etPassword.setText(it.password)
                 }
             })
     }

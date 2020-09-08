@@ -7,6 +7,11 @@ import androidx.annotation.Keep
  * @date
  */
 @Keep
-class HotListData {
-
-}
+data class HotListData(
+    val id: String,
+    val img: String,
+    val title: String,
+    val avatar: String,
+    val name: String,
+    val date: String
+)

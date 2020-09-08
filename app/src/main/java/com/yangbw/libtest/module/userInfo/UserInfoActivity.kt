@@ -42,7 +42,7 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
         }
         ActionBarUtils.setToolBarTitleText(toolbar, "账号管理")
         //点击事件
-        mBinding?.run {
+        mBinding.run {
             setOnClickListener(groupWeixin, groupAvatar, groupName, groupPhone, tvExit) {
                 when (this) {
                     groupAvatar -> {

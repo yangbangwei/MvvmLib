@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:banner="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -9,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_color"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.Group
@@ -29,7 +31,8 @@
             android:layout_marginTop="40dp"
             android:src="@mipmap/location"
             banner:layout_constraintStart_toStartOf="parent"
-            banner:layout_constraintTop_toTopOf="parent" />
+            banner:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/textView4"

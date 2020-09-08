@@ -40,13 +40,13 @@ class RegisterActivity : BaseActivity<RegisterViewModel, ActivityRegisterBinding
         ActionBarUtils.setCenterTitleText(toolbar, "注册")
         mViewModel.mResult.observe(this, {
             showToast("注册成功")
-            val username = mBinding!!.etUsername.text.toString()
-            val password = mBinding!!.etPassword.text.toString()
+            val username = mBinding.etUsername.text.toString()
+            val password = mBinding.etPassword.text.toString()
             LiveEventBus.get(LiveEventBusKey.REGISTER_SUC)
                 .post(UserData(password, username))
             finish()
         })
-        mBinding?.run {
+        mBinding.run {
             btnRegister.setOnClickListener {
                 val username = etUsername.text.toString()
                 val password = etPassword.text.toString()

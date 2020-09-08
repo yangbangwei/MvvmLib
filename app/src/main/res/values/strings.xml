@@ -30,4 +30,5 @@
     <string name="set_limits_tips">当前应用缺少必要权限,请打开所需权限。</string>
     <string name="go_set">去设置</string>
     <string name="go_set_tips">当前应用缺少必要权限，请点击"设置"-"权限"-打开所需权限。</string>
+    <string name="login_tips">注册/登录</string>
 </resources>

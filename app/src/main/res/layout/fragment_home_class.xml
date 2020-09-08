@@ -11,7 +11,9 @@
         android:id="@+id/iv_menu"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:scaleType="centerCrop"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -19,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="2dp"
+        android:layout_marginTop="5dp"
         android:textColor="@color/black"
         android:textSize="@dimen/sp10" />
 </LinearLayout>

@@ -43,7 +43,7 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
             finish()
         }
         mViewModel.mDetails.observe(this, {
-            mBinding!!.detail = it
+            mBinding.detail = it
         })
         mViewModel.getHomeDetails(mId)
     }

@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.library.common.utils.GlideUtils
 import com.youth.banner.adapter.BannerAdapter
 
-class HomeBannerAdapter(mDatas: List<BannerInfo>) : BannerAdapter<BannerInfo, HomeBannerAdapter.BannerViewHolder>(mDatas) {
+class HomeBannerAdapter(mDatas: List<BannerInfo.Data>) : BannerAdapter<BannerInfo.Data,
+        HomeBannerAdapter.BannerViewHolder>(mDatas) {
 
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         val imageView = ImageView(parent.context)
@@ -21,7 +22,7 @@ class HomeBannerAdapter(mDatas: List<BannerInfo>) : BannerAdapter<BannerInfo, Ho
     class BannerViewHolder(var imageView: ImageView) :
         RecyclerView.ViewHolder(imageView)
 
-    override fun onBindView(holder: BannerViewHolder, data: BannerInfo, position: Int, size: Int) {
+    override fun onBindView(holder: BannerViewHolder, data: BannerInfo.Data, position: Int, size: Int) {
         //图片加载自己实现
         GlideUtils.loadImage(holder.imageView, data.img)
     }

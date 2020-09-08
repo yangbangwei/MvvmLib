@@ -1,5 +1,6 @@
 package com.yangbw.libtest.module.discover.hot
 
+import com.library.common.em.RequestDisplay
 import com.library.common.mvvm.BaseListViewModel
 import com.yangbw.libtest.api.ApiService
 
@@ -13,4 +14,16 @@ class HotViewModel : BaseListViewModel<ApiService>() {
 
     }
 
+    fun discoverHot(pageNo: Int) {
+        launchOnlyResult(
+            block = {
+                getApiService().discoverHot(pageNo)
+            },
+            reTry = {
+                discoverHot(pageNo)
+            },
+            type = RequestDisplay.REPLACE,
+            pageNo = pageNo
+        )
+    }
 }

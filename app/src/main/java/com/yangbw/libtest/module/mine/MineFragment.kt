@@ -1,10 +1,11 @@
-package com.yangbw.libtest.module.mine;
+package com.yangbw.libtest.module.mine
 
 import android.os.Bundle
 import android.view.View
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.extension.setOnClickListener
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentMineBinding
 import com.yangbw.libtest.module.msg.MsgActivity
@@ -14,8 +15,9 @@ import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
-
 /**
+ * 我的页面
+ *
  * @author yangbw
  * @date
  */
@@ -29,15 +31,17 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
 
     override fun getReplaceView(): View = fragment_mine
 
+    override fun getSmartRefreshLayout(): SmartRefreshLayout = smartRefreshLayout
+
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
             .transparentStatusBar()
             .statusBarDarkFont(false)
             .fitsSystemWindows(false)
             .init()
-        //点击事件
-        mBinding?.run {
-            setOnClickListener(groupUserInfo, ivSet,ivMsg) {
+        mBinding.run {
+            //点击事件
+            setOnClickListener(groupUserInfo, ivSet, ivMsg) {
                 when (this) {
                     groupUserInfo -> {
                         UserInfoActivity.launch(mContext)
@@ -50,19 +54,29 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
                     }
                 }
             }
+            //广告
+            banner.let {
+                it.addBannerLifecycleObserver(this@MineFragment)
+                it.indicator = RectangleIndicator(mContext)
+                it.setIndicatorSelectedWidth(BannerUtils.dp2px(12f).toInt())
+                it.setIndicatorSpace(BannerUtils.dp2px(4f).toInt())
+                it.setIndicatorRadius(0)
+            }
         }
-        banner.let {
-            it.addBannerLifecycleObserver(this)
-            it.indicator = RectangleIndicator(mContext)
-            it.setIndicatorSelectedWidth(BannerUtils.dp2px(12f).toInt())
-            it.setIndicatorSpace(BannerUtils.dp2px(4f).toInt())
-            it.setIndicatorRadius(0)
+        mViewModel.run {
+            mUserInfo.observe(this@MineFragment, {
+                mBinding.mineData = it
+            })
+            mBanner.observe(this@MineFragment, {
+                mBinding.banner.adapter = MineAdapter(it)
+            })
         }
-        mViewModel.mUserInfo.observe(this, {
-            banner.adapter = it.banners?.let { it1 -> MineAdapter(it1) }
-            mBinding!!.mineData = it
-        })
-        mViewModel.getUserInfo()
 
+        mBinding.mineData = MineData(getString(R.string.login_tips), null, "-", "-", "-")
+        getSmartRefreshLayout().autoRefresh()
+    }
+
+    override fun refreshData() {
+        mViewModel.onStart()
     }
 }

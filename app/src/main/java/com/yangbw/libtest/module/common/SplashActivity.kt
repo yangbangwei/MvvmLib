@@ -5,18 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.blankj.utilcode.util.SPUtils
 import com.library.common.base.BaseActivity
 import com.permissionx.guolindev.PermissionX
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
-import com.yangbw.libtest.common.Constant
-import com.yangbw.libtest.module.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
-
 
 /**
  * 启动页
@@ -51,12 +46,7 @@ class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     private val mCountDownTimer = object : CountDownTimer(3000, 1000) {
         override fun onFinish() {
-            val token = SPUtils.getInstance().getString(Constant.TOKEN)
-            if (!TextUtils.isEmpty(token)) {
-                MainActivity.launch(mContext)
-            } else {
-                LoginActivity.launch(mContext)
-            }
+            MainActivity.launch(mContext)
             finish()
         }
 

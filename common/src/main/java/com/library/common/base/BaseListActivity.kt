@@ -42,8 +42,8 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     IListView<T> {
 
     protected lateinit var mViewModel: VM
-    protected var mBinding: DB? = null
-    protected var mAdapter: A? = null
+    protected lateinit var mBinding: DB
+    protected lateinit var mAdapter: A
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -117,7 +117,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
             (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<*>
         if (ViewDataBinding::class.java != cls && ViewDataBinding::class.java.isAssignableFrom(cls)) {
             mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-            mBinding?.lifecycleOwner = this
+            mBinding.lifecycleOwner = this
         } else {
             setContentView(getLayoutId())
         }
@@ -266,7 +266,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
                 getSmartRefreshLayout()?.isEnabled = true
             }
             getSmartRefreshLayout()?.finishRefresh()
-            mAdapter?.data?.clear()
+            mAdapter.data.clear()
             mViewController?.showEmpty(emptyMsg, listener)
         }
     }
@@ -293,7 +293,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
                 getSmartRefreshLayout()?.isEnabled = true
             }
             getSmartRefreshLayout()?.finishRefresh()
-            mAdapter?.data?.clear()
+            mAdapter.data.clear()
             mViewController?.showNetworkError(msg, listener)
         }
     }
@@ -393,7 +393,7 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 自动刷新
      */
     open fun autoRefresh() {
-        if (ListUtils.getCount(mAdapter?.data) > 0) {
+        if (ListUtils.getCount(mAdapter.data) > 0) {
             getSmartRefreshLayout()?.autoRefresh()
         } else {
             showLoading()
@@ -411,11 +411,11 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         }
         if (pageNum == 1) {
             getSmartRefreshLayout()?.finishRefresh()
-            mAdapter?.setNewData(datas as MutableList<T>)
+            mAdapter.setNewData(datas as MutableList<T>)
         } else {
             getSmartRefreshLayout()?.finishLoadMore()
             datas?.let {
-                mAdapter?.addData(it)
+                mAdapter.addData(it)
             }
         }
     }

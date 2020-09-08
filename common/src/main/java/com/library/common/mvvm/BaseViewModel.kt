@@ -89,6 +89,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
      * @param error 失败回调
      * @param complete  完成回调（无论成功失败都会调用）
      * @param type RequestDisplay类型 NULL无交互  TOAST  REPLACE 替换
+     * @param msg TOAST文字提醒
      *
      **/
     fun <T> launchOnlyResult(
@@ -130,6 +131,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
         currentDomainName: String = AppConfig.DOMAIN_NAME,
         //接口操作交互类型
         type: RequestDisplay = RequestDisplay.NULL,
+        //弹窗文字提醒
         msg: String = ""
     ) {
         //接口操作交互类型赋值

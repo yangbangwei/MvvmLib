@@ -1,19 +1,16 @@
-package com.yangbw.libtest.module.home;
+package com.yangbw.libtest.module.home
 
 import androidx.lifecycle.MutableLiveData
 import com.library.common.em.RequestDisplay
-import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.BaseViewModel
 import com.yangbw.libtest.api.ApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 
 
 /**
- * @author yangbw
- * @date
- * module：
- * description：
+ * 首页viewModel
+ *
+ * @author :yangbw
+ * @date :2020/9/7
  */
 class HomeViewModel : BaseViewModel<ApiService>() {
 
@@ -22,7 +19,6 @@ class HomeViewModel : BaseViewModel<ApiService>() {
 
     public override fun onStart() {
         getBanner()
-        getHomes(1)
     }
 
     fun updateVersion(versionCode: Int) {
@@ -32,15 +28,12 @@ class HomeViewModel : BaseViewModel<ApiService>() {
             },
             success = {
                 mVersion.value = it
-            },
-            reTry = {
-                updateVersion(versionCode)
-            },
-            type = RequestDisplay.NULL
+            }
         )
     }
 
-    private fun getBanner(){
+    private fun getBanner() {
+        viewState.showLoading.call()
         launchOnlyResult(
             block = {
                 getApiService().banners()
@@ -51,23 +44,7 @@ class HomeViewModel : BaseViewModel<ApiService>() {
             reTry = {
                 onStart()
             },
-            type = RequestDisplay.NULL
-        )
-    }
-
-    fun getHomes(pageNo: Int) {
-        launchOnlyResult(
-            block = {
-                getApiService().homes(pageNo)
-            },
-            success = {
-
-            },
-            reTry = {
-                onStart()
-            },
             type = RequestDisplay.REPLACE
         )
     }
-
 }
