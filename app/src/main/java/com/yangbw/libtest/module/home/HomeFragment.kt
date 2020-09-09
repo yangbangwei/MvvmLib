@@ -7,25 +7,19 @@ import android.widget.TextView
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.alibaba.android.vlayout.DelegateAdapter
 import com.alibaba.android.vlayout.VirtualLayoutManager
 import com.alibaba.android.vlayout.layout.GridLayoutHelper
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
-import com.alibaba.android.vlayout.layout.StickyLayoutHelper
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.flyco.tablayout.CommonTabLayout
-import com.flyco.tablayout.listener.CustomTabEntity
-import com.flyco.tablayout.listener.OnTabSelectListener
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.utils.GlideUtils
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.sunfusheng.marqueeview.MarqueeView
 import com.yangbw.libtest.R
 import com.yangbw.libtest.module.common.WebActivity
-import com.yangbw.libtest.module.discover.DiscoverFragment
-import com.yangbw.libtest.module.discover.hot.HotFragment
-import com.yangbw.libtest.module.discover.hot.TabEntity
+import com.yangbw.libtest.view.NoStatusFooter
 import com.youth.banner.Banner
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -51,18 +45,20 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
 
     override fun getReplaceView(): View = frameLayout
 
+    override fun getSmartRefreshLayout(): SmartRefreshLayout? = smartRefreshLayout
+
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
             .transparentStatusBar()
             .statusBarDarkFont(false)
             .fitsSystemWindows(false)
             .init()
+        smartRefreshLayout.setRefreshFooter(NoStatusFooter(mContext))
         val layoutManager = VirtualLayoutManager(mContext)
         recyclerView.layoutManager = layoutManager
         val viewPool = RecyclerView.RecycledViewPool()
-
-        recyclerView.setRecycledViewPool(viewPool)
         viewPool.setMaxRecycledViews(0, 30)
+        recyclerView.setRecycledViewPool(viewPool)
 
         //首页动态布局
         mViewModel.mBanners.observe(this, {
@@ -75,7 +71,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
         //更新接口
         mViewModel.mVersion.observe(this, {
             if (it != null) {
-                showToast("当前版本：${it.verson}")
+                showToast("当前版本：${it.version}")
             } else {
                 showToast("当前为最新版本")
             }

@@ -41,7 +41,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     protected lateinit var mViewModel: VM
 
     /**
-     * dataBing
+     * dataBinding
      */
     protected lateinit var mBinding: DB
 
@@ -61,7 +61,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     /**
      * 替换view
      */
-    private var viewController: IVaryViewHelperController? = null
+    private var mViewController: IVaryViewHelperController? = null
 
     /**
      * 弹窗
@@ -84,7 +84,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         super.onCreate(savedInstanceState)
         initViewDataBinding()
         createViewModel()
-        viewController = initVaryViewHelperController()
+        mViewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
         registerViewChange()
         initBar()
@@ -142,7 +142,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     }
 
     /**
-     *     创建viewmodel
+     *     创建viewModel
      *     actualTypeArguments[0]  BaseViewModel
      *     actualTypeArguments[1]  ViewDataBinding
      *
@@ -161,7 +161,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
      */
     private fun registerViewChange() {
         mViewModel.viewState.showLoading.observe(this, {
-            viewController?.let {
+            mViewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
@@ -186,7 +186,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
             showNetworkError(it, mViewModel.listener)
         })
         mViewModel.viewState.restore.observe(this, {
-            viewController?.restore()
+            mViewController?.restore()
             //代表有设置刷新
             getSmartRefreshLayout()?.finishRefresh()
         })
@@ -241,42 +241,42 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
      * loading
      */
     override fun showLoading() {
-        viewController?.showLoading()
+        mViewController?.showLoading()
     }
 
     /***
      * loading 带文字
      */
     override fun showLoading(msg: String?) {
-        viewController?.showLoading(msg)
+        mViewController?.showLoading(msg)
     }
 
     /**
      * 无数据，空白页
      */
     override fun showEmpty(listener: View.OnClickListener?) {
-        viewController?.showEmpty(listener)
+        mViewController?.showEmpty(listener)
     }
 
     /**
      * 无数据，空白页
      */
     override fun showEmpty(emptyMsg: String?, listener: View.OnClickListener?) {
-        viewController?.showEmpty(emptyMsg, listener)
+        mViewController?.showEmpty(emptyMsg, listener)
     }
 
     /**
      * 网络错误
      */
     override fun showNetworkError(listener: View.OnClickListener?) {
-        viewController?.showNetworkError(listener)
+        mViewController?.showNetworkError(listener)
     }
 
     /**
      * 网络错误
      */
     override fun showNetworkError(msg: String?, listener: View.OnClickListener?) {
-        viewController?.showNetworkError(msg, listener)
+        mViewController?.showNetworkError(msg, listener)
     }
 
     /**
@@ -289,18 +289,18 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         btnText: String?,
         listener: View.OnClickListener?
     ) {
-        viewController?.showCustomView(drawableInt, title, msg, btnText, listener)
+        mViewController?.showCustomView(drawableInt, title, msg, btnText, listener)
     }
 
     /**
      * 恢复
      */
     override fun restore() {
-        viewController?.restore()
+        mViewController?.restore()
     }
 
     override val isHasRestore: Boolean
-        get() = viewController?.isHasRestore ?: false
+        get() = mViewController?.isHasRestore ?: false
 
     /**
      * toast

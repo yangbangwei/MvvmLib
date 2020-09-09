@@ -10,13 +10,8 @@ import com.library.common.view.baseviewholder.CommonViewHolder
  * @author yangbw
  * @date 2020/8/31
  */
-@Suppress("LeakingThis")
 abstract class BaseMultiAdapter<T : MultiItemEntity>(data: MutableList<T>) :
     BaseMultiItemQuickAdapter<T, CommonViewHolder>(data) {
-
-    init {
-        addItemType()
-    }
 
     abstract fun addItemType()
 

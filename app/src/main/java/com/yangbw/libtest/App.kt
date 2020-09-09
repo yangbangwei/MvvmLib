@@ -1,44 +1,37 @@
 package com.yangbw.libtest
 
-import com.yangbw.libtest.common.Constant
+import android.content.Context
 import com.android.aachulk.interceptor.RequestHeaderInterceptor
 import com.library.common.base.BaseApplication
 import com.library.common.config.AppConfig
 import com.library.common.http.ApiClient
+import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.yangbw.libtest.common.Constant
 import com.yangbw.libtest.interceptor.SessionInterceptor
-import com.yangbw.libtest.view.NoStatusFooter
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**
+ * APP
+ *
  * @author yangbw
- * @date 2020/3/16
+ * @date 2020/9/9
  */
 class App : BaseApplication() {
 
     init {
-        SmartRefreshLayout.setDefaultRefreshInitializer { _, layout ->
-            layout.setEnableLoadMore(true)
-            layout.setEnableLoadMoreWhenContentNotFull(true)
+
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ ->
+            MaterialHeader(context).setColorSchemeResources(R.color.main_color)
         }
 
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
-            layout.setEnableHeaderTranslationContent(false)
-            MaterialHeader(context).setColorSchemeResources(R.color.main_color, R.color.main_color,
-                R.color.main_color)
-        }
-
-        SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator { context: Context, layout: RefreshLayout ->
             layout.setEnableFooterFollowWhenNoMoreData(true)
-            layout.setEnableFooterTranslationContent(true)
-            layout.setFooterHeight(153f)
-            layout.setFooterTriggerRate(0.6f)
-            NoStatusFooter.REFRESH_FOOTER_NOTHING = "- 我是有底线的人 -"
-            NoStatusFooter(context).apply {
-                setAccentColorId(R.color.colorTextPrimary)
-                setTextTitleSize(16f)
-            }
+            return@setDefaultRefreshFooterCreator ClassicsFooter(context).setDrawableSize(20f)
         }
     }
 

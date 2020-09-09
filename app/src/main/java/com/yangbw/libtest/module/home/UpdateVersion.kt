@@ -8,5 +8,5 @@ data class UpdateVersion(
     val content: String,
     val isHas: Boolean,
     val url: String,
-    val verson: Int
+    val version: String
 )

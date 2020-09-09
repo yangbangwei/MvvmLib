@@ -31,4 +31,16 @@
     <string name="go_set">去设置</string>
     <string name="go_set_tips">当前应用缺少必要权限，请点击"设置"-"权限"-打开所需权限。</string>
     <string name="login_tips">注册/登录</string>
+    <string name="set">设置</string>
+    <string name="exit">退出登录</string>
+    <string name="location_tips">位置提醒</string>
+    <string name="auto_delivery">开启后，会根据您的当前位置提醒配送小区</string>
+    <string name="user_psw">账号密码</string>
+    <string name="no_set">未设置</string>
+    <string name="user_agreement">朴朴用户服务协议</string>
+    <string name="user_policy">朴朴用户隐私权限政策</string>
+    <string name="privacy">隐私</string>
+    <string name="user_soft_agreement">朴朴软件许可及服务协议</string>
+    <string name="clear_cache">清除缓存</string>
+    <string name="attention_tips">点击登录后可关注主题和作者</string>
 </resources>

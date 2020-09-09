@@ -15,6 +15,7 @@ import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.databinding.FragmentDiscoverBinding
 import com.yangbw.libtest.module.discover.hot.HotFragment
 import com.yangbw.libtest.module.discover.hot.TabEntity
+import com.yangbw.libtest.module.discover.newest.NewestFragment
 import kotlinx.android.synthetic.main.fragment_discover.*
 import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
 
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
  * @author yangbw
  * @date
  */
+@Suppress("RedundantInnerClassModifier")
 class DiscoverFragment : BaseFragment<CommonViewModel, FragmentDiscoverBinding>() {
 
     companion object {
@@ -47,7 +49,7 @@ class DiscoverFragment : BaseFragment<CommonViewModel, FragmentDiscoverBinding>(
                 arrayOf(
                     HotFragment.newInstance(),
                     HotFragment.newInstance(),
-                    HotFragment.newInstance()
+                    NewestFragment.newInstance()
                 )
             )
         }

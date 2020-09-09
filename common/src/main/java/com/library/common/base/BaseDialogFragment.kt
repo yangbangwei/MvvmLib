@@ -35,10 +35,10 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     DialogFragment(),
     IView {
 
-    //viewmodel
+    //viewModel
     protected lateinit var mViewModel: VM
 
-    //databing
+    //dataBinding
     protected lateinit var mBinding: DB
 
     @LayoutRes
@@ -57,7 +57,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     /**
      * 替换view
      */
-    private var viewController: IVaryViewHelperController? = null
+    private var mViewController: IVaryViewHelperController? = null
 
     /**
      * 弹窗
@@ -89,7 +89,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         createViewModel()
-        viewController = initVaryViewHelperController()
+        mViewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
         //注册 UI事件
         registerViewChange()
@@ -139,7 +139,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
      */
     private fun registerViewChange() {
         mViewModel.viewState.showLoading.observe(this, {
-            viewController?.let {
+            mViewController?.let {
                 if (!it.isHasRestore) {
                     showLoading()
                 }
@@ -164,7 +164,7 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
             showNetworkError(it, mViewModel.listener)
         })
         mViewModel.viewState.restore.observe(this, {
-            viewController?.restore()
+            mViewController?.restore()
             //代表有设置刷新
             if (getSmartRefreshLayout() != null) {
                 getSmartRefreshLayout()?.finishRefresh()
@@ -215,33 +215,33 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     }
 
     override fun showLoading() {
-        viewController?.showLoading()
+        mViewController?.showLoading()
     }
 
     override fun showLoading(msg: String?) {
-        viewController?.showLoading(msg)
+        mViewController?.showLoading(msg)
     }
 
     override fun showEmpty(listener: View.OnClickListener?) {
-        viewController?.showEmpty(listener)
+        mViewController?.showEmpty(listener)
     }
 
     override fun showEmpty(
         emptyMsg: String?,
         listener: View.OnClickListener?
     ) {
-        viewController?.showEmpty(emptyMsg, listener)
+        mViewController?.showEmpty(emptyMsg, listener)
     }
 
     override fun showNetworkError(listener: View.OnClickListener?) {
-        viewController?.showNetworkError(listener)
+        mViewController?.showNetworkError(listener)
     }
 
     override fun showNetworkError(
         msg: String?,
         listener: View.OnClickListener?
     ) {
-        viewController?.showNetworkError(msg, listener)
+        mViewController?.showNetworkError(msg, listener)
     }
 
     override fun showCustomView(
@@ -251,15 +251,15 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
         btnText: String?,
         listener: View.OnClickListener?
     ) {
-        viewController?.showCustomView(drawableInt, title, msg, btnText, listener)
+        mViewController?.showCustomView(drawableInt, title, msg, btnText, listener)
     }
 
     override fun restore() {
-        viewController?.restore()
+        mViewController?.restore()
     }
 
     override val isHasRestore: Boolean
-        get() = viewController?.isHasRestore ?: false
+        get() = mViewController?.isHasRestore ?: false
 
     override fun showToast(msg: String) {
         ToastUtils.showShort(msg)

@@ -1,4 +1,4 @@
-package utils
+package com.yangbw.libtest.utils
 
 import android.text.TextUtils
 import com.blankj.utilcode.util.GsonUtils

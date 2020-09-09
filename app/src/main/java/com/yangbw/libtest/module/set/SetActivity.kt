@@ -25,7 +25,7 @@ class SetActivity : BaseActivity<SetViewModel, ActivitySetBinding>() {
         }
     }
 
-    override fun getLayoutId() = R.layout.activity_set;
+    override fun getLayoutId() = R.layout.activity_set
 
     override fun getReplaceView(): View = activity_set
 
@@ -35,7 +35,8 @@ class SetActivity : BaseActivity<SetViewModel, ActivitySetBinding>() {
         ActionBarUtils.setSupportActionBarWithBack(toolbar, R.mipmap.icon_common_back_black) {
             finish()
         }
-        ActionBarUtils.setToolBarTitleText(toolbar, "设置")
+        ActionBarUtils.setToolBarTitleText(toolbar, getString(R.string.set))
+
 
     }
 

@@ -30,19 +30,20 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import java.lang.reflect.ParameterizedType
 
 /**
+ * BaseListFragment封装
+ *
  * @author yangbw
  * @date 2020/9/1
- * module：
- * description：
  */
 @Suppress("UNCHECKED_CAST")
 abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
-        A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(),
-    IListView<T> {
+        A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(), IListView<T> {
 
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: DB
-    protected lateinit var mAdapter: A
+    protected var mAdapter: A? = null
+    protected var mSmartRefreshLayout: SmartRefreshLayout? = null
+    protected var mRecyclerView: RecyclerView? = null
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -75,14 +76,6 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private var mLoadMoreEnable = true
     private var mRefreshEnable = true //是否能进行下拉刷新
 
-    abstract fun loadPageListData(pageNo: Int)
-
-    abstract fun getSmartRefreshLayout(): SmartRefreshLayout?
-
-    abstract fun getRecyclerView(): RecyclerView?
-
-    abstract fun getAdapter()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,17 +96,10 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         lifecycle.addObserver(mViewModel)
         //注册 UI事件
         registerViewChange()
+        registerDataChange()
+        initRecyclerView()
         initRefreshLoadMore()
         init(savedInstanceState)
-        registerDataChange()
-    }
-
-
-    /***
-     * view
-     */
-    protected open fun initVaryViewHelperController(): IVaryViewHelperController? {
-        return VaryViewHelperController(getReplaceView())
     }
 
     /**
@@ -132,6 +118,18 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
             val tClass = tp as? Class<VM> ?: BaseListViewModel::class.java
             mViewModel = ViewModelProviders.of(this)[tClass] as VM
         }
+    }
+
+    /**
+     * 初始化View
+     */
+    open fun initRecyclerView() {}
+
+    /***
+     * view
+     */
+    protected open fun initVaryViewHelperController(): IVaryViewHelperController? {
+        return VaryViewHelperController(getReplaceView())
     }
 
     /**
@@ -181,6 +179,8 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
             showListData(it as MutableList<T>, mPageNum)
         })
     }
+
+    abstract fun loadPageListData(pageNo: Int)
 
     /**
      * 相关view替换
@@ -255,10 +255,10 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         } else {
             mPageNum = 1
             if (mRefreshEnable) {
-                getSmartRefreshLayout()?.isEnabled = true
+                mSmartRefreshLayout?.isEnabled = true
             }
-            getSmartRefreshLayout()?.finishRefresh()
-            mAdapter.data.clear()
+            mSmartRefreshLayout?.finishRefresh()
+            mAdapter?.data?.clear()
             mViewController?.showEmpty(emptyMsg, listener)
         }
     }
@@ -282,10 +282,10 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         } else {
             mPageNum = 1
             if (mRefreshEnable) {
-                getSmartRefreshLayout()?.isEnabled = true
+                mSmartRefreshLayout?.isEnabled = true
             }
-            getSmartRefreshLayout()?.finishRefresh()
-            mAdapter.data.clear()
+            mSmartRefreshLayout?.finishRefresh()
+            mAdapter?.data?.clear()
             mViewController?.showNetworkError(msg, listener)
         }
     }
@@ -336,7 +336,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      */
     open fun setLoadMoreEnable(moreEnable: Boolean) {
         mLoadMoreEnable = moreEnable
-        getSmartRefreshLayout()?.setEnableLoadMore(mLoadMoreEnable)
+        mSmartRefreshLayout?.setEnableLoadMore(mLoadMoreEnable)
     }
 
     /**
@@ -344,7 +344,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      */
     open fun setRefreshEnable(refreshEnable: Boolean) {
         mRefreshEnable = refreshEnable
-        getSmartRefreshLayout()?.isEnabled = mRefreshEnable
+        mSmartRefreshLayout?.isEnabled = mRefreshEnable
     }
 
 
@@ -352,19 +352,18 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 设置刷新加载相关
      */
     private fun initRefreshLoadMore() {
-        getAdapter()
         //设置相关设置
-        getRecyclerView()?.adapter = mAdapter
-        getSmartRefreshLayout()?.isEnabled = mRefreshEnable
+        mRecyclerView?.adapter = mAdapter
+        mSmartRefreshLayout?.isEnabled = mRefreshEnable
         if (mRefreshEnable) {
-            getSmartRefreshLayout()?.setOnRefreshListener {
+            mSmartRefreshLayout?.setOnRefreshListener {
                 mLoadPageNum = 1
                 mPageNum = 1
                 loadPageListData(mPageNum)
             }
         }
         if (mLoadMoreEnable) {
-            getSmartRefreshLayout()?.setOnLoadMoreListener {
+            mSmartRefreshLayout?.setOnLoadMoreListener {
                 mLoadPageNum = mPageNum + 1
                 mPageNum += 1
                 loadPageListData(mPageNum)
@@ -376,8 +375,8 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 自动刷新
      */
     open fun autoRefresh() {
-        if (ListUtils.getCount(mAdapter.data) > 0) {
-            getSmartRefreshLayout()?.autoRefresh()
+        if (ListUtils.getCount(mAdapter?.data) > 0) {
+            mSmartRefreshLayout?.autoRefresh()
         } else {
             showLoading()
             loadPageListData(1)
@@ -390,27 +389,27 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     override fun showListData(datas: List<T>?, pageNum: Int) {
         this.mPageNum = pageNum
         if (mRefreshEnable) {
-            getSmartRefreshLayout()?.isEnabled = true
+            mSmartRefreshLayout?.isEnabled = true
         }
         if (pageNum == 1) {
-            getSmartRefreshLayout()?.finishRefresh()
-            mAdapter.setNewData(datas as MutableList<T>)
+            mSmartRefreshLayout?.finishRefresh()
+            mAdapter?.setNewData(datas as MutableList<T>)
         } else {
-            getSmartRefreshLayout()?.finishLoadMore()
+            mSmartRefreshLayout?.finishLoadMore()
             datas?.let {
-                mAdapter.addData(it)
+                mAdapter?.addData(it)
             }
         }
     }
 
     /**
-     * 加载更多---没有更多了
+     * 加载更多--没有更多了
      */
     open fun showNoMore() {
         if (mRefreshEnable) {
-            getSmartRefreshLayout()?.isEnabled = true
+            mSmartRefreshLayout?.isEnabled = true
         }
-        getSmartRefreshLayout()?.finishLoadMoreWithNoMoreData()
+        mSmartRefreshLayout?.finishLoadMoreWithNoMoreData()
     }
 
     /**
@@ -418,17 +417,17 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      */
     open fun showLoadMoreError() {
         if (mRefreshEnable) {
-            getSmartRefreshLayout()?.isEnabled = true
+            mSmartRefreshLayout?.isEnabled = true
         }
-        getSmartRefreshLayout()?.finishLoadMore(false)
+        mSmartRefreshLayout?.finishLoadMore(false)
     }
 
     /**
      * 刷新完成
      */
     override fun refreshComplete() {
-        getSmartRefreshLayout()?.finishLoadMore()
-        getSmartRefreshLayout()?.finishRefresh()
+        mSmartRefreshLayout?.finishLoadMore()
+        mSmartRefreshLayout?.finishRefresh()
     }
 
 }

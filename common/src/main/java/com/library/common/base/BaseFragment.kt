@@ -31,13 +31,16 @@ import java.lang.reflect.ParameterizedType
  * @date 2020/9/1
  */
 @Suppress("UNCHECKED_CAST")
-abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragment(),
-    IView {
+abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragment(), IView {
 
-    //viewModel
+    /**
+     * viewModel
+     */
     protected lateinit var mViewModel: VM
 
-    //dataBing
+    /**
+     * dataBinding
+     */
     protected lateinit var mBinding: DB
 
     @LayoutRes
@@ -182,10 +185,10 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
                 TSnackbar.LENGTH_SHORT
             )
             val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorAccent))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent))
             val textView =
                 snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-            textView.setTextColor(ContextCompat.getColor(mContext,R.color.m90EE90))
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.m90EE90))
             snackBar.show()
         }
     }

@@ -2,12 +2,10 @@ package com.yangbw.libtest.module.discover.hot
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.library.common.base.BaseListFragment
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentHotBinding
+import com.yangbw.libtest.module.common.WebActivity
 import kotlinx.android.synthetic.main.fragment_hot.*
 
 /**
@@ -25,14 +23,13 @@ class HotFragment : BaseListFragment<HotViewModel, FragmentHotBinding,
 
     override fun getReplaceView(): View = fragment_hot
 
-    override fun getSmartRefreshLayout(): SmartRefreshLayout = smartRefreshLayout
-
-    override fun getRecyclerView(): RecyclerView = recyclerView
-
-    override fun getAdapter() {
+    override fun initRecyclerView() {
+        mSmartRefreshLayout = smartRefreshLayout
+        mRecyclerView = recyclerView
         mAdapter = HotAdapter()
-        getRecyclerView().layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        mAdapter?.setOnItemClickListener { _, _, _ ->
+            WebActivity.launch(mContext,null,"https://home.meishichina.com/recipe-559721.html")
+        }
     }
 
     override fun init(savedInstanceState: Bundle?) {

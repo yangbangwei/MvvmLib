@@ -1,11 +1,10 @@
 package com.yangbw.libtest.module.mine
 
 import androidx.lifecycle.MutableLiveData
-import com.library.common.em.RequestDisplay
 import com.library.common.mvvm.BaseViewModel
 import com.yangbw.libtest.api.ApiService
 import com.yangbw.libtest.module.home.BannerInfo
-import utils.UserInfoUtils
+import com.yangbw.libtest.utils.UserInfoUtils
 
 
 /**

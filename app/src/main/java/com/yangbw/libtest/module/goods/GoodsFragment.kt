@@ -8,7 +8,11 @@ import com.library.common.base.BaseListFragment
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentDiscoverBinding
+import com.yangbw.libtest.module.discover.newest.NewestAdapter
 import kotlinx.android.synthetic.main.fragment_goods.*
+import kotlinx.android.synthetic.main.fragment_goods.recyclerView
+import kotlinx.android.synthetic.main.fragment_goods.smartRefreshLayout
+import kotlinx.android.synthetic.main.fragment_newest.*
 import utils.ActionBarUtils
 
 /**
@@ -26,6 +30,12 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
 
     override fun getReplaceView(): View = smartRefreshLayout
 
+    override fun initRecyclerView() {
+        mSmartRefreshLayout = smartRefreshLayout
+        mRecyclerView = recyclerView
+        mAdapter = GoodsAdapter()
+    }
+
     override fun init(savedInstanceState: Bundle?) {
         ActionBarUtils.setToolBarTitleText(toolbar, "分类")
         ImmersionBar.with(this)
@@ -37,11 +47,4 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
 
     }
 
-    override fun getSmartRefreshLayout(): SmartRefreshLayout = smartRefreshLayout
-
-    override fun getRecyclerView(): RecyclerView = recyclerView
-
-    override fun getAdapter() {
-        mAdapter = GoodsAdapter()
-    }
 }

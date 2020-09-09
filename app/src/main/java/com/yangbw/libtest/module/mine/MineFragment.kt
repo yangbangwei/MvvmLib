@@ -8,12 +8,14 @@ import com.library.common.extension.setOnClickListener
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentMineBinding
+import com.yangbw.libtest.module.login.LoginActivity
 import com.yangbw.libtest.module.msg.MsgActivity
 import com.yangbw.libtest.module.set.SetActivity
 import com.yangbw.libtest.module.userInfo.UserInfoActivity
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
+import com.yangbw.libtest.utils.UserInfoUtils
 
 /**
  * 我的页面
@@ -40,17 +42,21 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
             .fitsSystemWindows(false)
             .init()
         mBinding.run {
+            ivSet.setOnClickListener {
+                SetActivity.launch(mContext)
+            }
             //点击事件
-            setOnClickListener(groupUserInfo, ivSet, ivMsg) {
-                when (this) {
-                    groupUserInfo -> {
-                        UserInfoActivity.launch(mContext)
-                    }
-                    ivSet -> {
-                        SetActivity.launch(mContext)
-                    }
-                    ivMsg -> {
-                        MsgActivity.launch(mContext)
+            setOnClickListener(groupUserInfo, ivMsg) {
+                if (!UserInfoUtils.isLogin()) {
+                    LoginActivity.launch(mContext)
+                } else {
+                    when (this) {
+                        groupUserInfo -> {
+                            UserInfoActivity.launch(mContext)
+                        }
+                        ivMsg -> {
+                            MsgActivity.launch(mContext)
+                        }
                     }
                 }
             }

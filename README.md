@@ -3,13 +3,7 @@
 以及图片加载，版本更新，图片选择，常见的UI样式功能。
 
 模仿朴朴APP样式，接口部分个人开发，只提供测试使用。
-
-## jetPack系列思维导图
-1. [DataBinding]
-2. [LiveData]
-3. [Room]
-4. [Paging3]
-5. [ViewModel]
+[API代码](https://github.com/yangbangwei/api)
 
 ## 效果截图 
 <img src="images/snapshot1.png" width="50%"/><img src="images/snapshot2.png" width="50%"/>
@@ -59,16 +53,22 @@
 - [ ] 个推
 - [ ] 等等
 
-## 使用步骤
+## 模板功能使用
+支持快速生成页面相关的基类。
+1. 下载目录template下所有文件。
+2. 放入AndroidStudio 模板路径。
 
-#### Step 1.新建Activity
+    Windows：AS安装目录/plugins/android/lib/templates/gradle-projects
+    
+    Mac：/Applications/Android Studio.app/Contents/plugins/android/lib/templates/gradle-projects
+    
+3. 重启AndroidStudio。
+4. 鼠标右键 —— New —— AndroidMVVM —— Base基类，填写对应的参数。
+5. 可根据个人习惯进行调整。修改BaseActivity/root/src/app_package文件即可。
 
-#### Step 2.新增ActivityList
 
-
-## 使用工具
+## 常用工具
 1. [阿里巴巴矢量图](https://www.iconfont.cn/)
-
 
 ## 关于我
 
@@ -85,7 +85,7 @@
 ## License
 
 ```
-   Copyright [2020] [madreain]
+   Copyright [2020] yangbw
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
