@@ -13,8 +13,6 @@ import com.library.common.view.baseviewholder.CommonViewHolder
 abstract class BaseMultiAdapter<T : MultiItemEntity>(data: MutableList<T>) :
     BaseMultiItemQuickAdapter<T, CommonViewHolder>(data) {
 
-    abstract fun addItemType()
-
     open fun clearData() {
         data.clear()
         notifyDataSetChanged()

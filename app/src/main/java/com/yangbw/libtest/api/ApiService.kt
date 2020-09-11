@@ -3,6 +3,7 @@ package com.yangbw.libtest.api
 import com.yangbw.libtest.common.BaseRes
 import com.yangbw.libtest.module.details.DetailsData
 import com.yangbw.libtest.module.discover.hot.HotListData
+import com.yangbw.libtest.module.discover.newest.NewestListData
 import com.yangbw.libtest.module.home.BannerInfo
 import com.yangbw.libtest.module.home.UpdateVersion
 import com.yangbw.libtest.module.login.UserData
@@ -43,10 +44,11 @@ interface ApiService {
     @POST("api/userInfo")
     suspend fun userInfo(): BaseRes<MineData>
 
-    @POST("api/userBanner")
-    suspend fun userBanner(): BaseRes<List<BannerInfo.Data>>
-
     @POST("api/discoverHot")
     @FormUrlEncoded
     suspend fun discoverHot(@Field("pageNo") pageNo: Int): BaseRes<List<HotListData>>
+
+    @POST("api/discoverNew")
+    @FormUrlEncoded
+    suspend fun discoverNew(@Field("pageNo") pageNo: Int): BaseRes<List<NewestListData>>
 }

@@ -17,6 +17,7 @@ import retrofit2.Retrofit
  * @date 2020/8/31
  */
 object AppConfig {
+
     private var retrofit: Retrofit? = null
 
     //服务地址
@@ -25,6 +26,9 @@ object AppConfig {
     //returnCode 正常态的值 真对不同接口返回支持单正常态值的返回，也支持增删改查不同正常态值的返回
     private var retSuccess: String? = null
     private var retSuccessList: List<String>? = null
+    //设置多个BaseUrl，配合默认的DOMAIN_NAME
+    private var mDomainNameHub: HashMap<String, HttpUrl>? = null
+    private var isMoreBaseUrl = false
 
     //日志开关
     private var logOpen = false
@@ -51,10 +55,6 @@ object AppConfig {
     //是否开启缓存
     private var cacheOpen = false
     private var configBuilder: ConfigBuilder? = null
-
-    //设置多个BaseUrl，配合默认的DOMAIN_NAME
-    private var mDomainNameHub: HashMap<String, HttpUrl>? = null
-    private var isMoreBaseUrl = false
 
     //glide配置
     private var isSkipMemoryCache = false

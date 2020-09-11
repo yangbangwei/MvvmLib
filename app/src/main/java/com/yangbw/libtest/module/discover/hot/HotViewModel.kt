@@ -22,7 +22,6 @@ class HotViewModel : BaseListViewModel<ApiService>() {
             reTry = {
                 discoverHot(pageNo)
             },
-            type = RequestDisplay.REPLACE,
             pageNo = pageNo
         )
     }

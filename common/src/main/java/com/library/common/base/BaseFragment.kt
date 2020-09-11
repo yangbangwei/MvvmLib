@@ -270,13 +270,13 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
     }
 
     override val mActivity: Activity
-        get() = activity!!
+        get() = requireActivity()
 
     override val mContext: Context
-        get() = context!!
+        get() = requireContext()
 
     override val mAppContext: Context
-        get() = activity!!.applicationContext
+        get() = requireActivity().applicationContext
 
     /**
      *  @param refreshEnable 设置是否刷新操作

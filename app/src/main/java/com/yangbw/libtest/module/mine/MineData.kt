@@ -16,4 +16,5 @@ data class MineData(
     val present: String? = null,
     val discount: String? = null,
     val balance: String? = null,
+    val banners: List<BannerInfo.Data>? =null
 )

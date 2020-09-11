@@ -1,10 +1,10 @@
 package com.yangbw.libtest.module.mine
 
 import androidx.lifecycle.MutableLiveData
+import com.library.common.em.RequestDisplay
 import com.library.common.mvvm.BaseViewModel
 import com.yangbw.libtest.api.ApiService
 import com.yangbw.libtest.module.home.BannerInfo
-import com.yangbw.libtest.utils.UserInfoUtils
 
 
 /**
@@ -16,35 +16,23 @@ import com.yangbw.libtest.utils.UserInfoUtils
 class MineViewModel : BaseViewModel<ApiService>() {
 
     var mUserInfo = MutableLiveData<MineData>()
-    var mBanner = MutableLiveData<List<BannerInfo.Data>>()
 
     public override fun onStart() {
-        getUserBanner()
         getUserInfo()
     }
 
-    private fun getUserBanner() {
+    private fun getUserInfo() {
         launchOnlyResult(
             block = {
-                getApiService().userBanner()
+                getApiService().userInfo()
             },
             success = {
-                mBanner.value = it
+                mUserInfo.value = it
+            },
+            reTry = {
+                getUserInfo()
             }
         )
-    }
-
-    private fun getUserInfo() {
-        if (UserInfoUtils.isLogin()) {
-            launchOnlyResult(
-                block = {
-                    getApiService().userInfo()
-                },
-                success = {
-                    mUserInfo.value = it
-                }
-            )
-        }
     }
 
 

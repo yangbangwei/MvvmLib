@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import com.library.common.R
 
 /**
@@ -12,22 +13,16 @@ import com.library.common.R
  * @author yangbw
  * @date 2020/8/31
  */
-class VaryViewHelper(
-    /**
-     * 需替换的布局view
-     * @return
-     */
-    //要替换的view 必须是ViewGroup的相关继承类
-    override val replaceView: View
-) : IVaryViewHelper {
+class VaryViewHelper(override val replaceView: View) : IVaryViewHelper {
 
-    //替换view的夫view容器
+    /**
+     * 替换view的父view容器
+     */
     private var parentView: ViewGroup? = null
-    //要替换的view的下角标
-    private var viewIndex = 0
-    //夫容器的布局参数
-    private var params: ViewGroup.LayoutParams? = null
-    //当前显示的view
+
+    /**
+     * 当前显示的view
+     */
     private var mCurrentView: View? = null
 
     /**
@@ -37,13 +32,12 @@ class VaryViewHelper(
     override val currentView: View
         get() = mCurrentView!!
 
-
     /**
-     * 恢复到需替换的布局view
+     * 上下文
+     * @return
      */
-    override fun restoreView() {
-        showView(replaceView)
-    }
+    override val context: Context
+        get() = replaceView.context
 
     /**
      * 设置要展示的view
@@ -53,15 +47,24 @@ class VaryViewHelper(
         if (parentView == null) {
             init()
         }
-        mCurrentView = view
-        if (parentView?.getChildAt(viewIndex) != view) {
-            if (view.parent != null) {
-                val parent: ViewGroup = view.parent as ViewGroup
-                parent.removeView(view)
+        if (mCurrentView != view) {
+            //移除旧的View
+            if (mCurrentView != null) {
+                parentView?.removeView(mCurrentView)
             }
-            parentView?.removeViewAt(viewIndex)
-            parentView?.addView(view, viewIndex, params)
+            //添加新的View
+            mCurrentView = view
+            parentView?.addView(mCurrentView, parentView?.layoutParams)
         }
+    }
+
+    private fun init() {
+        parentView =
+            if (replaceView.parent != null) {
+                replaceView as ViewGroup
+            } else {
+                replaceView.rootView.findViewById(R.id.content)
+            }
     }
 
     /**
@@ -74,31 +77,14 @@ class VaryViewHelper(
     }
 
     /**
-     * 上下文
-     * @return
+     * 恢复到需替换的布局view
      */
-    override val context: Context
-        get() = replaceView.context
-
-    private fun init() {
-        params = replaceView.layoutParams
-        parentView =
-            if (replaceView.parent != null) {
-                replaceView.parent as ViewGroup
-            } else {
-                replaceView.rootView.findViewById(R.id.content)
-            }
-        var count = parentView?.childCount
-        if (count == null) {
-            count = 0
+    override fun restoreView() {
+        //移除旧的View
+        if (mCurrentView != null) {
+            parentView?.removeView(mCurrentView)
+            mCurrentView = null
         }
-        for (index in 0 until count) {
-            if (replaceView === parentView?.getChildAt(index)) {
-                viewIndex = index
-                break
-            }
-        }
-        mCurrentView = replaceView
     }
 
 }

@@ -27,8 +27,7 @@ class DetailsViewModel : BaseViewModel<ApiService>() {
             },
             success = {
                 mDetails.value = it
-            },
-            type = RequestDisplay.REPLACE
+            }
         )
     }
 }

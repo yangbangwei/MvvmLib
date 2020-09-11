@@ -1,4 +1,4 @@
-# MvvmLibTest
+# MvvmLibTest（未完善，持续更新...）
 一个基于MVVM使用AndroidJetpack封装的快速开发框架，包含Retrofit，Coroutine，DataBinding，ViewModel，LiveData，Room，Paging3
 以及图片加载，版本更新，图片选择，常见的UI样式功能。
 

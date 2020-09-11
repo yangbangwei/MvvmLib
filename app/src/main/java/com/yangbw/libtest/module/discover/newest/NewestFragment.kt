@@ -31,11 +31,11 @@ class NewestFragment : BaseListFragment<NewestViewModel, FragmentNewestBinding,
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
+        loadPageListData(1)
     }
 
     override fun loadPageListData(pageNo: Int) {
-
+        mViewModel.discoverNew(pageNo)
     }
 
 }

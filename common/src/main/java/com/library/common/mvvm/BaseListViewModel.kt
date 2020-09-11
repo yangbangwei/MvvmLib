@@ -28,11 +28,6 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
     var mResult: MutableLiveData<*>? = null
 
     /**
-     * 页数
-     */
-    private var pageNo = 0
-
-    /**
      * 过滤请求结果，其他全抛异常
      * @param block 请求体
      * @param success 成功回调
@@ -47,32 +42,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
         success: (T) -> Unit = {
         },
         //错误 根据错误进行不同分类
-        error: (Throwable) -> Unit = {
-            if (!NetworkUtils.isConnected()) {
-                onNetWorkError({ reTry() })//没网
-            } else {
-                when (it) {
-                    is NetWorkException -> {
-                        onNetWorkError({ reTry() })
-                    }
-                    is ReturnCodeException -> {
-                        isIntercepted(it)
-                        onReturnCodeError(
-                            it.message
-                        ) { reTry() }
-                    }
-                    is ReturnCodeNullException -> {
-                        onNetWorkError({ reTry() }, codeNullMsg)
-                    }
-                    is ResultException -> {
-                        onTEmpty { reTry() }
-                    }
-                    else -> {
-                        onNetWorkError({ reTry() }) //UnknownHostException 1：服务器地址错误；2：网络未连接
-                    }
-                }
-            }
-        },
+        error: (Throwable) -> Unit = {},
         //完成
         complete: () -> Unit = {},
         //重试
@@ -80,18 +50,12 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
         //当前请求的CurrentDomainName,默认的DOMAIN_NAME，也可自行设置
         currentDomainName: String = AppConfig.DOMAIN_NAME,
         //接口操作交互类型
-        type: RequestDisplay = RequestDisplay.NULL,
-        //分页数
-        pageNo: Int = 1,
-        //是否为加载列表数据
-        isList: Boolean = true,
+        type: RequestDisplay = RequestDisplay.REPLACE,
+        //分页数,-1为非list接口
+        pageNo: Int = -1,
         //加载弹窗提醒内容
         msg: String = ""
     ) {
-        //接口操作交互类型赋值
-        this.type = type
-        //页数赋值
-        this.pageNo = pageNo
         //开始请求接口前
         if (pageNo == 1) {
             when (type) {
@@ -113,10 +77,31 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
                     //接口成功返回
-                    executeResponse(res, currentDomainName, isList) { success(it) }
+                    executeResponse(pageNo, res, currentDomainName) { success(it) }
                 },
                 {
-                    //接口失败返回
+                    //通用异常处理
+                    if (!NetworkUtils.isConnected()) {
+                        onNetWorkError(pageNo, type) { reTry() }
+                    } else {
+                        when (it) {
+                            is ReturnCodeException -> {
+                                isIntercepted(it)
+                                onReturnCodeError(type, it.message) { reTry() }
+                            }
+                            is ReturnCodeNullException -> {
+                                onNetWorkError(pageNo, type, codeNullMsg) { reTry() }
+                            }
+                            is ResultException -> {
+                                onTEmpty(pageNo, type) { reTry() }
+                            }
+                            else -> {
+                                //UnknownHostException 1：服务器地址错误；2：网络未连接
+                                onNetWorkError(pageNo, type) { reTry() }
+                            }
+                        }
+                    }
+                    //自定义异常处理
                     error(it)
                 },
                 {
@@ -131,9 +116,9 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
      * 请求结果过滤
      */
     private suspend fun <T> executeResponse(
+        pageNo: Int,
         response: IRes<T>,
         currentDomainName: String,
-        isList: Boolean,
         success: suspend CoroutineScope.(T) -> Unit
     ) {
         coroutineScope {
@@ -157,8 +142,8 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                                 viewState.showEmpty.call()
                             }
                         } else {
-                            //接口数据赋值
-                            if (isList) {
+                            //列表接口数据赋值
+                            if (pageNo != -1) {
                                 mResult?.value = response.getBaseResult()
                             }
                             success(response.getBaseResult())
@@ -194,8 +179,8 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                             viewState.showEmpty.call()
                         }
                     } else {
-                        //接口数据赋值
-                        if (isList) {
+                        //列表接口数据赋值
+                        if (pageNo != -1) {
                             mResult?.value = response.getBaseResult()
                         }
                         success(response.getBaseResult())
@@ -226,8 +211,8 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                             viewState.showEmpty.call()
                         }
                     } else {
-                        //接口数据赋值
-                        if (isList) {
+                        //列表接口数据赋值
+                        if (pageNo != -1) {
                             mResult?.value = response.getBaseResult()
                         }
                         success(response.getBaseResult())
@@ -254,6 +239,8 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
      * 数据为空
      */
     private fun onTEmpty( //重试
+        pageNo: Int,
+        type: RequestDisplay,
         reTry: () -> Unit = {
         }
     ) {
@@ -280,8 +267,10 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
      * 网络异常，状态码异常，未设置成功状态码
      */
     private fun onNetWorkError(
-        reTry: () -> Unit = {},
-        errorMsg: String = this.errorMsg
+        pageNo: Int,
+        type: RequestDisplay,
+        errorMsg: String = this.errorMsg,
+        reTry: () -> Unit = {}
     ) {
         when (type) {
             RequestDisplay.NULL -> {

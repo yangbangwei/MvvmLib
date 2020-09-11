@@ -37,8 +37,9 @@ class App : BaseApplication() {
 
     override fun initConfig() {
         AppConfig.builder()
-            .setRetSuccess(Constant.CODE_SUCCESS)
+            //单地址和多地址设置
             .setBaseUrl(Constant.BASE_URL)
+            .setRetSuccess(Constant.CODE_SUCCESS)
             //日志开关
             .setLogOpen(Constant.OPEN_LOG)
             //请求头拦截器

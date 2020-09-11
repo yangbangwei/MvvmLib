@@ -185,10 +185,10 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
                 TSnackbar.LENGTH_SHORT
             )
             val snackBarView = snackBar.view
-            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorAccent))
+            snackBarView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorAccent))
             val textView =
                 snackBarView.findViewById<TextView>(com.androidadvance.topsnackbar.R.id.snackbar_text)
-            textView.setTextColor(ContextCompat.getColor(mContext,R.color.m90EE90))
+            textView.setTextColor(ContextCompat.getColor(mContext, R.color.m90EE90))
             snackBar.show()
         }
     }
@@ -270,13 +270,13 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
     }
 
     override val mActivity: Activity
-        get() = activity!!
+        get() = requireActivity()
 
     override val mContext: Context
-        get() = context!!
+        get() = requireContext()
 
     override val mAppContext: Context
-        get() = activity?.applicationContext!!
+        get() = requireActivity().applicationContext
 
 
     /**

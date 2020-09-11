@@ -14,39 +14,28 @@ import java.util.*
  */
 class NewestAdapter : BaseMultiAdapter<NewestListData>(ArrayList()) {
 
-    enum class TYPE(val type: Int) {
-        HEAD(0),
-        BODY(1)
-    }
-
     init {
-        addItemType()
-    }
-
-    override fun addItemType() {
-        addItemType(TYPE.HEAD.type, R.layout.item_fragment_newest_head)
-        addItemType(TYPE.BODY.type, R.layout.item_fragment_newest)
+        addItemType(NewestListData.TYPE_HEAD, R.layout.item_fragment_newest_head)
+        addItemType(NewestListData.TYPE_BODY, R.layout.item_fragment_newest)
     }
 
     override fun onItemViewHolderCreated(viewHolder: CommonViewHolder, viewType: Int) {
         when (viewType) {
-            TYPE.HEAD.type -> {
+            NewestListData.TYPE_HEAD  -> {
                 DataBindingUtil.bind<ItemFragmentNewestHeadBinding>(viewHolder.itemView)
             }
-            TYPE.BODY.type -> {
+            NewestListData.TYPE_BODY -> {
                 DataBindingUtil.bind<ItemFragmentNewestBinding>(viewHolder.itemView)
             }
         }
     }
 
-    /**
-     * 布局
-     */
     override fun convert(helper: CommonViewHolder, item: NewestListData) {
-        when (helper.layoutPosition) {
-            TYPE.HEAD.type -> {
+        when (item.itemType) {
+            NewestListData.TYPE_HEAD -> {
+
             }
-            else -> {
+            NewestListData.TYPE_BODY -> {
                 val itemListBinding = helper.getBinding<ItemFragmentNewestBinding>()
                 if (itemListBinding != null) {
                     itemListBinding.data = item

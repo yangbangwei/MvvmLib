@@ -15,6 +15,7 @@ import com.library.common.base.BaseApplication
  */
 class VaryViewHelperController private constructor(private val helper: VaryViewHelper) :
     IVaryViewHelperController {
+
     //是否已经调用过restore方法
     private var hasRestore: Boolean = false
 

@@ -5,17 +5,16 @@ import android.view.View
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.extension.setOnClickListener
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentMineBinding
 import com.yangbw.libtest.module.login.LoginActivity
 import com.yangbw.libtest.module.msg.MsgActivity
 import com.yangbw.libtest.module.set.SetActivity
 import com.yangbw.libtest.module.userInfo.UserInfoActivity
+import com.yangbw.libtest.utils.UserInfoUtils
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
-import com.yangbw.libtest.utils.UserInfoUtils
 
 /**
  * 我的页面
@@ -32,8 +31,6 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
     override fun getLayoutId() = R.layout.fragment_mine
 
     override fun getReplaceView(): View = fragment_mine
-
-    override fun getSmartRefreshLayout(): SmartRefreshLayout = smartRefreshLayout
 
     override fun init(savedInstanceState: Bundle?) {
         ImmersionBar.with(this)
@@ -71,18 +68,16 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
         }
         mViewModel.run {
             mUserInfo.observe(this@MineFragment, {
-                mBinding.mineData = it
-            })
-            mBanner.observe(this@MineFragment, {
-                mBinding.banner.adapter = MineAdapter(it)
+                if (UserInfoUtils.isLogin()) {
+                    mBinding.mineData = it
+                }
+                mBinding.banner.adapter = MineAdapter(it.banners!!)
             })
         }
 
-        mBinding.mineData = MineData(getString(R.string.login_tips), null, "-", "-", "-")
-        getSmartRefreshLayout().autoRefresh()
-    }
+        mBinding.mineData = MineData(getString(R.string.login_tips), null, "-", "-", "-", null)
 
-    override fun refreshData() {
         mViewModel.onStart()
     }
+
 }

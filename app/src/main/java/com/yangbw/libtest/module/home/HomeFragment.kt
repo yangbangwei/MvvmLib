@@ -43,7 +43,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_home
 
-    override fun getReplaceView(): View = frameLayout
+    override fun getReplaceView(): View = fragment_home
 
     override fun getSmartRefreshLayout(): SmartRefreshLayout? = smartRefreshLayout
 
@@ -77,12 +77,12 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
             }
         })
 
-        mViewModel.updateVersion(2)
+//        mViewModel.updateVersion(2)
         refreshData()
     }
 
     override fun refreshData() {
-        mViewModel.onStart()
+        mViewModel.getBanner()
     }
 
     /**
@@ -159,8 +159,8 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
                     }
                     mAdapters.add(adapter)
                 }
-//                //活动类型
-//                PROMOTION -> {
+                //活动类型
+                PROMOTION -> {
 //                    val adapter: BaseDelegateAdapter = object : BaseDelegateAdapter(
 //                        mContext,
 //                        StickyLayoutHelper(true),
@@ -183,7 +183,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
 //                        }
 //                    }
 //                    mAdapters.add(adapter)
-//                }
+                }
             }
         }
     }

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -41,6 +42,7 @@
         android:layout_height="@dimen/dp36"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/dp40"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/shape_status"
         android:text="@string/refresh"
         android:textColor="@color/main_color"

@@ -175,7 +175,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     private fun registerDataChange() {
         mViewModel.mResult = MutableLiveData<T>()
         //数据变化的监听
-        mViewModel.mResult?.observe(this, {
+        mViewModel.mResult?.observe(viewLifecycleOwner, {
             showListData(it as MutableList<T>, mPageNum)
         })
     }
@@ -322,13 +322,13 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     }
 
     override val mActivity: Activity
-        get() = activity!!
+        get() = requireActivity()
 
     override val mContext: Context
-        get() = context!!
+        get() = requireContext()
 
     override val mAppContext: Context
-        get() = activity!!.applicationContext
+        get() = requireActivity().applicationContext
 
     /**
      *

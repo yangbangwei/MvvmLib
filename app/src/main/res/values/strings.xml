@@ -43,4 +43,7 @@
     <string name="user_soft_agreement">朴朴软件许可及服务协议</string>
     <string name="clear_cache">清除缓存</string>
     <string name="attention_tips">点击登录后可关注主题和作者</string>
+    <string name="discover_hot">热门</string>
+    <string name="discover_recommend">推荐</string>
+    <string name="discover_newest">最新</string>
 </resources>

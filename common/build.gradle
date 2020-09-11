@@ -47,7 +47,6 @@ dependencies {
     api rootProject.ext.dependencies["appcompat"]
     api rootProject.ext.dependencies["material"]
     api rootProject.ext.dependencies["recyclerview"]
-    api rootProject.ext.dependencies["annotation"]
     api rootProject.ext.dependencies["constraintlayout"]
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["viewpager2"]

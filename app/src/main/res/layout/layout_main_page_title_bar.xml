@@ -23,5 +23,4 @@
         app:tl_textUnselectColor="@color/white"
         app:tl_textsize="@dimen/sp14" />
 
-
 </FrameLayout>
