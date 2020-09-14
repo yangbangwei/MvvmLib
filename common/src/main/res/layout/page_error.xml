@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/network_error_please_refresh"
+        android:text="@string/network_error"
         android:textColor="@color/mA2A2A2"
         android:textSize="@dimen/sp14"
         app:layout_constraintBottom_toTopOf="@+id/btn_reload"

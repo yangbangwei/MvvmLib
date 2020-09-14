@@ -22,7 +22,7 @@ class NewestFragment : BaseListFragment<NewestViewModel, FragmentNewestBinding,
 
     override fun getLayoutId() = R.layout.fragment_newest
 
-    override fun getReplaceView(): View = smartRefreshLayout
+    override fun getReplaceView(): View = fragment_newest
 
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout

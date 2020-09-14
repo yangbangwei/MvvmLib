@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import com.blankj.utilcode.util.NetworkUtils
 import com.library.common.config.AppConfig
 import com.library.common.em.RequestDisplay
-import com.library.common.http.exception.NetWorkException
 import com.library.common.http.exception.ResultException
 import com.library.common.http.exception.ReturnCodeException
 import com.library.common.http.exception.ReturnCodeNullException
@@ -97,7 +96,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                             }
                             else -> {
                                 //UnknownHostException 1：服务器地址错误；2：网络未连接
-                                onNetWorkError(pageNo, type) { reTry() }
+                                onNetWorkError(pageNo, type, serverErrorMsg) { reTry() }
                             }
                         }
                     }

@@ -33,6 +33,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     protected val emptyMsg: String by lazy { BaseApplication.context.getString(R.string.no_data) }
     protected val errorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error) }
     protected val codeNullMsg: String by lazy { BaseApplication.context.getString(R.string.no_suc_code) }
+    protected val serverErrorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error_please_refresh) }
 
     /**
      * 重试的监听
@@ -142,7 +143,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                             }
                             else -> {
                                 //UnknownHostException 1：服务器地址错误；2：网络未连接
-                                onNetWorkError(type) { reTry() }
+                                onNetWorkError(type, serverErrorMsg) { reTry() }
                             }
                         }
                     }
