@@ -2,6 +2,7 @@ package com.yangbw.libtest.module.discover.recommend
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.library.common.base.BaseListFragment
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentRecommendBinding
@@ -20,21 +21,23 @@ class RecommendFragment : BaseListFragment<RecommendViewModel, FragmentRecommend
 
     override fun getLayoutId() = R.layout.fragment_recommend
 
-    override fun getReplaceView(): View = smartRefreshLayout
+    override fun getReplaceView(): View = fragment_recommend
 
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout
         mRecyclerView = recyclerView
+        val mainLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        mainLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+        recyclerView.layoutManager = mainLayoutManager
         mAdapter = RecommendAdapter()
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
-
+        loadPageListData(1)
     }
 
     override fun loadPageListData(pageNo: Int) {
-
+        mViewModel.discoverRecommend(pageNo)
     }
 
 }

@@ -4,6 +4,7 @@ import com.yangbw.libtest.common.BaseRes
 import com.yangbw.libtest.module.details.DetailsData
 import com.yangbw.libtest.module.discover.hot.HotListData
 import com.yangbw.libtest.module.discover.newest.NewestListData
+import com.yangbw.libtest.module.discover.recommend.RecommendListData
 import com.yangbw.libtest.module.home.BannerInfo
 import com.yangbw.libtest.module.home.UpdateVersion
 import com.yangbw.libtest.module.login.UserData
@@ -51,4 +52,8 @@ interface ApiService {
     @POST("api/discoverNew")
     @FormUrlEncoded
     suspend fun discoverNew(@Field("pageNo") pageNo: Int): BaseRes<List<NewestListData>>
+
+    @POST("api/discoverRecommend")
+    @FormUrlEncoded
+    suspend fun discoverRecommend(@Field("pageNo") pageNo: Int): BaseRes<List<RecommendListData>>
 }

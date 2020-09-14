@@ -13,4 +13,14 @@ class RecommendViewModel : BaseListViewModel<ApiService>() {
 
     }
 
+    fun discoverRecommend(pageNo: Int) {
+        launchOnlyResult(
+            block = {
+                getApiService().discoverRecommend(pageNo)
+            }, reTry = {
+                discoverRecommend(pageNo)
+            },
+            pageNo = pageNo
+        )
+    }
 }

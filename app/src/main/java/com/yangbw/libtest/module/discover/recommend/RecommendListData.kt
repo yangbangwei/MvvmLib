@@ -7,6 +7,12 @@ import androidx.annotation.Keep
  * @date
  */
 @Keep
-class RecommendListData {
-
-}
+data class RecommendListData(
+    val id: String,
+    val img: String,
+    val title: String,
+    val avatar: String,
+    val name: String,
+    val date: String,
+    val like: String
+)

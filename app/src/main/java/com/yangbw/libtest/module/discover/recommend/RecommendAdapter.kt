@@ -19,6 +19,10 @@ class RecommendAdapter :
     }
 
     override fun convert(helper: CommonViewHolder, item: RecommendListData) {
+        val itemListBinding = helper.getBinding<ItemFragmentRecommendBinding>()
+        if (itemListBinding != null) {
+            itemListBinding.item = item
+        }
     }
 
 }

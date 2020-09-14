@@ -56,7 +56,7 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     override fun init(savedInstanceState: Bundle?) {
         setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
             if (this.id == btnMenu.id) {
-                MenuActivity.launch(mContext)
+                MenuActivity.launch(mActivity)
             } else {
                 setTabSelection(this.id)
             }

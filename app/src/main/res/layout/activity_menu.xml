@@ -1,109 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
 
     </data>
 
-    <FrameLayout
+    <RelativeLayout
+        android:id="@+id/activity_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/parallax"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="570dp"
-            android:layout_marginTop="-100dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/bg_menu"
-            android:scaleType="fitXY"
-            app:layout_collapseMode="parallax" />
-
-        <com.scwang.smart.refresh.layout.SmartRefreshLayout
-            android:id="@+id/refreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srlEnablePreviewInEditMode="false">
-
-            <com.scwang.smart.refresh.header.ClassicsHeader
-                android:id="@+id/header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srlAccentColor="@android:color/white"
-                app:srlPrimaryColor="@android:color/transparent" />
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/scrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.appbar.CollapsingToolbarLayout
-                            android:id="@+id/collapse"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:contentScrim="?attr/colorPrimary"
-                            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                            app:titleEnabled="false">
-
-                            <RelativeLayout
-                                android:id="@+id/panel_lyt"
-                                android:layout_width="match_parent"
-                                android:layout_height="100dp"
-                                android:background="@color/white"
-                                android:layout_gravity="bottom"
-                                android:layout_marginTop="200dp"
-                                android:orientation="vertical">
-                            </RelativeLayout>
-                        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:background="@color/white"
-                            android:layout_height="match_parent"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-
-        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/MToolbar"
-            android:layout_marginBottom="0dp"
-            android:background="@android:color/transparent"
-            app:layout_collapseMode="pin">
-
-            <LinearLayout
-                android:id="@+id/buttonBarLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="今日菜谱"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-    </FrameLayout>
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 </layout>
