@@ -6,7 +6,7 @@
 [API代码](https://github.com/yangbangwei/api)
 
 ## 效果截图 
-<img src="images/snapshot1.png" height="400dp" width="50%"/><img src="images/snapshot2.png" width="50%"/>
+<img src="images/snapshot1.png" width="50%"/><img src="images/snapshot2.png" width="50%"/>
 <img src="images/snapshot3.png" width="50%"/><img src="images/snapshot4.png" width="50%"/>
 
 ## 第三方库
