@@ -1,9 +1,13 @@
 package com.yangbw.libtest.module.discover.recommend
 
+import android.content.Context
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
+import android.view.WindowManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.library.common.base.BaseListFragment
+import com.library.common.extension.dp2px
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentRecommendBinding
 import kotlinx.android.synthetic.main.fragment_recommend.*

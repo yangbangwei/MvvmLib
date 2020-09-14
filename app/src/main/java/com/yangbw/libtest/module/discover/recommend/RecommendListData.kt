@@ -14,5 +14,7 @@ data class RecommendListData(
     val avatar: String,
     val name: String,
     val date: String,
-    val like: String
+    val like: String,
+    val width: Int,
+    val height: Int
 )

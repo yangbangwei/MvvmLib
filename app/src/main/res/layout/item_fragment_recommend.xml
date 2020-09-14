@@ -5,7 +5,6 @@
     tools:ignore="ContentDescription">
 
     <data>
-
         <variable
             name="item"
             type="com.yangbw.libtest.module.discover.recommend.RecommendListData" />
@@ -17,10 +16,11 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView25"
+            android:id="@+id/iv_img"
             loadImage="@{item.img}"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,6 +32,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView52"
             app:layout_constraintTop_toBottomOf="@+id/textView52"
             app:srcCompat="@mipmap/default_avatar_header" />
@@ -42,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{item.title}"
-            app:layout_constraintStart_toStartOf="@+id/imageView25"
-            app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+            app:layout_constraintStart_toStartOf="@+id/iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img" />
 
         <TextView
             android:id="@+id/textView53"
@@ -64,7 +65,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView26"
-            app:layout_constraintEnd_toEndOf="@+id/imageView25"
+            app:layout_constraintEnd_toEndOf="@+id/iv_img"
             app:layout_constraintTop_toTopOf="@+id/imageView26"
             app:srcCompat="@mipmap/icon_mine_page_collection" />
 
