@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.gyf.immersionbar.ImmersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.utils.GlideUtils
+import com.library.common.utils.LogUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.sunfusheng.marqueeview.MarqueeView
 import com.yangbw.libtest.R
@@ -76,8 +77,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
                 showToast("当前为最新版本")
             }
         })
-
-//        mViewModel.updateVersion(2)
+        mViewModel.updateVersion(2)
         refreshData()
     }
 

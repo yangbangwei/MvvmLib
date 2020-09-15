@@ -8,6 +8,7 @@ import com.yangbw.libtest.module.discover.recommend.RecommendListData
 import com.yangbw.libtest.module.home.BannerInfo
 import com.yangbw.libtest.module.home.UpdateVersion
 import com.yangbw.libtest.module.login.UserData
+import com.yangbw.libtest.module.menu.MenuData
 import com.yangbw.libtest.module.mine.MineData
 import retrofit2.http.*
 
@@ -56,4 +57,8 @@ interface ApiService {
     @POST("api/discoverRecommend")
     @FormUrlEncoded
     suspend fun discoverRecommend(@Field("pageNo") pageNo: Int): BaseRes<List<RecommendListData>>
+
+    @POST("api/menuList")
+    @FormUrlEncoded
+    suspend fun menuList(@Field("pageNo") pageNo: Int): BaseRes<List<MenuData>>
 }

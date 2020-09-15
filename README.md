@@ -6,8 +6,8 @@
 [API代码](https://github.com/yangbangwei/api)
 
 ## 效果截图 
-<img src="images/snapshot1.png" width="50%"/><img src="images/snapshot2.png" width="50%"/>
-<img src="images/snapshot3.png" width="50%"/><img src="images/snapshot4.png" width="50%"/>
+<img src="images/snapshot1.png" width="30%"/><img src="images/snapshot2.png" width="30%"/><img src="images/snapshot3.png" width="30%"/>
+<img src="images/snapshot4.png" width="30%"/><img src="images/snapshot5.png" width="30%"/>
 
 ## 第三方库
 1. [`Okhttp` Okhttp网络访问框架](https://github.com/square/okhttp)
@@ -24,6 +24,7 @@
 12. [`Leakcanary` 内存检测功能](https://github.com/square/leakcanary)
 13. [`FlycoTabLayout` tabLayout页签](https://github.com/H07000223/FlycoTabLayout)
 14. [`PermissionX` 动态权限管理](https://github.com/guolindev/PermissionX)
+15. [`photoView` 图片预览](https://github.com/chrisbanes/PhotoView)
 
 ## 后续完善部分
 - [x] 重新调整，优化流程，精简代码
@@ -36,16 +37,16 @@
 - [x] autoSize屏幕适配
 - [x] 无网络，异常问题
 - [x] 重构网络通用处理部分
-- [ ] 单页面多个请求问题
+- [x] photoView控件
+- [x] gsyVideoPlayer使用
+- [ ] 弹窗封装
 - [ ] 工具类整理
 - [ ] 首页仿美团饿了么，多列表效果
 - [ ] 商品页面仿购物类型APP，分类样式
-- [ ] photoView控件
 - [ ] 更新控件
 - [ ] 图片上传控件
 - [ ] Paging3使用
 - [ ] 相机功能
-- [ ] gsyVideoPlayer使用
 - [ ] 单元测试
 - [ ] 功能完善后，将lib提交jCenter,jitPack
 

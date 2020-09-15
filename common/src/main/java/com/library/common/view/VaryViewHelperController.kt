@@ -1,11 +1,9 @@
 package com.library.common.view
 
-import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.library.common.R
-import com.library.common.base.BaseApplication
 
 /**
  * 变化view的默认辅助控制类
@@ -26,16 +24,16 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
     )
 
     override fun showLoading() {
-        hasRestore = false
-        val layout = helper.inflate(R.layout.page_loading)
-        helper.showView(layout)
+        showLoading(null)
     }
 
     override fun showLoading(msg: String?) {
         hasRestore = false
         val layout = helper.inflate(R.layout.page_loading)
-        val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
-        tvMsg.text = msg
+        msg?.let {
+            val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
+            tvMsg.text = it
+        }
         helper.showView(layout)
     }
 
@@ -46,22 +44,22 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
     override fun showEmpty(emptyMsg: String?, listener: View.OnClickListener?) {
         hasRestore = false
         val layout = helper.inflate(R.layout.page_empty)
-        val againBtn = layout.findViewById<Button>(R.id.btn_reload)
-        val textView = layout.findViewById<TextView>(R.id.tv_empty)
-        if (!TextUtils.isEmpty(emptyMsg)) {
-            textView.text = emptyMsg
+        val btnReload = layout.findViewById<Button>(R.id.btn_reload)
+        emptyMsg?.let {
+            val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
+            tvMsg.text = it
         }
         if (null != listener) {
-            againBtn.setOnClickListener(listener)
-            againBtn.visibility = View.VISIBLE
+            btnReload.setOnClickListener(listener)
+            btnReload.visibility = View.VISIBLE
         } else {
-            againBtn.visibility = View.GONE
+            btnReload.visibility = View.GONE
         }
         helper.showView(layout)
     }
 
     override fun showNetworkError(listener: View.OnClickListener?) {
-        showNetworkError(BaseApplication.context.getString(R.string.network_error), listener)
+        showNetworkError(null, listener)
     }
 
     override fun showNetworkError(
@@ -70,15 +68,16 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
     ) {
         hasRestore = false
         val layout = helper.inflate(R.layout.page_error)
-        val againBtn =
-            layout.findViewById<Button>(R.id.btn_reload)
-        val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
-        tvMsg.text = msg
+        val btnReload = layout.findViewById<Button>(R.id.btn_reload)
+        msg?.let {
+            val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
+            tvMsg.text = it
+        }
         if (null != listener) {
-            againBtn.setOnClickListener(listener)
-            againBtn.visibility = View.VISIBLE
+            btnReload.setOnClickListener(listener)
+            btnReload.visibility = View.VISIBLE
         } else {
-            againBtn.visibility = View.GONE
+            btnReload.visibility = View.GONE
         }
         helper.showView(layout)
     }

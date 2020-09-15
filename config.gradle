@@ -3,10 +3,10 @@ ext {
     //查看错误信息 ./gradlew compileDebug --stacktrace -info      ./gradlew compileDebugSource --stacktrace -info
     //应用配置
     android = [
-            compileSdkVersion: 28,
-            buildToolsVersion: "28.0.0",
-            minSdkVersion    : 19,
-            targetSdkVersion : 28,
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.3",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
             kotlinVersion    : "1.4.0-rc",
             versionCode      : 100,
             versionName      : "1.0.0",
@@ -14,7 +14,7 @@ ext {
     ]
 
     version = [
-            androidSupportSdkVersion: "28.0.0",
+            androidSupportSdkVersion: "29.0.3",
             okhttpSdkVersion        : "4.4.1",
             retrofitSdkVersion      : "2.7.2",
             roomSdkVersion          : "1.1.1",
