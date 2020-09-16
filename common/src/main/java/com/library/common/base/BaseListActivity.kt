@@ -18,6 +18,7 @@ import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.R
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
@@ -358,14 +359,16 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     }
 
     private fun initBar() {
-        ImmersionBar.with(this)
-            .autoStatusBarDarkModeEnable(true)
-            .fitsSystemWindows(true)
-            .statusBarColor(R.color.colorPrimary)
-            .init()
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            fitsSystemWindows(true)
+            statusBarColor(getStatusBarColor())
+        }
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
+
+    open fun getStatusBarColor() = R.color.colorPrimary
 
     /**
      * 设置刷新加载相关

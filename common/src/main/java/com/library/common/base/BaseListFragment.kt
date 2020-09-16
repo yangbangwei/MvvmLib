@@ -2,12 +2,14 @@ package com.library.common.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.gyf.immersionbar.components.SimpleImmersionOwner
+import com.gyf.immersionbar.components.SimpleImmersionProxy
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.R
 import com.library.common.mvvm.BaseListViewModel
 import com.library.common.mvvm.IListView
@@ -37,13 +42,19 @@ import java.lang.reflect.ParameterizedType
  */
 @Suppress("UNCHECKED_CAST")
 abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
-        A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(), IListView<T> {
+        A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(), IListView<T>,
+    SimpleImmersionOwner {
 
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: DB
     protected var mAdapter: A? = null
     protected var mSmartRefreshLayout: SmartRefreshLayout? = null
     protected var mRecyclerView: RecyclerView? = null
+
+    /**
+     * ImmersionBar代理类
+     */
+    private val mSimpleImmersionProxy = SimpleImmersionProxy(this)
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -430,4 +441,50 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         mSmartRefreshLayout?.finishRefresh()
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        @Suppress("DEPRECATION")
+        super.setUserVisibleHint(isVisibleToUser)
+        mSimpleImmersionProxy.isUserVisibleHint = isVisibleToUser
+    }
+
+    override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
+        @Suppress("DEPRECATION")
+        super.onActivityCreated(savedInstanceState)
+        mSimpleImmersionProxy.onActivityCreated(savedInstanceState)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        mSimpleImmersionProxy.onHiddenChanged(hidden)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        mSimpleImmersionProxy.onConfigurationChanged(newConfig)
+    }
+
+    /**
+     * 是否可以实现沉浸式，当为true的时候才可以执行initImmersionBar方法
+     * Immersion bar enabled boolean.
+     *
+     * @return the boolean
+     */
+    override fun immersionBarEnabled()= true
+
+    /**
+     * 沉浸式效果
+     */
+    override fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            statusBarColor(R.color.colorPrimary)
+            fitsSystemWindows(true)
+        }
+    }
+
+    override fun onDestroy() {
+        mSimpleImmersionProxy.onDestroy()
+        dismissDialog()
+        super.onDestroy()
+    }
 }

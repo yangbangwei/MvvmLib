@@ -2,24 +2,19 @@ package com.yangbw.libtest.module.goods
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseListFragment
-import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
-import com.yangbw.libtest.databinding.FragmentDiscoverBinding
-import com.yangbw.libtest.module.discover.newest.NewestAdapter
+import com.yangbw.libtest.databinding.FragmentGoodsBinding
 import kotlinx.android.synthetic.main.fragment_goods.*
-import kotlinx.android.synthetic.main.fragment_goods.recyclerView
-import kotlinx.android.synthetic.main.fragment_goods.smartRefreshLayout
-import kotlinx.android.synthetic.main.fragment_newest.*
 import utils.ActionBarUtils
 
 /**
  * @author yangbw
  * @date
  */
-class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
+class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentGoodsBinding,
         GoodsAdapter, GoodsListData>() {
 
     companion object {
@@ -29,6 +24,14 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, FragmentDiscoverBinding,
     override fun getLayoutId() = R.layout.fragment_goods
 
     override fun getReplaceView(): View = smartRefreshLayout
+
+    override fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            statusBarColor(R.color.white)
+            titleBar(toolbar)
+        }
+    }
 
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout

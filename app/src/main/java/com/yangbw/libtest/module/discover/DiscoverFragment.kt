@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseFragment
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
@@ -15,7 +16,9 @@ import com.yangbw.libtest.module.discover.hot.HotFragment
 import com.yangbw.libtest.module.discover.hot.TabEntity
 import com.yangbw.libtest.module.discover.newest.NewestFragment
 import com.yangbw.libtest.module.discover.recommend.RecommendFragment
+import com.yangbw.libtest.module.goods.GoodsViewModel
 import kotlinx.android.synthetic.main.fragment_discover.*
+import kotlinx.android.synthetic.main.fragment_goods.*
 import kotlinx.android.synthetic.main.layout_main_page_title_bar.*
 
 /**
@@ -36,11 +39,15 @@ class DiscoverFragment : BaseFragment<CommonViewModel, FragmentDiscoverBinding>(
 
     override fun getReplaceView(): View = fragment_discover
 
+    override fun initImmersionBar() {
+        immersionBar {
+            statusBarColor(R.color.main_color)
+            autoStatusBarDarkModeEnable(true)
+            titleBarMarginTop(tabLayout)
+        }
+
+    }
     override fun init(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this)
-            .statusBarDarkFont(false)
-            .titleBar(tabLayout)
-            .init()
         viewPager.offscreenPageLimit = offscreenPageLimit
         viewPager.adapter = VpAdapter(requireActivity()).apply {
             addFragments(

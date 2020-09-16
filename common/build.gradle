@@ -89,6 +89,8 @@ dependencies {
     api rootProject.ext.dependencies["agentweb"]
     //通知栏
     api rootProject.ext.dependencies["immersionbar"]
+    api rootProject.ext.dependencies["immersionbar-components"]
+    api rootProject.ext.dependencies["immersionbar-ktx"]
     //屏幕适配
     api rootProject.ext.dependencies["autosize"]
     //Banner

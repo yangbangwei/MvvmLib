@@ -30,7 +30,7 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
         }
     }
 
-    private lateinit var mId: String
+    private  var mId: String? = null
 
     override fun getLayoutId() = R.layout.activity_details
 
@@ -45,12 +45,16 @@ class DetailsActivity : BaseActivity<DetailsViewModel, ActivityDetailsBinding>()
         mViewModel.mDetails.observe(this, {
             mBinding.detail = it
         })
-        mViewModel.getHomeDetails(mId)
+        mId?.let {
+            mViewModel.getHomeDetails(it)
+        }
     }
 
     override fun getSmartRefreshLayout(): SmartRefreshLayout? = smartRefreshLayout
 
     override fun refreshData() {
-        mViewModel.getHomeDetails(mId)
+        mId?.let {
+            mViewModel.getHomeDetails(it)
+        }
     }
 }

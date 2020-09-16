@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.R
 import com.library.common.mvvm.BaseViewModel
 import com.library.common.mvvm.IView
@@ -87,9 +88,10 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         mViewController = initVaryViewHelperController()
         lifecycle.addObserver(mViewModel)
         registerViewChange()
-        initBar()
+        initImmersionBar()
         initRefresh()
         init(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     /***
@@ -99,17 +101,13 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         return VaryViewHelperController(getReplaceView())
     }
 
-    private fun initBar() {
-        ImmersionBar.with(this)
-            .autoStatusBarDarkModeEnable(true)
-            .fitsSystemWindows(true)
-            .statusBarColor(getStatusBarColor())
-            .init()
-
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    protected open fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            fitsSystemWindows(true)
+            statusBarColor(R.color.colorPrimary)
+        }
     }
-
-    open fun getStatusBarColor() = R.color.colorPrimary
 
     private fun initRefresh() {
         getSmartRefreshLayout()?.run {

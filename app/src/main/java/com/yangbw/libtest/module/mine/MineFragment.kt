@@ -3,6 +3,7 @@ package com.yangbw.libtest.module.mine
 import android.os.Bundle
 import android.view.View
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.extension.setOnClickListener
 import com.yangbw.libtest.R
@@ -32,12 +33,15 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
 
     override fun getReplaceView(): View = fragment_mine
 
+    override fun initImmersionBar() {
+        immersionBar {
+            transparentStatusBar()
+            autoStatusBarDarkModeEnable(false)
+            fitsSystemWindows(false)
+        }
+    }
+
     override fun init(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this)
-            .transparentStatusBar()
-            .statusBarDarkFont(false)
-            .fitsSystemWindows(false)
-            .init()
         mBinding.run {
             ivSet.setOnClickListener {
                 SetActivity.launch(mContext)

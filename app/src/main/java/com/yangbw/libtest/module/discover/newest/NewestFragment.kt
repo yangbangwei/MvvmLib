@@ -24,6 +24,8 @@ class NewestFragment : BaseListFragment<NewestViewModel, FragmentNewestBinding,
 
     override fun getReplaceView(): View = fragment_newest
 
+    override fun immersionBarEnabled() = false
+
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout
         mRecyclerView = recyclerView

@@ -13,6 +13,7 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.utils.GlideUtils
 import com.library.common.utils.LogUtils
@@ -48,12 +49,15 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
 
     override fun getSmartRefreshLayout(): SmartRefreshLayout? = smartRefreshLayout
 
+    override fun initImmersionBar() {
+        immersionBar {
+            transparentStatusBar()
+            autoStatusBarDarkModeEnable(false)
+            fitsSystemWindows(false)
+        }
+    }
+
     override fun init(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this)
-            .transparentStatusBar()
-            .statusBarDarkFont(false)
-            .fitsSystemWindows(false)
-            .init()
         smartRefreshLayout.setRefreshFooter(NoStatusFooter(mContext))
         val layoutManager = VirtualLayoutManager(mContext)
         recyclerView.layoutManager = layoutManager

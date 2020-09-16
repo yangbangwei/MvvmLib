@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseActivity
 import com.library.common.view.IVaryViewHelperController
 import com.shuyu.gsyvideoplayer.GSYVideoManager
@@ -34,7 +35,13 @@ class MenuActivity : BaseActivity<MenuViewModel, ActivityMenuBinding>() {
 
     override fun getReplaceView(): View = activity_menu
 
-    override fun getStatusBarColor() = R.color.black
+    override fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            fitsSystemWindows(true)
+            barColor(R.color.black)
+        }
+    }
 
     /**
      * 自定义相关不同状态展示的view,这里只是修改了loading的效果不同，可根据每个项目的实际情况
@@ -45,10 +52,6 @@ class MenuActivity : BaseActivity<MenuViewModel, ActivityMenuBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        ImmersionBar.with(this)
-            .navigationBarColor(R.color.black)
-            .init()
-
         val adapter = MenuAdapter()
         viewPager.adapter = adapter
         viewPager.orientation = ViewPager2.ORIENTATION_VERTICAL

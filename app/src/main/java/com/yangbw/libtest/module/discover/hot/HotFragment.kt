@@ -23,6 +23,8 @@ class HotFragment : BaseListFragment<HotViewModel, FragmentHotBinding,
 
     override fun getReplaceView(): View = fragment_hot
 
+    override fun immersionBarEnabled() = false
+
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout
         mRecyclerView = recyclerView

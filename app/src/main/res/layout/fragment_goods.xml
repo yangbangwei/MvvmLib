@@ -8,61 +8,18 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/fragment_goods"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            android:background="@color/colorPrimary"
+            style="@style/MToolbar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:theme="@style/ToolbarTheme"
-            app:titleTextAppearance="@style/Toolbar.TitleText">
-
-            <TextView
-                android:id="@+id/tv_left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:maxWidth="@dimen/dp100"
-                android:paddingStart="@dimen/dp15"
-                android:paddingLeft="@dimen/dp15"
-                android:paddingEnd="@dimen/dp15"
-                android:paddingRight="@dimen/dp15"
-                android:singleLine="true"
-                android:textColor="@color/m444444"
-                android:textSize="@dimen/sp28"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="end"
-                android:focusable="true"
-                android:maxWidth="@dimen/dp150"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/sp16" />
-
-            <TextView
-                android:id="@+id/tv_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/dp8"
-                android:layout_marginRight="@dimen/dp8"
-                android:gravity="center"
-                android:paddingLeft="@dimen/dp8"
-                android:paddingRight="@dimen/dp8"
-                android:textColor="@color/m444444"
-                android:textSize="@dimen/sp14"
-                android:visibility="gone" />
+            app:theme="@style/ToolbarTheme">
 
         </androidx.appcompat.widget.Toolbar>
 

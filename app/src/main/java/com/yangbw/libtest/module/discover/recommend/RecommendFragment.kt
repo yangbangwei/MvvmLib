@@ -27,6 +27,8 @@ class RecommendFragment : BaseListFragment<RecommendViewModel, FragmentRecommend
 
     override fun getReplaceView(): View = fragment_recommend
 
+    override fun immersionBarEnabled() = false
+
     override fun initRecyclerView() {
         mSmartRefreshLayout = smartRefreshLayout
         mRecyclerView = recyclerView

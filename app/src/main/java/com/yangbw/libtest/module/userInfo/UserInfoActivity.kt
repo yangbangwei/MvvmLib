@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
 import com.library.common.utils.ActivityUtils
@@ -34,7 +35,13 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
 
     override fun getReplaceView(): View = activity_user_info
 
-    override fun getStatusBarColor() = R.color.white
+    override fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            fitsSystemWindows(true)
+            statusBarColor(com.library.common.R.color.white)
+        }
+    }
 
     override fun init(savedInstanceState: Bundle?) {
         ActionBarUtils.setSupportActionBarWithBack(toolbar, R.mipmap.icon_common_back_black) {

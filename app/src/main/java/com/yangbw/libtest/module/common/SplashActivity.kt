@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseActivity
 import com.permissionx.guolindev.PermissionX
 import com.yangbw.libtest.R
@@ -33,7 +34,13 @@ class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     override fun getReplaceView(): View = activity_splash
 
-    override fun getStatusBarColor() = R.color.white
+    override fun initImmersionBar() {
+        immersionBar {
+            autoStatusBarDarkModeEnable(true)
+            fitsSystemWindows(true)
+            statusBarColor(com.library.common.R.color.white)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
