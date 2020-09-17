@@ -38,15 +38,16 @@
 - [x] 无网络，异常问题
 - [x] 重构网络通用处理部分
 - [x] photoView控件
-- [x] gsyVideoPlayer使用
-- [ ] 弹窗封装
+- [x] gsyVideoPlayer基本使用
+- [x] 封装BaseDialogFragment弹窗，以及CommonDialog提醒。
 - [ ] 工具类整理
 - [ ] 首页仿美团饿了么，多列表效果
 - [ ] 商品页面仿购物类型APP，分类样式
-- [ ] 更新控件
-- [ ] 图片上传控件
+- [ ] 版本更新控件
+- [ ] 图片裁剪上传控件
 - [ ] Paging3使用
 - [ ] 相机功能
+- [ ] 重新整理第三方框架
 - [ ] 单元测试
 - [ ] 功能完善后，将lib提交jCenter,jitPack
 

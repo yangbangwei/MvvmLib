@@ -46,7 +46,7 @@ class CouponFragment : BaseDialogFragment<CouponViewModel, FragmentCouponBinding
                 data.addAll(it)
             }
             couponAdapter.addChildClickViewIds(R.id.btn_get)
-            couponAdapter.setOnItemChildClickListener { adapter, view, position ->
+            couponAdapter.setOnItemChildClickListener { adapter, _, position ->
                 val couponData = adapter.getItem(position) as CouponData
                 showToast(String.format(getString(R.string.get_red_packet_tips), couponData.derate))
             }
