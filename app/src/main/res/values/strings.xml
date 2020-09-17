@@ -52,4 +52,9 @@
 
     <string name="photo_count">%1$d/%2$d</string>
     <string name="halving_line">/</string>
+    <string name="all_get">全部领取</string>
+    <string name="yuan">¥</string>
+    <string name="get">领取</string>
+    <string name="congratulation">恭喜您成功领取红包</string>
+    <string name="get_red_packet_tips">恭喜您成功领取%1$s元红包</string>
 </resources>

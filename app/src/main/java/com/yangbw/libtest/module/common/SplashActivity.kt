@@ -68,7 +68,7 @@ class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
             .onExplainRequestReason { scope, deniedList ->
                 scope.showRequestReasonDialog(
                     deniedList, getString(R.string.set_limits_tips),
-                    getString(R.string.confirm)
+                    getString(R.string.dialog_confirm)
                 )
             }
             .onForwardToSettings { scope, deniedList ->

@@ -18,7 +18,7 @@ import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.databinding.ActivityDetailsBinding
 import kotlinx.android.synthetic.main.activity_web.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import utils.ActionBarUtils
 
 /**

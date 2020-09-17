@@ -15,7 +15,7 @@ import com.yangbw.libtest.databinding.ActivityLoginBinding
 import com.yangbw.libtest.module.common.MainActivity
 import com.yangbw.libtest.module.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import utils.ActionBarUtils
 
 /**
@@ -38,7 +38,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         ActionBarUtils.setCenterTitleText(toolbar, "登录")
-
         mViewModel.mUser.observe(this, {
             it.let {
                 SPUtils.getInstance().put(Constant.TOKEN,it.token)

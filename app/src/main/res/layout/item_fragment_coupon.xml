@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.yangbw.libtest.module.coupon.CouponData" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/shape_blue_4dp_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textView58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/yuan"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp28"
+            app:layout_constraintBottom_toBottomOf="@+id/textView57"
+            app:layout_constraintStart_toEndOf="@+id/textView57"
+            app:layout_constraintTop_toTopOf="@+id/textView57" />
+
+        <View
+            android:id="@+id/view7"
+            style="@style/div_ver"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/textView58"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:text="@{item.derate}"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            tools:text="28" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.deadline}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp12"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView28"
+            app:layout_constraintEnd_toStartOf="@+id/btn_get"
+            app:layout_constraintStart_toStartOf="@+id/textView60"
+            app:layout_constraintTop_toBottomOf="@+id/textView60"
+            tools:text="今天有效" />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@{item.title}"
+            android:textColor="@color/white"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="@dimen/sp14"
+            app:layout_constraintBottom_toTopOf="@+id/textView59"
+            app:layout_constraintEnd_toStartOf="@+id/btn_get"
+            app:layout_constraintStart_toEndOf="@+id/view7"
+            app:layout_constraintTop_toTopOf="@+id/imageView28"
+            tools:text="4周年神券" />
+
+        <Button
+            android:id="@+id/btn_get"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:textSize="@dimen/sp10"
+            android:background="@drawable/shape_mine_bg"
+            android:text="@string/get"
+            android:textColor="@color/main_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView28"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentTransaction
-import com.yangbw.libtest.common.LiveEventBusKey
 import com.blankj.utilcode.util.ToastUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
@@ -14,6 +13,8 @@ import com.library.common.extension.setOnClickListener
 import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
+import com.yangbw.libtest.common.LiveEventBusKey
+import com.yangbw.libtest.module.coupon.CouponFragment
 import com.yangbw.libtest.module.discover.DiscoverFragment
 import com.yangbw.libtest.module.goods.GoodsFragment
 import com.yangbw.libtest.module.home.HomeFragment
@@ -54,14 +55,6 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     override fun getReplaceView(): View = homeActivityFragContainer
 
     override fun init(savedInstanceState: Bundle?) {
-        setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
-            if (this.id == btnMenu.id) {
-                MenuActivity.launch(mActivity)
-            } else {
-                setTabSelection(this.id)
-            }
-        }
-        setTabSelection(btnHome.id)
         //强制登出
         LiveEventBus
             .get(LiveEventBusKey.LOGIN_OUT, String::class.java)
@@ -69,6 +62,22 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
                 ActivityUtils.get()?.finishAll()
                 LoginActivity.launch(mContext)
             })
+        setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
+            if (this.id == btnMenu.id) {
+                MenuActivity.launch(mActivity)
+            } else {
+                setTabSelection(this.id)
+            }
+        }
+        //选中首页
+        setTabSelection(btnHome.id)
+
+        //显示弹窗
+        val couponFragment = CouponFragment.newInstance()
+        couponFragment.setOnOkClickListener {
+            showToast(getString(R.string.congratulation))
+        }
+        couponFragment.show(supportFragmentManager, CouponFragment::javaClass.name)
     }
 
     /**

@@ -12,7 +12,7 @@ import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.ActivityRegisterBinding
 import com.yangbw.libtest.module.login.UserData
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import utils.ActionBarUtils
 
 /**

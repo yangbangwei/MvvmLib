@@ -5,9 +5,10 @@ import android.app.Dialog
 import android.content.Context
 import android.text.TextUtils
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import com.library.common.R
+import com.library.common.extension.gone
+import com.library.common.extension.visible
 
 /**
  * 弹出浮动加载进度条
@@ -15,17 +16,11 @@ import com.library.common.R
  * @author yangbw
  * @date 2020/8/31
  */
-@Suppress("unused")
 class LoadingDialog(private val mContext: Context) {
     /**
      * 加载数据对话框
      */
     private var mLoadingDialog: Dialog? = null
-    private var mIvLoad: ImageView? = null
-
-    fun show() {
-        show(null, false)
-    }
 
     /**
      * 显示加载对话框
@@ -35,9 +30,12 @@ class LoadingDialog(private val mContext: Context) {
      */
     fun show(msg: String?, cancelable: Boolean) {
         val view = View.inflate(mContext, R.layout.dialog_loading, null)
-        val loadingText = view.findViewById<View>(R.id.tv_tips) as TextView
+        val tvTips = view.findViewById<View>(R.id.tv_tips) as TextView
         if (!TextUtils.isEmpty(msg)) {
-            loadingText.text = msg
+            tvTips.text = msg
+            tvTips.visible()
+        } else {
+            tvTips.gone()
         }
         mLoadingDialog = Dialog(mContext, R.style.CustomProgressDialog)
         mLoadingDialog!!.setCancelable(cancelable)
@@ -57,6 +55,11 @@ class LoadingDialog(private val mContext: Context) {
      */
     val isShowing: Boolean
         get() = mLoadingDialog!!.isShowing
+
+    @Suppress("unused")
+    fun show() {
+        show(null, false)
+    }
 
     /**
      * 关闭对话框

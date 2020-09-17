@@ -2,7 +2,6 @@ package com.yangbw.libtest.module.mine
 
 import android.os.Bundle
 import android.view.View
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.base.BaseFragment
 import com.library.common.extension.setOnClickListener

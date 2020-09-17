@@ -1,6 +1,7 @@
 package com.yangbw.libtest.api
 
 import com.yangbw.libtest.common.BaseRes
+import com.yangbw.libtest.module.coupon.CouponData
 import com.yangbw.libtest.module.details.DetailsData
 import com.yangbw.libtest.module.discover.hot.HotListData
 import com.yangbw.libtest.module.discover.newest.NewestListData
@@ -61,4 +62,7 @@ interface ApiService {
     @POST("api/menuList")
     @FormUrlEncoded
     suspend fun menuList(@Field("pageNo") pageNo: Int): BaseRes<List<MenuData>>
+
+    @GET("api/couponList")
+    suspend fun couponList(): BaseRes<List<CouponData>>
 }

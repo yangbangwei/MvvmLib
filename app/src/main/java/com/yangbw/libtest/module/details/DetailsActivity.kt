@@ -10,7 +10,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.ActivityDetailsBinding
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import utils.ActionBarUtils
 
 /**

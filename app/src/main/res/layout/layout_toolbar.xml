@@ -45,12 +45,11 @@
                 android:textSize="@dimen/sp16" />
 
             <TextView
-                android:id="@+id/tv_right"
+                android:id="@+id/tv_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/dp8"
-                android:layout_marginRight="@dimen/dp8"
                 android:gravity="center"
                 android:paddingLeft="@dimen/dp8"
                 android:paddingRight="@dimen/dp8"
