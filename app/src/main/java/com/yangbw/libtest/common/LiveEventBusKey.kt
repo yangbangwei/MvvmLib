@@ -10,6 +10,6 @@ object LiveEventBusKey {
 
     const val LOGIN_OUT = "login_out"
 
-    const val REGISTER_SUC = "register_suc"
+    const val LOGIN_SUC = "login_suc"
 
 }

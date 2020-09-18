@@ -1,4 +1,4 @@
-package com.yangbw.libtest.module.coupon
+package com.yangbw.libtest.dialog.coupon
 
 import androidx.annotation.Keep
 

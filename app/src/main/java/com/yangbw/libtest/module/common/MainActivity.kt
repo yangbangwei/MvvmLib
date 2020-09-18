@@ -14,7 +14,7 @@ import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.common.LiveEventBusKey
-import com.yangbw.libtest.module.coupon.CouponFragment
+import com.yangbw.libtest.dialog.coupon.CouponDialog
 import com.yangbw.libtest.module.discover.DiscoverFragment
 import com.yangbw.libtest.module.goods.GoodsFragment
 import com.yangbw.libtest.module.home.HomeFragment
@@ -73,11 +73,11 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
         setTabSelection(btnHome.id)
 
         //显示弹窗
-        val couponFragment = CouponFragment.newInstance()
+        val couponFragment = CouponDialog.newInstance()
         couponFragment.setOnOkClickListener {
             showToast(getString(R.string.congratulation))
         }
-        couponFragment.show(supportFragmentManager, CouponFragment::javaClass.name)
+//        couponFragment.show(supportFragmentManager, CouponFragment::javaClass.name)
     }
 
     /**

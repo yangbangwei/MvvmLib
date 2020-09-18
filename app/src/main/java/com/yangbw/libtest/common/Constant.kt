@@ -11,7 +11,7 @@ object Constant {
     const val OPEN_LOG: Boolean = true
 
 //        const val BASE_URL: String = "http://111.229.84.169:9090/"
-    const val BASE_URL: String = "http://192.168.1.66:9090/"
+    const val BASE_URL: String = "http://192.168.1.68:9090/"
 
     //接口成功标识符
     const val CODE_SUCCESS: String = "200"

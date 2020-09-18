@@ -81,7 +81,7 @@ class HomeFragment : BaseFragment<HomeViewModel, ViewDataBinding>() {
                 showToast("当前为最新版本")
             }
         })
-        mViewModel.updateVersion(2)
+//        mViewModel.updateVersion(2)
         refreshData()
     }
 

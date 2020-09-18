@@ -1,7 +1,7 @@
 package com.yangbw.libtest.api
 
 import com.yangbw.libtest.common.BaseRes
-import com.yangbw.libtest.module.coupon.CouponData
+import com.yangbw.libtest.dialog.coupon.CouponData
 import com.yangbw.libtest.module.details.DetailsData
 import com.yangbw.libtest.module.discover.hot.HotListData
 import com.yangbw.libtest.module.discover.newest.NewestListData
@@ -20,6 +20,18 @@ import retrofit2.http.*
  * @date 2020-03-16.
  */
 interface ApiService {
+
+    @POST("api/loginByPhone")
+    @FormUrlEncoded
+    suspend fun loginByPhone(
+        @Field("phone") phone: String
+    ): BaseRes<UserData>
+
+    @POST("api/sendCode")
+    @FormUrlEncoded
+    suspend fun sendCode(
+        @Field("phone") phone: String
+    ): BaseRes<UserData>
 
     @POST("api/login")
     @FormUrlEncoded

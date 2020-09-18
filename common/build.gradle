@@ -102,4 +102,7 @@ dependencies {
     //图片缩放
     api rootProject.ext.dependencies["photoView"]
 }
+repositories {
+    mavenCentral()
+}
 

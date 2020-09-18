@@ -40,6 +40,7 @@
 - [x] photoView控件
 - [x] gsyVideoPlayer基本使用
 - [x] 封装BaseDialogFragment弹窗，以及CommonDialog提醒。
+- [ ] BUG收集
 - [ ] 工具类整理
 - [ ] 首页仿美团饿了么，多列表效果
 - [ ] 商品页面仿购物类型APP，分类样式
@@ -54,6 +55,7 @@
 ## 常用开发平台封装
 - [ ] ShareSdk
 - [ ] 个推
+- [ ] 热修补
 - [ ] 等等
 
 ## 模板功能使用

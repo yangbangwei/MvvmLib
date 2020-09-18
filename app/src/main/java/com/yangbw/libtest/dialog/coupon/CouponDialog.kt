@@ -1,11 +1,11 @@
-package com.yangbw.libtest.module.coupon
+package com.yangbw.libtest.dialog.coupon
 
 import android.os.Bundle
 import android.view.Gravity
 import com.library.common.base.BaseDialogFragment
 import com.yangbw.libtest.R
-import com.yangbw.libtest.databinding.FragmentCouponBinding
-import kotlinx.android.synthetic.main.fragment_coupon.*
+import com.yangbw.libtest.databinding.DialogCouponBinding
+import kotlinx.android.synthetic.main.dialog_coupon.*
 
 /**
  *
@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.fragment_coupon.*
  * @author :yangbw
  * @date :2020/9/17
  */
-class CouponFragment : BaseDialogFragment<CouponViewModel, FragmentCouponBinding>() {
+class CouponDialog : BaseDialogFragment<CouponViewModel, DialogCouponBinding>() {
 
     companion object {
-        fun newInstance() = CouponFragment()
+        fun newInstance() = CouponDialog()
     }
 
-    override fun getLayoutId() = R.layout.fragment_coupon
+    override fun getLayoutId() = R.layout.dialog_coupon
 
     override fun init(savedInstanceState: Bundle?) {
         //基本配置

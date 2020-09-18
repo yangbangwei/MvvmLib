@@ -21,6 +21,10 @@ import okhttp3.logging.HttpLoggingInterceptor
  */
 class App : BaseApplication() {
 
+    companion object {
+        lateinit var context: Context
+    }
+
     init {
 
         //设置全局的Header构建器
@@ -36,6 +40,7 @@ class App : BaseApplication() {
     }
 
     override fun initConfig() {
+        context = this
         AppConfig.builder()
             //单地址和多地址设置
             .setBaseUrl(Constant.BASE_URL)

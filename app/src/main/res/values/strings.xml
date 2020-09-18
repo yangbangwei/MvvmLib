@@ -57,4 +57,16 @@
     <string name="get">领取</string>
     <string name="congratulation">恭喜您成功领取红包</string>
     <string name="get_red_packet_tips">恭喜您成功领取%1$s元红包</string>
+    <string name="login_welcome">欢迎来到朴朴</string>
+    <string name="login_on_login_button">本机号码一键登录</string>
+    <string name="login_agreement">已认真阅读并同意中国移动认证服务条款和朴朴用户协议、隐私协议并使用本机号码登录</string>
+    <string name="china_mobile_agreement">中国移动提供认证服务</string>
+    <string name="other_account">社交账号登录</string>
+    <string name="other_account_register_login">其他号码登录/注册</string>
+    <string name="logining">登录中</string>
+    <string name="service_tips">客服小姐姐，还未上线哦</string>
+    <string name="wchat_login_tips">暂不支持微信登录</string>
+    <string name="login_suc">登录成功</string>
+    <string name="disagree">不同意</string>
+    <string name="agree">同意</string>
 </resources>

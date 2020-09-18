@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.yangbw.libtest.module.coupon.CouponData" />
+            type="com.yangbw.libtest.dialog.coupon.CouponData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

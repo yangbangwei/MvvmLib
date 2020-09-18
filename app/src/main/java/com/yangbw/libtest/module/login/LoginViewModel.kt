@@ -3,6 +3,8 @@ package com.yangbw.libtest.module.login
 import androidx.lifecycle.MutableLiveData
 import com.library.common.em.RequestDisplay
 import com.library.common.mvvm.BaseViewModel
+import com.yangbw.libtest.App
+import com.yangbw.libtest.R
 import com.yangbw.libtest.api.ApiService
 
 /**
@@ -17,16 +19,16 @@ class LoginViewModel : BaseViewModel<ApiService>() {
 
     }
 
-    fun login(username: String, password: String) {
+    fun login(phone: String) {
         launchOnlyResult(
             block = {
-                getApiService().login(username, password)
+                getApiService().loginByPhone(phone)
             },
             success = {
                 mUser.value = it
             },
             type = RequestDisplay.TOAST,
-            msg = "登录中"
+            msg = App.context.getString(R.string.logining)
         )
     }
 }

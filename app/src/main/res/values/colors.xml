@@ -17,6 +17,7 @@
     <color name="bg_default">#F9F9F9</color>
 
     <color name="text_gray">#AFAFAF</color>
+    <color name="text_black">#000000</color>
     <color name="text_red">#FC363E</color>
 
     <color name="mEEFAF0">#EEFAF0</color>
