@@ -43,8 +43,6 @@ class SetActivity : BaseActivity<SetViewModel, ActivitySetBinding>() {
             finish()
         }
         ActionBarUtils.setToolBarTitleText(toolbar, getString(R.string.set))
-
-
     }
 
 }

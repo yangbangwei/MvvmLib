@@ -8,10 +8,12 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
+import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivityLoginBinding
 import com.yangbw.libtest.dialog.LoginDialog
+import com.yangbw.libtest.module.register.PhoneActivity
 import com.yangbw.libtest.utils.CommonUtils
 import com.yangbw.libtest.utils.UserInfoUtils
 import kotlinx.android.synthetic.main.activity_login.*
@@ -63,7 +65,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                     }
                     ivWchat -> showToast(context.getString(R.string.wchat_login_tips))
                     tvOther -> {
-
+                        PhoneActivity.launch(mContext)
                     }
                 }
             }
@@ -76,11 +78,17 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                 UserInfoUtils.setUser(it)
                 showToast(getString(R.string.login_suc))
                 //发送广播
-                LiveEventBus.get(LiveEventBusKey.LOGIN_SUC).post(it)
+                LiveEventBus.get(LiveEventBusKey.LOGIN_SUC)
+                    .post(it)
                 finish()
             }
 
         })
+        //短信验证码登录成功，关闭该页面
+        LiveEventBus.get(LiveEventBusKey.LOGIN_SUC, UserData::class.java)
+            .observe(this, {
+                finish()
+            })
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yangbw.libtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,13 +9,15 @@
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher_new"
         android:label="@string/app_name"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_new"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        tools:targetApi="n">
         <activity android:name=".module.common.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,23 +31,21 @@
         <activity android:name=".module.userInfo.UserInfoActivity" />
         <activity android:name=".module.details.DetailsActivity" />
         <activity android:name=".module.login.LoginActivity" />
-        <activity android:name=".module.register.RegisterActivity" />
+        <activity android:name=".module.register.PhoneActivity" />
         <activity android:name=".module.common.MainActivity" />
+        <activity android:name=".module.register.CodeActivity" />
         <activity
             android:name=".module.common.WebActivity"
-            android:launchMode="singleTop" />
-        <!-- 屏幕适配 -->
+            android:launchMode="singleTop" /> <!-- 屏幕适配 -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
         <meta-data
             android:name="design_height_in_dp"
-            android:value="640" />
-        <!--适配华为（huawei）刘海屏-->
+            android:value="640" /> <!-- 适配华为（huawei）刘海屏 -->
         <meta-data
             android:name="android.notch_support"
-            android:value="true"/>
-        <!--适配小米（xiaomi）刘海屏-->
+            android:value="true" /> <!-- 适配小米（xiaomi）刘海屏 -->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />

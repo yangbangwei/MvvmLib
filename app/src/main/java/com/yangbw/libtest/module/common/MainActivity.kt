@@ -55,13 +55,6 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
     override fun getReplaceView(): View = homeActivityFragContainer
 
     override fun init(savedInstanceState: Bundle?) {
-        //强制登出
-        LiveEventBus
-            .get(LiveEventBusKey.LOGIN_OUT, String::class.java)
-            .observe(this, {
-                ActivityUtils.get()?.finishAll()
-                LoginActivity.launch(mContext)
-            })
         setOnClickListener(btnHome, btnDiscover, btnMine, btnGoods, btnMenu) {
             if (this.id == btnMenu.id) {
                 MenuActivity.launch(mActivity)

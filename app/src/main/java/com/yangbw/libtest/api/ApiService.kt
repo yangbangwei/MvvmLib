@@ -31,21 +31,14 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun sendCode(
         @Field("phone") phone: String
-    ): BaseRes<UserData>
+    ): BaseRes<String>
 
     @POST("api/login")
     @FormUrlEncoded
     suspend fun login(
-        @Field("username") username: String,
-        @Field("password") password: String
+        @Field("phone") username: String,
+        @Field("code") code: String
     ): BaseRes<UserData>
-
-    @POST("api/register")
-    @FormUrlEncoded
-    suspend fun register(
-        @Field("username") username: String,
-        @Field("password") password: String
-    ): BaseRes<String>
 
     @GET("api/banners")
     suspend fun banners(): BaseRes<List<BannerInfo>>

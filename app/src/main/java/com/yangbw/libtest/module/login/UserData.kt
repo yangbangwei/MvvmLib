@@ -8,11 +8,12 @@ import androidx.annotation.Keep
  */
 @Keep
 data class UserData constructor(
-    val id: Long?,
-    val password: String?,
-    val username: String?,
-    val token: String?
-) {
-    constructor(password: String, username: String) : this(null, password, username, null)
-}
+    val id: Long,
+    val password: String,
+    val username: String,
+    val phone: String?,
+    val wechat: String?,
+    val avatar: String?,
+    val token: String
+)
 

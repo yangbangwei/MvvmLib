@@ -5,12 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
-import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
+import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivityUserInfoBinding
-import com.yangbw.libtest.module.login.LoginActivity
+import com.yangbw.libtest.utils.UserInfoUtils
 import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.android.synthetic.main.layout_set_toolbar.*
 import utils.ActionBarUtils
@@ -47,7 +48,7 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
         ActionBarUtils.setSupportActionBarWithBack(toolbar, R.mipmap.icon_common_back_black) {
             finish()
         }
-        ActionBarUtils.setToolBarTitleText(toolbar, "账号管理")
+        ActionBarUtils.setToolBarTitleText(toolbar, getString(R.string.user_manager))
         //点击事件
         mBinding.run {
             setOnClickListener(groupWeixin, groupAvatar, groupName, groupPhone, tvExit) {
@@ -61,15 +62,19 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
                     groupPhone -> {
                     }
                     tvExit -> {
-                        ActivityUtils.get()?.finishAll()
-                        LoginActivity.launch(mContext)
+                        UserInfoUtils.logout()
+                        //退出登录广播
+                        LiveEventBus
+                            .get(LiveEventBusKey.LOGIN_OUT)
+                            .post("")
+                        finish()
                     }
                     tvLogout -> {
 
                     }
                 }
             }
+            mBinding.data = UserInfoUtils.getUser()
         }
     }
-
 }

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription">
 
     <data>
 
+        <variable
+            name="data"
+            type="com.yangbw.libtest.module.login.UserData" />
 
     </data>
 
@@ -12,13 +17,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/layout_set_toolbar"/>
+        <include layout="@layout/layout_set_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_user_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
@@ -36,8 +40,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:layout_marginLeft="14dp"
-                    android:text="头像"
+                    android:text="@string/avatar"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_img"
                     app:layout_constraintEnd_toStartOf="@+id/iv_img"
                     app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +51,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_img"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/iv_img"
@@ -56,11 +58,11 @@
 
                 <ImageView
                     android:id="@+id/iv_img"
+                    loadCircleImage="@{data.avatar}"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     app:layout_constraintEnd_toStartOf="@+id/imageView8"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@mipmap/default_avatar_header" />
@@ -86,9 +88,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:layout_marginLeft="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="昵称"
+                    android:text="@string/nickname"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -97,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="杨大帅"
+                    android:text="@{data.username}"
                     android:textColor="@color/text_gray"
                     app:layout_constraintStart_toStartOf="@+id/textView19"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -107,8 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="修改"
+                    android:text="@string/change"
                     android:textColor="@color/text_gray"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                     app:layout_constraintEnd_toStartOf="@+id/imageView9"
@@ -119,7 +119,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView19"
@@ -146,9 +145,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:layout_marginLeft="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="手机号"
+                    android:text="@string/phone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view1" />
 
@@ -157,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="188****2727"
+                    android:text="@{data.phone,default=暂无}"
                     android:textColor="@color/text_gray"
                     app:layout_constraintStart_toStartOf="@+id/textView25"
                     app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -167,8 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="修改"
+                    android:text="@string/change"
                     android:textColor="@color/text_gray"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_phone"
                     app:layout_constraintEnd_toStartOf="@+id/imageView10"
@@ -179,7 +176,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_phone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView25"
@@ -206,9 +202,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="14dp"
-                    android:layout_marginLeft="14dp"
                     android:layout_marginTop="14dp"
-                    android:text="微信"
+                    android:text="@string/wechat"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view2" />
 
@@ -218,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="14dp"
-                    android:text="杨大帅"
+                    android:text="@{data.wechat,default=暂无}"
                     android:textColor="@color/text_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView29"
@@ -229,7 +224,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_weixin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView29"
@@ -240,8 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="解绑"
+                    android:text="@string/unbind"
                     android:textColor="@color/text_gray"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_weixin"
                     app:layout_constraintEnd_toStartOf="@+id/imageView11"
@@ -266,7 +259,7 @@
                 android:background="@color/white"
                 android:gravity="center"
                 android:padding="17dp"
-                android:text="退出登录"
+                android:text="@string/exit_login"
                 android:textColor="@color/text_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -277,7 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:text="申请注销账号"
+                android:text="@string/apply_to_logout"
                 android:textColor="@color/text_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView12"
@@ -290,7 +283,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_logout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

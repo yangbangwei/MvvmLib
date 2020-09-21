@@ -3,11 +3,14 @@ package com.yangbw.libtest.module.mine
 import android.os.Bundle
 import android.view.View
 import com.gyf.immersionbar.ktx.immersionBar
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseFragment
 import com.library.common.extension.setOnClickListener
 import com.yangbw.libtest.R
+import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.FragmentMineBinding
 import com.yangbw.libtest.module.login.LoginActivity
+import com.yangbw.libtest.module.login.UserData
 import com.yangbw.libtest.module.msg.MsgActivity
 import com.yangbw.libtest.module.set.SetActivity
 import com.yangbw.libtest.module.userInfo.UserInfoActivity
@@ -79,8 +82,23 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
         }
 
         mBinding.mineData = MineData(getString(R.string.login_tips), null, "-", "-", "-", null)
-
         mViewModel.onStart()
+
+        //登录成功刷新页面
+        LiveEventBus.get(LiveEventBusKey.LOGIN_SUC, UserData::class.java)
+            .observe(this, {
+                mViewModel.onStart()
+            })
+
+        //退出登录
+        LiveEventBus
+            .get(LiveEventBusKey.LOGIN_OUT, String::class.java)
+            .observe(this, {
+                mBinding.ivImg.setImageResource(R.mipmap.default_avatar_header)
+                mBinding.mineData =
+                    MineData(getString(R.string.login_tips), null, "-", "-", "-", null)
+                mViewModel.onStart()
+            })
     }
 
 }

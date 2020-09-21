@@ -185,7 +185,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                     response.getBaseMsg()
                 )
                 //判断状态码是否包含
-                if (!retSuccessList.equals(response.getBaseCode())) {
+                if (!retSuccessList.contains(response.getBaseCode())) {
                     //抛出状态码错误异常
                     throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
                 }
