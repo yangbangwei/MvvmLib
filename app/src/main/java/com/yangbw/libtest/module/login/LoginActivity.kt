@@ -8,12 +8,10 @@ import com.gyf.immersionbar.ktx.immersionBar
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
-import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivityLoginBinding
 import com.yangbw.libtest.dialog.LoginDialog
-import com.yangbw.libtest.module.register.PhoneActivity
 import com.yangbw.libtest.utils.CommonUtils
 import com.yangbw.libtest.utils.UserInfoUtils
 import kotlinx.android.synthetic.main.activity_login.*

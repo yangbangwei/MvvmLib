@@ -48,9 +48,11 @@
             android:text="@{mineData.name}"
             android:textColor="@color/white"
             android:textSize="@dimen/sp18"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_img"
             app:layout_constraintStart_toEndOf="@+id/iv_img"
-            app:layout_constraintTop_toTopOf="@+id/iv_img" />
+            app:layout_constraintTop_toTopOf="@+id/iv_img"
+            tools:text="杨大帅" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -60,7 +62,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_name"
             app:layout_constraintStart_toEndOf="@+id/tv_name"
             app:layout_constraintTop_toTopOf="@+id/tv_name"
-            app:srcCompat="@mipmap/ic_arrow_right_white" />
+            app:srcCompat="@mipmap/icon_arrow_right_white_big" />
 
         <ImageView
             android:id="@+id/iv_msg"

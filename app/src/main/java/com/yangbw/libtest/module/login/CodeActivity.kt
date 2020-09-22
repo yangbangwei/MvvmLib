@@ -1,4 +1,4 @@
-package com.yangbw.libtest.module.register
+package com.yangbw.libtest.module.login
 
 import android.content.Context
 import android.content.Intent
@@ -167,8 +167,8 @@ class CodeActivity : BaseActivity<CodeViewModel, ActivityCodeBinding>() {
 
             })
 
-            etNum2.setOnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            etNum2.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
                     if (TextUtils.isEmpty(etNum2.text.toString())) {
                         etNum1.requestFocus()
                         etNum1.text.clear()
@@ -178,8 +178,8 @@ class CodeActivity : BaseActivity<CodeViewModel, ActivityCodeBinding>() {
                 }
                 true
             }
-            etNum3.setOnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            etNum3.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
                     if (TextUtils.isEmpty(etNum3.text.toString())) {
                         etNum2.text.clear()
                         etNum2.requestFocus()
@@ -189,8 +189,8 @@ class CodeActivity : BaseActivity<CodeViewModel, ActivityCodeBinding>() {
                 }
                 true
             }
-            etNum4.setOnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            etNum4.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
                     if (TextUtils.isEmpty(etNum4.text.toString())) {
                         btnLogin.isEnabled = false
                         etNum3.text.clear()

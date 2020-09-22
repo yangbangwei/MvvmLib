@@ -29,9 +29,7 @@ interface ApiService {
 
     @POST("api/sendCode")
     @FormUrlEncoded
-    suspend fun sendCode(
-        @Field("phone") phone: String
-    ): BaseRes<String>
+    suspend fun sendCode(@Field("phone") phone: String? = null): BaseRes<String>
 
     @POST("api/login")
     @FormUrlEncoded
@@ -39,6 +37,10 @@ interface ApiService {
         @Field("phone") username: String,
         @Field("code") code: String
     ): BaseRes<UserData>
+
+    @POST("api/verifyCode")
+    @FormUrlEncoded
+    suspend fun verifyCode(@Field("code") code: String): BaseRes<String>
 
     @GET("api/banners")
     suspend fun banners(): BaseRes<List<BannerInfo>>
@@ -70,4 +72,8 @@ interface ApiService {
 
     @GET("api/couponList")
     suspend fun couponList(): BaseRes<List<CouponData>>
+
+    @POST("api/changeName")
+    @FormUrlEncoded
+    suspend fun changeName(@Field("name") username: String): BaseRes<String>
 }

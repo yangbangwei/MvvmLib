@@ -1,5 +1,4 @@
 @file:Suppress("unused")
-
 package com.library.common.extension
 
 import com.library.common.base.BaseApplication

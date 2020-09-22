@@ -1,4 +1,4 @@
-package com.yangbw.libtest.module.register
+package com.yangbw.libtest.module.login
 
 import androidx.lifecycle.MutableLiveData
 import com.library.common.em.RequestDisplay

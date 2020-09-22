@@ -1,9 +1,7 @@
 @file:Suppress("unused")
-
 package com.library.common.extension
 
 import android.view.View
-
 
 /**
  * 批量设置控件点击事件。

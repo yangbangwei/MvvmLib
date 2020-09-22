@@ -31,9 +31,14 @@
         <activity android:name=".module.userInfo.UserInfoActivity" />
         <activity android:name=".module.details.DetailsActivity" />
         <activity android:name=".module.login.LoginActivity" />
-        <activity android:name=".module.register.PhoneActivity" />
+        <activity android:name=".module.login.PhoneActivity" />
         <activity android:name=".module.common.MainActivity" />
-        <activity android:name=".module.register.CodeActivity" />
+        <activity android:name=".module.login.CodeActivity" />
+        <activity android:name=".module.userInfo.ChangePhoneActivity" />
+        <activity android:name=".module.userInfo.NewPhoneActivity"/>
+        <activity
+            android:name=".module.userInfo.ChangeNameActivity"
+            android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".module.common.WebActivity"
             android:launchMode="singleTop" /> <!-- 屏幕适配 -->

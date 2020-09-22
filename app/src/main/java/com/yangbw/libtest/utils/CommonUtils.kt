@@ -33,7 +33,7 @@ class CommonUtils {
             context: Context,
             tvAgreement: TextView,
             colorResId: Int = R.color.blue,
-            isUnderLine: Boolean = false
+            isUnderLine: Boolean = false,
         ) {
             //协议样式布局
             val builder = SpannableStringBuilder(tvAgreement.text)
@@ -98,6 +98,29 @@ class CommonUtils {
         }
 
         /**
+         * 设置部分文字颜色，点击事件
+         */
+        fun setTextColorClick(
+            context: Context, textView: TextView, start: Int, end: Int,
+            colorResId: Int = R.color.main_color, clickableSpan: ClickableSpan,
+        ) {
+            //协议样式布局
+            val builder = SpannableStringBuilder(textView.text)
+            //单独设置字体颜色
+            builder.setSpan(
+                ForegroundColorSpan(ContextCompat.getColor(context, colorResId)),
+                start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            builder.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            //去掉点击后文字的背景色 (不去掉回有默认背景色)
+            textView.highlightColor = Color.parseColor("#00000000")
+            //不设置不生效
+            textView.movementMethod = LinkMovementMethod.getInstance()
+            textView.text = builder
+        }
+
+
+        /**
          * 如果输入法在窗口上已经显示，则隐藏，反之则显示
          */
         fun showOrHide(context: Context) {
@@ -125,15 +148,6 @@ class CommonUtils {
                     activity.currentFocus!!.windowToken,
                     InputMethodManager.HIDE_NOT_ALWAYS
                 )
-        }
-
-        /**
-         * 获取输入法打开的状态
-         */
-        fun isShowing(context: Context): Boolean {
-            val imm: InputMethodManager =
-                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            return imm.isActive() //isOpen若返回true，则表示输入法打开
         }
     }
 }

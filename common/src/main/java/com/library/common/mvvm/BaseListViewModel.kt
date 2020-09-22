@@ -24,7 +24,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
     /**
      * 对于list的不同展示
      */
-    var mResult: MutableLiveData<*>? = null
+    var mListData: MutableLiveData<*>? = null
 
     /**
      * 过滤请求结果，其他全抛异常
@@ -76,7 +76,12 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
                     //接口成功返回
-                    executeResponse(pageNo, res, currentDomainName) { success(it) }
+                    executeResponse(pageNo, res, currentDomainName) {
+                        //成功回调成功
+                        mResult.value = true
+                        //自定义成功处理
+                        success(it)
+                    }
                 },
                 {
                     //通用异常处理
@@ -100,6 +105,8 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                             }
                         }
                     }
+                    //失败回调通知
+                    mResult.value = false
                     //自定义异常处理
                     error(it)
                 },
@@ -143,7 +150,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                         } else {
                             //列表接口数据赋值
                             if (pageNo != -1) {
-                                mResult?.value = response.getBaseResult()
+                                mListData?.value = response.getBaseResult()
                             }
                             success(response.getBaseResult())
                             if (pageNo == 1) {
@@ -180,7 +187,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                     } else {
                         //列表接口数据赋值
                         if (pageNo != -1) {
-                            mResult?.value = response.getBaseResult()
+                            mListData?.value = response.getBaseResult()
                         }
                         success(response.getBaseResult())
                         if (pageNo == 1) {
@@ -212,7 +219,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                     } else {
                         //列表接口数据赋值
                         if (pageNo != -1) {
-                            mResult?.value = response.getBaseResult()
+                            mListData?.value = response.getBaseResult()
                         }
                         success(response.getBaseResult())
                         if (pageNo == 1) {

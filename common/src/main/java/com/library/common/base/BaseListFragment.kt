@@ -184,9 +184,9 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 接口请求的数据变化
      */
     private fun registerDataChange() {
-        mViewModel.mResult = MutableLiveData<T>()
+        mViewModel.mListData = MutableLiveData<T>()
         //数据变化的监听
-        mViewModel.mResult?.observe(viewLifecycleOwner, {
+        mViewModel.mListData?.observe(viewLifecycleOwner, {
             showListData(it as MutableList<T>, mPageNum)
         })
     }

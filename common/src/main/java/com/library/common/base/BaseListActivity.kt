@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.R
 import com.library.common.mvvm.BaseListViewModel
@@ -184,9 +183,9 @@ abstract class BaseListActivity<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 接口请求的数据变化
      */
     private fun registerDataChange() {
-        mViewModel.mResult = MutableLiveData<T>()
+        mViewModel.mListData = MutableLiveData<T>()
         //数据变化的监听
-        mViewModel.mResult?.observe(this, {
+        mViewModel.mListData?.observe(this, {
             showListData(it as MutableList<T>, mPageNum)
         })
     }

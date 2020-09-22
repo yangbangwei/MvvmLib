@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/shape_readme_able" android:state_enabled="true" />
+    <item android:drawable="@drawable/shape_readme_disable" />
+</selector>

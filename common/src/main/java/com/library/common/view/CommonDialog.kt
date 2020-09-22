@@ -78,7 +78,7 @@ class CommonDialog(builder: Builder) {
             mTvLeft.text = mNegativeButtonText
             mTvLeft.setOnClickListener {
                 mDialog.dismiss()
-                mNegativeButtonListener!!.onClick(mDialog, 0)
+                mNegativeButtonListener?.onClick(mDialog, 0)
             }
         } else {
             mTvLeft.visibility = View.GONE

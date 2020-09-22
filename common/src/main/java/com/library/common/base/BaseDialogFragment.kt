@@ -136,7 +136,10 @@ abstract class BaseDialogFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> :
             params?.gravity = mGravity
             // 如果不设置宽度,那么即使你在布局中设置宽度为 match_parent 也不会起作用
             params?.width = (resources.displayMetrics.widthPixels * mWidth).toInt()
-            params?.height = (resources.displayMetrics.heightPixels * mHeight).toInt()
+            // 1.0f时为自适应高度
+            if (mHeight != 1.0f) {
+                params?.height = (resources.displayMetrics.heightPixels * mHeight).toInt()
+            }
             window?.attributes = params
             //是否能关闭
             isCancelable = mIsCancelable

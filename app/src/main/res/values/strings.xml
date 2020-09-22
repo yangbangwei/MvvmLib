@@ -87,4 +87,34 @@
     <string name="exit_login">退出登录</string>
     <string name="unbind">解绑</string>
     <string name="wechat">微信</string>
+    <string name="msg_center">消息中心</string>
+    <string name="online_server">在线客服</string>
+    <string name="msg_sys">系统消息</string>
+    <string name="no_msg">暂无新消息</string>
+    <string name="one">1</string>
+    <string name="promotion_des"><![CDATA[16点秒杀价->蒙牛红枣酸奶低至0.99元]]></string>
+    <string name="msg_promotion">促销活动</string>
+    <string name="msg_money">我的资产</string>
+    <string name="msg_goods">到货提醒</string>
+    <string name="order_arrive">订单已签收</string>
+    <string name="msg_order">订单消息</string>
+    <string name="with_server_msg">查看与客服的沟通记录</string>
+    <string name="fun_no_support">功能暂未实现，敬请期待</string>
+    <string name="exit_tips">确定退出登录？</string>
+    <string name="affirm_save">确认保存</string>
+    <string name="change_suc">修改成功</string>
+    <string name="change_name">修改昵称</string>
+    <string name="change_tips">请输入用户昵称</string>
+    <string name="old_phone">原手机号</string>
+    <string name="phone_code">验证码</string>
+    <string name="send_phone_code">获取验证码</string>
+    <string name="voice_code">收不到验证码？使用语言验证码</string>
+    <string name="phone_no_use">若当前手机号不再使用，请联系在线客服</string>
+    <string name="check_old_phone">验证原手机号</string>
+    <string name="check_bind_phone">验证后绑定新手机号</string>
+
+    <string name="change_send_code_able">重新发送(%1$ds)</string>
+    <string name="warn_tips">温馨提示</string>
+    <string name="logout_tips">您的优惠券、礼品卡、账户余额、邀请好友数量，收藏等数据将失效，且不可恢复。因您已有订单记录，申请注销将转由客服人工审核，确认提交注销申请?</string>
+    <string name="i_have_read">我已阅读</string>
 </resources>

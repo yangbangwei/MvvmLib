@@ -8,5 +8,5 @@
     <string name="no_suc_code">未设置成功状态码</string>
     <string name="dialog_tips">提示</string>
     <string name="dialog_cancel">取消</string>
-    <string name="dialog_confirm">确认</string>
+    <string name="dialog_confirm">确定</string>
 </resources>

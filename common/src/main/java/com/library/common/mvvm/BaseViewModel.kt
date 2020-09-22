@@ -2,6 +2,7 @@ package com.library.common.mvvm
 
 import android.view.View
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.NetworkUtils
@@ -34,6 +35,11 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     protected val errorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error) }
     protected val codeNullMsg: String by lazy { BaseApplication.context.getString(R.string.no_suc_code) }
     protected val serverErrorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error_please_refresh) }
+
+    /**
+     * 每次请求结果，成功true，失败false
+     */
+    val mResult = MutableLiveData<Boolean>()
 
     /**
      * 重试的监听
@@ -125,6 +131,9 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                 { res ->
                     //接口成功返回
                     executeResponse(res, currentDomainName) {
+                        //成功回调成功
+                        mResult.value = true
+                        //自定义成功处理
                         success(it)
                     }
                 },
@@ -147,6 +156,8 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                             }
                         }
                     }
+                    //失败回调通知
+                    mResult.value = false
                     //自定义异常处理
                     error(it)
                 },

@@ -1,4 +1,4 @@
-package com.yangbw.libtest.module.register
+package com.yangbw.libtest.module.login
 
 import android.content.Context
 import android.content.Intent
@@ -25,7 +25,6 @@ import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivityPhoneBinding
 import com.yangbw.libtest.module.common.WebActivity
-import com.yangbw.libtest.module.login.UserData
 import kotlinx.android.synthetic.main.activity_phone.*
 import android.text.TextWatcher as TextWatcher1
 

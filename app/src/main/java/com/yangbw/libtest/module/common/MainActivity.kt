@@ -7,18 +7,14 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentTransaction
 import com.blankj.utilcode.util.ToastUtils
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
-import com.library.common.utils.ActivityUtils
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
-import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.dialog.coupon.CouponDialog
 import com.yangbw.libtest.module.discover.DiscoverFragment
 import com.yangbw.libtest.module.goods.GoodsFragment
 import com.yangbw.libtest.module.home.HomeFragment
-import com.yangbw.libtest.module.login.LoginActivity
 import com.yangbw.libtest.module.menu.MenuActivity
 import com.yangbw.libtest.module.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -66,11 +62,11 @@ class MainActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
         setTabSelection(btnHome.id)
 
         //显示弹窗
-        val couponFragment = CouponDialog.newInstance()
-        couponFragment.setOnOkClickListener {
+        val couponDialog = CouponDialog.newInstance()
+        couponDialog.setOnOkClickListener {
             showToast(getString(R.string.congratulation))
         }
-//        couponFragment.show(supportFragmentManager, CouponFragment::javaClass.name)
+        couponDialog.show(supportFragmentManager, CouponDialog::javaClass.name)
     }
 
     /**
