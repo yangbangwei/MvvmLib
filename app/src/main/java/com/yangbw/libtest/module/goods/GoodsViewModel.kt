@@ -7,10 +7,4 @@ import com.yangbw.libtest.api.ApiService
  * @author yangbw
  * @date
  */
-class GoodsViewModel : BaseListViewModel<ApiService>() {
-
-    public override fun onStart() {
-
-    }
-
-}
+class GoodsViewModel : BaseListViewModel<ApiService>()

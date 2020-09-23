@@ -14,7 +14,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import com.androidadvance.topsnackbar.TSnackbar
 import com.blankj.utilcode.util.ToastUtils
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.library.common.R
 import com.library.common.mvvm.BaseViewModel
@@ -168,7 +167,7 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewState.dismissDialog.observe(this, {
+        mViewModel.viewState.dismissDialogProgress.observe(this, {
             dismissDialog()
         })
         mViewModel.viewState.showToast.observe(this, {
@@ -180,8 +179,8 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
         mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewState.showNetworkError.observe(this, {
-            showNetworkError(it, mViewModel.listener)
+        mViewModel.viewState.showError.observe(this, {
+            showError(it, mViewModel.listener)
         })
         mViewModel.viewState.restore.observe(this, {
             mViewController?.restore()
@@ -266,15 +265,15 @@ abstract class BaseActivity<VM : BaseViewModel<*>, DB : ViewDataBinding> : AppCo
     /**
      * 网络错误
      */
-    override fun showNetworkError(listener: View.OnClickListener?) {
-        mViewController?.showNetworkError(listener)
+    override fun showError(listener: View.OnClickListener?) {
+        mViewController?.showError(listener)
     }
 
     /**
      * 网络错误
      */
-    override fun showNetworkError(msg: String?, listener: View.OnClickListener?) {
-        mViewController?.showNetworkError(msg, listener)
+    override fun showError(msg: String?, listener: View.OnClickListener?) {
+        mViewController?.showError(msg, listener)
     }
 
     /**

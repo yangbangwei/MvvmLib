@@ -4,7 +4,6 @@ import androidx.annotation.Keep
 
 /**
  * @author yangbw
- * @date
  */
 @Keep
 data class CouponData(

@@ -23,7 +23,7 @@ class RecommendAdapter :
      *
      * @return 计算后得出的每张图片最大的宽度。
      */
-    val maxImageWidth: Int
+    private val maxImageWidth: Int
         get() {
             val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
             val metrics = DisplayMetrics()

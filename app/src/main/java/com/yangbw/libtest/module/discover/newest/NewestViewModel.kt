@@ -10,10 +10,6 @@ import com.yangbw.libtest.api.ApiService
  */
 class NewestViewModel : BaseListViewModel<ApiService>() {
 
-    public override fun onStart() {
-
-    }
-
     fun discoverNew(pageNo: Int) {
         launchOnlyResult(
             block = {

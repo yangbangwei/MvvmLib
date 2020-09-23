@@ -14,6 +14,7 @@ import com.library.common.base.BaseActivity
 import com.library.common.extension.getTextToString
 import com.library.common.extension.setOnClickListener
 import com.yangbw.libtest.R
+import com.yangbw.libtest.common.Constant
 import com.yangbw.libtest.databinding.ActivityChangePhoneBinding
 import com.yangbw.libtest.utils.CommonUtils
 import com.yangbw.libtest.utils.UserInfoUtils
@@ -97,6 +98,7 @@ class ChangePhoneActivity : BaseActivity<ChangePhoneViewModel, ActivityChangePho
         }
 
         mViewModel.mSendCode.observe(this) {
+            showToast(it)
             mCountDownTimer.start()
         }
         mViewModel.mVerifyCode.observe(this) {
@@ -105,7 +107,7 @@ class ChangePhoneActivity : BaseActivity<ChangePhoneViewModel, ActivityChangePho
         }
     }
 
-    private val mCountDownTimer = object : CountDownTimer(60000, 1000) {
+    private val mCountDownTimer = object : CountDownTimer(Constant.TIME_CODE, Constant.SECOND) {
         override fun onFinish() {
             mBinding.tvSend.apply {
                 text = context.getString(R.string.resend_code)
@@ -118,7 +120,7 @@ class ChangePhoneActivity : BaseActivity<ChangePhoneViewModel, ActivityChangePho
             mBinding.tvSend.apply {
                 text = String.format(
                     context.getString(R.string.change_send_code_able),
-                    millisUntilFinished / 1000
+                    millisUntilFinished / Constant.SECOND
                 )
                 setTextColor(ContextCompat.getColor(mContext, R.color.text_gray))
                 isEnabled = false

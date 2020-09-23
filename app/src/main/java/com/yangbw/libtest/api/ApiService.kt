@@ -42,6 +42,13 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun verifyCode(@Field("code") code: String): BaseRes<String>
 
+    @POST("api/changePhone")
+    @FormUrlEncoded
+    suspend fun changePhone(
+        @Field("phone") phone: String,
+        @Field("code") code: String
+    ): BaseRes<String>
+
     @GET("api/banners")
     suspend fun banners(): BaseRes<List<BannerInfo>>
 
@@ -65,6 +72,10 @@ interface ApiService {
     @POST("api/discoverRecommend")
     @FormUrlEncoded
     suspend fun discoverRecommend(@Field("pageNo") pageNo: Int): BaseRes<List<RecommendListData>>
+
+    @POST("api/discoverRecommendLike")
+    @FormUrlEncoded
+    suspend fun discoverRecommendLike(@Field("id") id: String): BaseRes<String>
 
     @POST("api/menuList")
     @FormUrlEncoded

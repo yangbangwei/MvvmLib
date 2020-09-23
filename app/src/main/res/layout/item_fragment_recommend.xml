@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageView26" />
 
         <ImageView
-            android:id="@+id/imageView27"
+            android:id="@+id/iv_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView26"
@@ -75,8 +75,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@{item.like}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView27"
-            app:layout_constraintEnd_toStartOf="@+id/imageView27"
-            app:layout_constraintTop_toTopOf="@+id/imageView27" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_like"
+            app:layout_constraintEnd_toStartOf="@+id/iv_like"
+            app:layout_constraintTop_toTopOf="@+id/iv_like" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

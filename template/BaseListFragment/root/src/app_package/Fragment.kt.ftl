@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.${layoutName}.*
 
 /**
  * @author yangbw
- * @date
  */
 class ${fragmentClass}Fragment : BaseListFragment<${fragmentClass}ViewModel, Fragment${fragmentClass}Binding,
     ${fragmentClass}Adapter,${ktBeanName}>(){

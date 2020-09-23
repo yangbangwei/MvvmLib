@@ -16,7 +16,7 @@ class ViewState {
     /**
      *  隐藏Loading弹窗
      */
-    val dismissDialog by lazy { SingleLiveEvent<String>() }
+    val dismissDialogProgress by lazy { SingleLiveEvent<String>() }
 
     /**
      * 吐司显示内容
@@ -41,7 +41,7 @@ class ViewState {
     /**
      * 网络异常
      */
-    val showNetworkError by lazy { SingleLiveEvent<String>() }
+    val showError by lazy { SingleLiveEvent<String>() }
 
     /**
      * 恢复初始效果

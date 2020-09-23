@@ -60,11 +60,9 @@ class ChangeNameActivity : BaseActivity<ChangeNameViewModel, ActivityChangeNameB
                 mViewModel.changeName(etName.getTextToString())
             }
         }
-        mViewModel.mResult.observe(this) {
-            if (it) {
-                showToast(R.string.change_suc)
-                finish()
-            }
+        mViewModel.mChangeName.observe(this) {
+            showToast(it)
+            finish()
         }
 
     }

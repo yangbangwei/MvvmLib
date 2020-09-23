@@ -44,7 +44,7 @@ interface IVaryViewHelperController {
      *
      * @param listener netWorkError View 点击重试按钮
      */
-    fun showNetworkError(listener: View.OnClickListener?)
+    fun showError(listener: View.OnClickListener?)
 
     /**
      * 显示netWorkError View
@@ -52,7 +52,7 @@ interface IVaryViewHelperController {
      * @param msg      netWorkError View 文字描述
      * @param listener netWorkError View 点击重试按钮
      */
-    fun showNetworkError(
+    fun showError(
         msg: String?,
         listener: View.OnClickListener?
     )

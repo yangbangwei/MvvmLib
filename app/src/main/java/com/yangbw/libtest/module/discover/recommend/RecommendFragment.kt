@@ -1,20 +1,19 @@
 package com.yangbw.libtest.module.discover.recommend
 
-import android.content.Context
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.WindowManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.blankj.utilcode.util.ToastUtils
 import com.library.common.base.BaseListFragment
-import com.library.common.extension.dp2px
 import com.yangbw.libtest.R
 import com.yangbw.libtest.databinding.FragmentRecommendBinding
 import kotlinx.android.synthetic.main.fragment_recommend.*
 
 /**
- * @author yangbw
- * @date
+ * 推荐页面
+ *
+ * @author :yangbw
+ * @date :2020/9/23
  */
 class RecommendFragment : BaseListFragment<RecommendViewModel, FragmentRecommendBinding,
         RecommendAdapter, RecommendListData>() {
@@ -36,9 +35,16 @@ class RecommendFragment : BaseListFragment<RecommendViewModel, FragmentRecommend
         mainLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         recyclerView.layoutManager = mainLayoutManager
         mAdapter = RecommendAdapter()
+        mAdapter.addChildClickViewIds(R.id.iv_like)
+        mAdapter.setOnItemChildClickListener { _, _, position ->
+            mViewModel.discoverRecommendLike(mAdapter.getItem(position).id)
+        }
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        mViewModel.mLike.observe(this){
+            showToast(it)
+        }
         loadPageListData(1)
     }
 

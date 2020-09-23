@@ -5,12 +5,5 @@ import ${packageName}.api.ApiService
 
 /**
  * @author yangbw
- * @date
  */
-class ${fragmentClass}ViewModel:BaseViewModel<ApiService>() {
-
-    public override fun onStart() {
-
-    }
-
-}
+class ${fragmentClass}ViewModel:BaseViewModel<ApiService>()

@@ -2,7 +2,7 @@
 一个基于MVVM使用AndroidJetpack封装的快速开发框架，包含Retrofit，Coroutine，DataBinding，ViewModel，LiveData，Room，Paging3
 以及图片加载，版本更新，图片选择，常见的UI样式功能。
 
-模仿朴朴APP样式，接口部分个人开发，只提供测试使用。所有验证码默认0000。
+模仿朴朴APP样式，接口部分个人开发，只提供测试使用。所有验证码默认 **0000**。
 [API代码](https://github.com/yangbangwei/api)
 
 ## 效果截图 
@@ -49,6 +49,8 @@
 - [ ] Paging3使用
 - [ ] 相机功能
 - [ ] 重新整理第三方框架
+- [ ] 蓝牙模块lib
+- [ ] 串口通讯lib
 - [ ] 单元测试
 - [ ] 功能完善后，将lib提交jCenter,jitPack
 

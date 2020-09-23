@@ -17,23 +17,17 @@ class MineViewModel : BaseViewModel<ApiService>() {
 
     var mUserInfo = MutableLiveData<MineData>()
 
-    public override fun onStart() {
-        getUserInfo()
-    }
-
-    private fun getUserInfo() {
+    override fun onStart() {
         launchOnlyResult(
             block = {
                 getApiService().userInfo()
             },
             success = {
-                mUserInfo.value = it
+                mUserInfo.value = it.getBaseResult()
             },
             reTry = {
-                getUserInfo()
+                onStart()
             }
         )
     }
-
-
 }

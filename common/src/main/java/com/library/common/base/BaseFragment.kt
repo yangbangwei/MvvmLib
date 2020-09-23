@@ -162,7 +162,7 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewState.dismissDialog.observe(this, {
+        mViewModel.viewState.dismissDialogProgress.observe(this, {
             dismissDialog()
         })
         mViewModel.viewState.showToast.observe(this, {
@@ -174,8 +174,8 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewState.showNetworkError.observe(this, {
-            showNetworkError(it, mViewModel.listener)
+        mViewModel.viewState.showError.observe(this, {
+            showError(it, mViewModel.listener)
         })
         mViewModel.viewState.restore.observe(this, {
             viewController?.restore()
@@ -245,15 +245,15 @@ abstract class BaseFragment<VM : BaseViewModel<*>, DB : ViewDataBinding> : Fragm
         viewController?.showEmpty(emptyMsg, listener)
     }
 
-    override fun showNetworkError(listener: View.OnClickListener?) {
-        viewController?.showNetworkError(listener)
+    override fun showError(listener: View.OnClickListener?) {
+        viewController?.showError(listener)
     }
 
-    override fun showNetworkError(
+    override fun showError(
         msg: String?,
         listener: View.OnClickListener?
     ) {
-        viewController?.showNetworkError(msg, listener)
+        viewController?.showError(msg, listener)
     }
 
     override fun showCustomView(

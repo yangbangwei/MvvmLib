@@ -1,5 +1,7 @@
 package com.yangbw.libtest.module.discover.recommend
 
+import androidx.lifecycle.MutableLiveData
+import com.library.common.em.RequestDisplay
 import com.library.common.mvvm.BaseListViewModel
 import com.yangbw.libtest.api.ApiService
 
@@ -9,9 +11,7 @@ import com.yangbw.libtest.api.ApiService
  */
 class RecommendViewModel : BaseListViewModel<ApiService>() {
 
-    public override fun onStart() {
-
-    }
+    val mLike = MutableLiveData<String>()
 
     fun discoverRecommend(pageNo: Int) {
         launchOnlyResult(
@@ -21,6 +21,18 @@ class RecommendViewModel : BaseListViewModel<ApiService>() {
                 discoverRecommend(pageNo)
             },
             pageNo = pageNo
+        )
+    }
+
+    fun discoverRecommendLike(id: String) {
+        launchOnlyResult(
+            block = {
+                getApiService().discoverRecommendLike(id)
+            },
+            success = {
+                mLike.value = it.getBaseMsg()
+            },
+            type = RequestDisplay.TOAST
         )
     }
 }

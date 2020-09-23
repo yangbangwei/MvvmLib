@@ -17,17 +17,13 @@ class CodeViewModel : BaseViewModel<ApiService>() {
     val mSendMsg = MutableLiveData<String>()
     val mUser = MutableLiveData<UserData>()
 
-    public override fun onStart() {
-
-    }
-
     fun sendCode(phone: String) {
         launchOnlyResult(
             block = {
                 getApiService().sendCode(phone)
             },
             success = {
-                mSendMsg.value = it
+                mSendMsg.value = it.getBaseMsg()
             },
             type = RequestDisplay.TOAST
         )
@@ -39,7 +35,7 @@ class CodeViewModel : BaseViewModel<ApiService>() {
                 getApiService().login(phone, code)
             },
             success = {
-                mUser.value = it
+                mUser.value = it.getBaseResult()
             },
             type = RequestDisplay.TOAST,
             msg = App.context.getString(R.string.logining)

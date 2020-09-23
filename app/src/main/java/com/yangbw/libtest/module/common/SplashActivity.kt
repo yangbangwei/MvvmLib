@@ -12,6 +12,7 @@ import com.library.common.base.BaseActivity
 import com.permissionx.guolindev.PermissionX
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.CommonViewModel
+import com.yangbw.libtest.common.Constant
 import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
@@ -51,7 +52,7 @@ class SplashActivity : BaseActivity<CommonViewModel, ViewDataBinding>() {
 
     }
 
-    private val mCountDownTimer = object : CountDownTimer(3000, 1000) {
+    private val mCountDownTimer = object : CountDownTimer(Constant.TIME_START, Constant.SECOND) {
         override fun onFinish() {
             MainActivity.launch(mContext)
             finish()

@@ -117,4 +117,10 @@
     <string name="warn_tips">温馨提示</string>
     <string name="logout_tips">您的优惠券、礼品卡、账户余额、邀请好友数量，收藏等数据将失效，且不可恢复。因您已有订单记录，申请注销将转由客服人工审核，确认提交注销申请?</string>
     <string name="i_have_read">我已阅读</string>
+    <string name="phone_format_error">输入的手机号格式有误</string>
+    <string name="bind_new_phone">绑定新手机号</string>
+    <string name="affirm_submit">确认提交</string>
+    <string name="please_input_code">请输入验证码</string>
+    <string name="new_phone">新手机号</string>
+    <string name="please_input_new_phone">请输入新手机号</string>
 </resources>

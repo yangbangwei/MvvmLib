@@ -36,25 +36,26 @@ import java.lang.reflect.ParameterizedType
 
 /**
  * BaseListFragment封装
+ * 适用于单一列表接口，多操作接口。
  *
  * @author yangbw
  * @date 2020/9/1
  */
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "MemberVisibilityCanBePrivate")
 abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         A : BaseQuickAdapter<T, CommonViewHolder>, T> : Fragment(), IListView<T>,
     SimpleImmersionOwner {
 
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: DB
-    protected var mAdapter: A? = null
+    protected lateinit var mAdapter: A
     protected var mSmartRefreshLayout: SmartRefreshLayout? = null
     protected var mRecyclerView: RecyclerView? = null
 
     /**
      * ImmersionBar代理类
      */
-    private val mSimpleImmersionProxy = SimpleImmersionProxy(this)
+    private lateinit var mSimpleImmersionProxy:SimpleImmersionProxy
 
     @LayoutRes
     abstract fun getLayoutId(): Int
@@ -92,6 +93,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mSimpleImmersionProxy = SimpleImmersionProxy(this)
         val cls =
             (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[1] as Class<*>
         if (ViewDataBinding::class.java != cls && ViewDataBinding::class.java.isAssignableFrom(cls)) {
@@ -157,7 +159,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         mViewModel.viewState.showDialogProgress.observe(this, {
             showDialogProgress(it)
         })
-        mViewModel.viewState.dismissDialog.observe(this, {
+        mViewModel.viewState.dismissDialogProgress.observe(this, {
             dismissDialog()
         })
         mViewModel.viewState.showToast.observe(this, {
@@ -169,8 +171,8 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         mViewModel.viewState.showEmpty.observe(this, {
             showEmpty(it, mViewModel.listener)
         })
-        mViewModel.viewState.showNetworkError.observe(this, {
-            showNetworkError(it, mViewModel.listener)
+        mViewModel.viewState.showError.observe(this, {
+            showError(it, mViewModel.listener)
         })
         mViewModel.viewState.restore.observe(this, {
             mViewController?.restore()
@@ -269,7 +271,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
                 mSmartRefreshLayout?.isEnabled = true
             }
             mSmartRefreshLayout?.finishRefresh()
-            mAdapter?.data?.clear()
+            mAdapter.data.clear()
             mViewController?.showEmpty(emptyMsg, listener)
         }
     }
@@ -277,14 +279,14 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
     /**
      * 网络错误
      */
-    override fun showNetworkError(listener: View.OnClickListener?) {
-        mViewController?.showNetworkError(listener)
+    override fun showError(listener: View.OnClickListener?) {
+        mViewController?.showError(listener)
     }
 
     /**
      * 网络错误
      */
-    override fun showNetworkError(
+    override fun showError(
         msg: String?,
         listener: View.OnClickListener?
     ) {
@@ -296,8 +298,8 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
                 mSmartRefreshLayout?.isEnabled = true
             }
             mSmartRefreshLayout?.finishRefresh()
-            mAdapter?.data?.clear()
-            mViewController?.showNetworkError(msg, listener)
+            mAdapter.data.clear()
+            mViewController?.showError(msg, listener)
         }
     }
 
@@ -386,7 +388,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      * 自动刷新
      */
     open fun autoRefresh() {
-        if (ListUtils.getCount(mAdapter?.data) > 0) {
+        if (ListUtils.getCount(mAdapter.data) > 0) {
             mSmartRefreshLayout?.autoRefresh()
         } else {
             showLoading()
@@ -404,11 +406,11 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
         }
         if (pageNum == 1) {
             mSmartRefreshLayout?.finishRefresh()
-            mAdapter?.setNewData(datas as MutableList<T>)
+            mAdapter.setNewData(datas as MutableList<T>)
         } else {
             mSmartRefreshLayout?.finishLoadMore()
             datas?.let {
-                mAdapter?.addData(it)
+                mAdapter.addData(it)
             }
         }
     }
@@ -469,7 +471,7 @@ abstract class BaseListFragment<VM : BaseListViewModel<*>, DB : ViewDataBinding,
      *
      * @return the boolean
      */
-    override fun immersionBarEnabled()= true
+    override fun immersionBarEnabled() = true
 
     /**
      * 沉浸式效果

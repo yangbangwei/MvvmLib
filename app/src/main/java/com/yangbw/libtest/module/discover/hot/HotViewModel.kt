@@ -10,10 +10,6 @@ import com.yangbw.libtest.api.ApiService
  */
 class HotViewModel : BaseListViewModel<ApiService>() {
 
-    public override fun onStart() {
-
-    }
-
     fun discoverHot(pageNo: Int) {
         launchOnlyResult(
             block = {

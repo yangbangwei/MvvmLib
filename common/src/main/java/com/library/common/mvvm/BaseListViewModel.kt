@@ -38,7 +38,7 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
     fun <T> launchOnlyResult(
         block: suspend CoroutineScope.() -> IRes<T>,
         //成功
-        success: (T) -> Unit = {
+        success: (IRes<T>) -> Unit = {
         },
         //错误 根据错误进行不同分类
         error: (Throwable) -> Unit = {},
@@ -77,8 +77,6 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                 { res ->
                     //接口成功返回
                     executeResponse(pageNo, res, currentDomainName) {
-                        //成功回调成功
-                        mResult.value = true
                         //自定义成功处理
                         success(it)
                     }
@@ -86,27 +84,25 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
                 {
                     //通用异常处理
                     if (!NetworkUtils.isConnected()) {
-                        onNetWorkError(pageNo, type) { reTry() }
+                        onError(type, pageNo) { reTry() }
                     } else {
                         when (it) {
+                            is ReturnCodeNullException -> {
+                                onError(type, pageNo, codeNullMsg) { reTry() }
+                            }
                             is ReturnCodeException -> {
                                 isIntercepted(it)
-                                onReturnCodeError(type, it.message) { reTry() }
-                            }
-                            is ReturnCodeNullException -> {
-                                onNetWorkError(pageNo, type, codeNullMsg) { reTry() }
+                                onError(type, pageNo, it.message) { reTry() }
                             }
                             is ResultException -> {
-                                onTEmpty(pageNo, type) { reTry() }
+                                onEmpty { reTry() }
                             }
                             else -> {
-                                //UnknownHostException 1：服务器地址错误；2：网络未连接
-                                onNetWorkError(pageNo, type, serverErrorMsg) { reTry() }
+                                //服务异常 1：服务器地址错误；2：网络未连接
+                                onError(type, pageNo, serverErrorMsg) { reTry() }
                             }
                         }
                     }
-                    //失败回调通知
-                    mResult.value = false
                     //自定义异常处理
                     error(it)
                 },
@@ -125,177 +121,102 @@ abstract class BaseListViewModel<API> : BaseViewModel<API>() {
         pageNo: Int,
         response: IRes<T>,
         currentDomainName: String,
-        success: suspend CoroutineScope.(T) -> Unit
+        success: suspend CoroutineScope.(IRes<T>) -> Unit
     ) {
         coroutineScope {
-            //多baseUrl
+            //单一地址和多地址判断
             if (AppConfig.getMoreBaseUrl() && currentDomainName != AppConfig.DOMAIN_NAME) {
-                //获取当前baseUrl对应的成功码
                 val retSuccessList = AppConfig.getRetSuccessMap()?.get(currentDomainName)
-                //当前对应的baseUrl对应的code
-                if (retSuccessList != null) {
-                    //状态码正确
-                    if (retSuccessList.contains(response.getBaseCode())) {
-                        //数据为空，或者list.size=0
-                        if (response.getBaseResult() == null
-                            || response.getBaseResult().toString() == "[]"
-                        ) {
-                            //完成的回调所有弹窗消失
-                            if (pageNo == 1) {
-                                //返回结果null
-                                throw ResultException(response.getBaseMsg())
-                            } else {
-                                viewState.showEmpty.call()
-                            }
-                        } else {
-                            //列表接口数据赋值
-                            if (pageNo != -1) {
-                                mListData?.value = response.getBaseResult()
-                            }
-                            success(response.getBaseResult())
-                            if (pageNo == 1) {
-                                //完成的回调所有弹窗消失
-                                viewState.dismissDialog.call()
-                                viewState.restore.call()
-                            } else {
-                                viewState.refreshComplete.call()
-                            }
-                        }
-                    } else {
-                        //状态码错误
-                        throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
-                    }
-                } else {
-                    //未设置状态码
+                if (retSuccessList == null || retSuccessList.isEmpty()) {
+                    ///抛出未设置状态码异常
                     throw ReturnCodeNullException(response.getBaseCode(), response.getBaseMsg())
                 }
-                //接口多状态码的返回 接口成功返回后判断是否是增删改查成功，不满足的话，返回异常
-            } else if (AppConfig.getRetSuccessList().isNotEmpty()) {
-                //成功
-                if (AppConfig.getRetSuccessList().contains(response.getBaseCode())) {
-                    //数据为空，或者list.size=0
-                    if (response.getBaseResult() == null
-                        || response.getBaseResult().toString() == "[]"
-                    ) {
-                        //完成的回调所有弹窗消失
-                        if (pageNo == 1) {
-                            //返回结果null
-                            throw ResultException(response.getBaseMsg())
-                        } else {
-                            viewState.showEmpty.call()
-                        }
-                    } else {
-                        //列表接口数据赋值
-                        if (pageNo != -1) {
-                            mListData?.value = response.getBaseResult()
-                        }
-                        success(response.getBaseResult())
-                        if (pageNo == 1) {
-                            //完成的回调所有弹窗消失
-                            viewState.dismissDialog.call()
-                            viewState.restore.call()
-                        } else {
-                            viewState.refreshComplete.call()
-                        }
-                    }
-                } else {
-                    //状态码错误
-                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
-                }
-                //接口单状态码
-            } else if (AppConfig.getRetSuccess() != null) {
-                //成功
-                if (response.getBaseCode() == AppConfig.getRetSuccess()) {
-                    if (response.getBaseResult() == null
-                        || response.getBaseResult().toString() == "[]"
-                    ) {
-                        //完成的回调所有弹窗消失
-                        if (pageNo == 1) {
-                            //返回结果null
-                            throw ResultException(response.getBaseMsg())
-                        } else {
-                            viewState.showEmpty.call()
-                        }
-                    } else {
-                        //列表接口数据赋值
-                        if (pageNo != -1) {
-                            mListData?.value = response.getBaseResult()
-                        }
-                        success(response.getBaseResult())
-                        if (pageNo == 1) {
-                            //完成的回调所有弹窗消失
-                            viewState.dismissDialog.call()
-                            viewState.restore.call()
-                        } else {
-                            viewState.refreshComplete.call()
-                        }
-                    }
-                } else {
-                    //状态码错误
+                //判断状态码是否包含
+                if (!retSuccessList.contains(response.getBaseCode())) {
+                    //抛出状态码错误异常
                     throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
                 }
             } else {
-                //未设置状态码
-                throw ReturnCodeNullException(response.getBaseCode(), response.getBaseMsg())
+                val retSuccessList = AppConfig.getRetSuccess() ?: throw ReturnCodeNullException(
+                    response.getBaseCode(),
+                    response.getBaseMsg()
+                )
+                //判断状态码是否包含
+                if (!retSuccessList.contains(response.getBaseCode())) {
+                    //抛出状态码错误异常
+                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
+                }
             }
+            //成功处理，判断是否为列表数据接口
+            if (pageNo != -1) {
+                //数据为空的情况
+                if (response.getBaseResult() == null
+                    || response.getBaseResult().toString() == "[]"
+                ) {
+                    //是否为第一页
+                    if (pageNo == 1) {
+                        throw ResultException(response.getBaseMsg())
+                    } else {
+                        viewState.showEmpty.call()
+                    }
+                } else {
+                    //列表接口数据赋值
+                    mListData?.value = response.getBaseResult()
+                    //返回列表数据
+                    success(response)
+                    //完成的回调页面效果处理
+                    if (pageNo == 1) {
+                        viewState.restore.call()
+                    } else {
+                        viewState.refreshComplete.call()
+                    }
+                }
+            } else {
+                //无需判断数据是否为空,直接返回处理
+                success(response)
+                //完成的回调页面效果处理
+                viewState.dismissDialogProgress.call()
+            }
+
         }
     }
 
     /**
-     * 数据为空
+     * list数据为空的情况
      */
-    private fun onTEmpty( //重试
-        pageNo: Int,
-        type: RequestDisplay,
-        reTry: () -> Unit = {
-        }
-    ) {
-        if (pageNo == 1) {
-            when (type) {
-                RequestDisplay.NULL -> {
-                }
-                RequestDisplay.TOAST -> {
-                    viewState.showToast.value = emptyMsg
-                    viewState.dismissDialog.call()
-                }
-                RequestDisplay.REPLACE -> {
-                    this.listener = View.OnClickListener {
-                        reTry()
-                    }
-                    viewState.showEmpty.value = emptyMsg
-
-                }
-            }
+    private fun onEmpty(reTry: () -> Unit = {}) {
+        viewState.showEmpty.value = emptyMsg
+        this.listener = View.OnClickListener {
+            reTry()
         }
     }
 
     /**
      * 网络异常，状态码异常，未设置成功状态码
      */
-    private fun onNetWorkError(
-        pageNo: Int,
+    private fun onError(
         type: RequestDisplay,
-        errorMsg: String = this.errorMsg,
+        pageNo: Int,
+        msg: String? = this.errorMsg,
         reTry: () -> Unit = {}
     ) {
         when (type) {
             RequestDisplay.NULL -> {
-
             }
             RequestDisplay.TOAST -> {
-                viewState.showToast.value = errorMsg
-                viewState.dismissDialog.call()
+                viewState.showToast.value = msg
+                viewState.dismissDialogProgress.call()
             }
             RequestDisplay.REPLACE -> {
                 if (pageNo == 1) {
                     this.listener = View.OnClickListener {
                         reTry()
                     }
-                    viewState.showNetworkError.value = errorMsg
+                    viewState.showError.value = msg
                 } else {
                     viewState.refreshComplete.call()
                     viewState.restore.call()
-                    viewState.showTips.value = errorMsg
+                    viewState.showTips.value = msg
                 }
             }
         }

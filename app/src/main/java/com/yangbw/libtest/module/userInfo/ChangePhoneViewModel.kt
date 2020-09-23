@@ -11,12 +11,8 @@ import com.yangbw.libtest.api.ApiService
  */
 class ChangePhoneViewModel : BaseViewModel<ApiService>() {
 
-    val mSendCode = MutableLiveData<Boolean>()
-    val mVerifyCode = MutableLiveData<Boolean>()
-
-    public override fun onStart() {
-
-    }
+    val mSendCode = MutableLiveData<String>()
+    val mVerifyCode = MutableLiveData<String>()
 
     fun sendCode() {
         launchOnlyResult(
@@ -24,7 +20,7 @@ class ChangePhoneViewModel : BaseViewModel<ApiService>() {
                 getApiService().sendCode()
             },
             success = {
-                mSendCode.value = true
+                mSendCode.value = it.getBaseMsg()
             },
             type = RequestDisplay.TOAST
         )
@@ -36,7 +32,7 @@ class ChangePhoneViewModel : BaseViewModel<ApiService>() {
                 getApiService().verifyCode(code)
             },
             success = {
-                mVerifyCode.value = true
+                mVerifyCode.value = it.getBaseMsg()
             },
             type = RequestDisplay.TOAST
         )

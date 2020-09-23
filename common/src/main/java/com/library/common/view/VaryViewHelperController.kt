@@ -58,11 +58,11 @@ class VaryViewHelperController private constructor(private val helper: VaryViewH
         helper.showView(layout)
     }
 
-    override fun showNetworkError(listener: View.OnClickListener?) {
-        showNetworkError(null, listener)
+    override fun showError(listener: View.OnClickListener?) {
+        showError(null, listener)
     }
 
-    override fun showNetworkError(
+    override fun showError(
         msg: String?,
         listener: View.OnClickListener?
     ) {

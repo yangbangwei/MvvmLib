@@ -5,12 +5,5 @@ import ${packageName}.api.ApiService
 
 /**
  * @author yangbw
- * @date
  */
-class ${activityClass}ViewModel:BaseViewModel<ApiService>() {
-
-    public override fun onStart() {
-
-    }
-
-}
+class ${activityClass}ViewModel:BaseViewModel<ApiService>()

@@ -17,16 +17,13 @@ class HomeViewModel : BaseViewModel<ApiService>() {
     val mBanners = MutableLiveData<List<BannerInfo>>()
     val mVersion = MutableLiveData<UpdateVersion>()
 
-    public override fun onStart() {
-    }
-
     fun updateVersion(versionCode: Int) {
         launchOnlyResult(
             block = {
                 getApiService().updateVersion(versionCode)
             },
             success = {
-                mVersion.value = it
+                mVersion.value = it.getBaseResult()
             },
             type = RequestDisplay.NULL
         )
@@ -38,7 +35,7 @@ class HomeViewModel : BaseViewModel<ApiService>() {
                 getApiService().banners()
             },
             success = {
-                mBanners.value = it
+                mBanners.value = it.getBaseResult()
             },
             reTry = {
                 getBanner()

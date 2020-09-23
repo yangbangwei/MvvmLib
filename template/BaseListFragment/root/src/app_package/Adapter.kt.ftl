@@ -9,7 +9,6 @@ import java.util.*
 
 /**
  * @author yangbw
- * @date
  */
 class ${fragmentClass}Adapter : BaseAdapter<${ktBeanName}>(R.layout.item_${layoutName}, ArrayList()) {
 

@@ -15,17 +15,13 @@ class LoginViewModel : BaseViewModel<ApiService>() {
 
     var mUser = MutableLiveData<UserData>()
 
-    public override fun onStart() {
-
-    }
-
     fun login(phone: String) {
         launchOnlyResult(
             block = {
                 getApiService().loginByPhone(phone)
             },
             success = {
-                mUser.value = it
+                mUser.value = it.getBaseResult()
             },
             type = RequestDisplay.TOAST,
             msg = App.context.getString(R.string.logining)

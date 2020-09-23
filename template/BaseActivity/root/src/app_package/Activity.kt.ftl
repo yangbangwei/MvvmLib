@@ -11,7 +11,6 @@ import kotlinx.android.synthetic.main.${layoutName}.*
 
 /**
  * @author yangbw
- * @date
  */
 class ${activityClass}Activity : BaseActivity<${activityClass}ViewModel, Activity${activityClass}Binding>(){
 

@@ -1,52 +1,35 @@
-package com.yangbw.libtest.module.home;
+package com.yangbw.libtest.module.home
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.LayoutHelper;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.alibaba.android.vlayout.DelegateAdapter
+import com.alibaba.android.vlayout.LayoutHelper
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 
 /**
  * 基类适配器
- * Created by zxl on 2017/8/28.
+ *
+ * @author :yangbw
+ * @date :2020/9/23
  */
-
-public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder> {
-
-    private LayoutHelper mLayoutHelper;
-    private int mCount = -1;
-    private int mLayoutId = -1;
-    private Context mContext;
-    private int mViewTypeItem = -1;
-
-    public BaseDelegateAdapter(Context context, LayoutHelper layoutHelper, int layoutId, int count,
-                               int viewTypeItem) {
-        this.mContext = context;
-        this.mCount = count;
-        this.mLayoutHelper = layoutHelper;
-        this.mLayoutId = layoutId;
-        this.mViewTypeItem = viewTypeItem;
+open class BaseDelegateAdapter(
+    private val mContext: Context, layoutHelper: LayoutHelper, layoutId: Int, count: Int,
+    viewTypeItem: Int
+) : DelegateAdapter.Adapter<BaseViewHolder?>() {
+    private val mLayoutHelper: LayoutHelper
+    private var mCount = -1
+    private var mLayoutId = -1
+    private var mViewTypeItem = -1
+    override fun onCreateLayoutHelper(): LayoutHelper {
+        return mLayoutHelper
     }
 
-    @Override
-    public LayoutHelper onCreateLayoutHelper() {
-        return mLayoutHelper;
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        return BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false))
     }
 
-    @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == mViewTypeItem) {
-            return new BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false));
-        }
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-
-    }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {}
 
     /**
      * 必须重写不然会出现滑动不流畅的情况
@@ -54,14 +37,19 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
      * @param position
      * @return
      */
-    @Override
-    public int getItemViewType(int position) {
-        return mViewTypeItem;
+    override fun getItemViewType(position: Int): Int {
+        return mViewTypeItem
     }
 
     //条目数量
-    @Override
-    public int getItemCount() {
-        return mCount;
+    override fun getItemCount(): Int {
+        return mCount
+    }
+
+    init {
+        mCount = count
+        mLayoutHelper = layoutHelper
+        mLayoutId = layoutId
+        mViewTypeItem = viewTypeItem
     }
 }

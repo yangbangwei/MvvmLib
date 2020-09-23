@@ -13,16 +13,13 @@ class MenuViewModel : BaseViewModel<ApiService>() {
 
     val mMenuData = MutableLiveData<List<MenuData>>()
 
-    public override fun onStart() {
-    }
-
     fun menuList() {
         launchOnlyResult(
             block = {
                 getApiService().menuList(1)
             },
             success = {
-                mMenuData.value = it
+                mMenuData.value = it.getBaseResult()
             },
             reTry = {
                 menuList()

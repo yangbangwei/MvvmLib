@@ -13,10 +13,6 @@ class DetailsViewModel : BaseViewModel<ApiService>() {
 
     var mDetails = MutableLiveData<DetailsData>()
 
-    public override fun onStart() {
-
-    }
-
     fun getHomeDetails(id: String) {
         launchOnlyResult(
             block = {
@@ -26,7 +22,7 @@ class DetailsViewModel : BaseViewModel<ApiService>() {
                 getHomeDetails(id)
             },
             success = {
-                mDetails.value = it
+                mDetails.value = it.getBaseResult()
             }
         )
     }

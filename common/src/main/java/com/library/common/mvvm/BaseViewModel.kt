@@ -2,7 +2,6 @@ package com.library.common.mvvm
 
 import android.view.View
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.NetworkUtils
@@ -37,11 +36,6 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     protected val serverErrorMsg: String by lazy { BaseApplication.context.getString(R.string.network_error_please_refresh) }
 
     /**
-     * 每次请求结果，成功true，失败false
-     */
-    val mResult = MutableLiveData<Boolean>()
-
-    /**
      * 重试的监听
      */
     var listener: View.OnClickListener? = null
@@ -66,7 +60,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     /**
      * 开始执行方法
      */
-    protected abstract fun onStart()
+    open fun onStart() {}
 
     /**
      * 所有网络请求都在 viewModelScope 域中启动，当页面销毁时会自动
@@ -97,7 +91,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     fun <T> launchOnlyResult(
         block: suspend CoroutineScope.() -> IRes<T>,
         //成功
-        success: (T?) -> Unit = {},
+        success: (IRes<T>) -> Unit = {},
         //错误 根据错误进行不同分类
         error: (Throwable) -> Unit = {},
         //完成
@@ -130,9 +124,7 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                 { withContext(Dispatchers.IO) { block() } },
                 { res ->
                     //接口成功返回
-                    executeResponse(res, currentDomainName) {
-                        //成功回调成功
-                        mResult.value = true
+                    executeResponse(type, res, currentDomainName) {
                         //自定义成功处理
                         success(it)
                     }
@@ -140,24 +132,25 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                 {
                     //通用异常处理
                     if (!NetworkUtils.isConnected()) {
-                        onNetWorkError(type) { reTry() }
+                        //无网络情况
+                        onError(type) { reTry() }
                     } else {
                         when (it) {
+                            //未设置成功码
+                            is ReturnCodeNullException -> {
+                                onError(type, codeNullMsg) { reTry() }
+                            }
+                            //返回非成功码
                             is ReturnCodeException -> {
                                 isIntercepted(it)
-                                onReturnCodeError(type, it.message) { reTry() }
-                            }
-                            is ReturnCodeNullException -> {
-                                onNetWorkError(type, codeNullMsg) { reTry() }
+                                onError(type, it.message) { reTry() }
                             }
                             else -> {
-                                //UnknownHostException 1：服务器地址错误；2：网络未连接
-                                onNetWorkError(type, serverErrorMsg) { reTry() }
+                                //服务异常 1：服务器地址错误；2：网络未连接
+                                onError(type, serverErrorMsg) { reTry() }
                             }
                         }
                     }
-                    //失败回调通知
-                    mResult.value = false
                     //自定义异常处理
                     error(it)
                 },
@@ -166,46 +159,6 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                     complete()
                 }
             )
-        }
-    }
-
-    /**
-     * 请求结果过滤
-     */
-    private suspend fun <T> executeResponse(
-        response: IRes<T>,
-        currentDomainName: String,
-        success: suspend CoroutineScope.(T?) -> Unit
-    ) {
-        coroutineScope {
-            //判断是否设置状态码
-            if (AppConfig.getMoreBaseUrl() && currentDomainName != AppConfig.DOMAIN_NAME) {
-                val retSuccessList = AppConfig.getRetSuccessMap()?.get(currentDomainName)
-                if (retSuccessList == null || retSuccessList.isEmpty()) {
-                    ///抛出未设置状态码异常
-                    throw ReturnCodeNullException(response.getBaseCode(), response.getBaseMsg())
-                }
-                //判断状态码是否包含
-                if (!retSuccessList.contains(response.getBaseCode())) {
-                    //抛出状态码错误异常
-                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
-                }
-            } else {
-                val retSuccessList = AppConfig.getRetSuccess() ?: throw ReturnCodeNullException(
-                    response.getBaseCode(),
-                    response.getBaseMsg()
-                )
-                //判断状态码是否包含
-                if (!retSuccessList.contains(response.getBaseCode())) {
-                    //抛出状态码错误异常
-                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
-                }
-            }
-            //数据正常，异常。都在success中处理
-            success(response.getBaseResult())
-            //完成的回调所有弹窗消失
-            viewState.dismissDialog.call()
-            viewState.restore.call()
         }
     }
 
@@ -230,58 +183,82 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
     }
 
     /**
+     * 请求结果过滤
+     */
+    private suspend fun <T> executeResponse(
+        type: RequestDisplay,
+        response: IRes<T>,
+        currentDomainName: String,
+        success: suspend CoroutineScope.(IRes<T>) -> Unit
+    ) {
+        coroutineScope {
+            //单一地址和多地址判断
+            if (AppConfig.getMoreBaseUrl() && currentDomainName != AppConfig.DOMAIN_NAME) {
+                val retSuccessList = AppConfig.getRetSuccessMap()?.get(currentDomainName)
+                if (retSuccessList == null || retSuccessList.isEmpty()) {
+                    ///抛出未设置状态码异常
+                    throw ReturnCodeNullException(response.getBaseCode(), response.getBaseMsg())
+                }
+                //判断状态码是否包含
+                if (!retSuccessList.contains(response.getBaseCode())) {
+                    //抛出状态码错误异常
+                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
+                }
+            } else {
+                val retSuccessList = AppConfig.getRetSuccess() ?: throw ReturnCodeNullException(
+                    response.getBaseCode(),
+                    response.getBaseMsg()
+                )
+                //判断状态码是否包含
+                if (!retSuccessList.contains(response.getBaseCode())) {
+                    //抛出状态码错误异常
+                    throw ReturnCodeException(response.getBaseCode(), response.getBaseMsg())
+                }
+            }
+            //无需判断数据是否为空,直接返回处理
+            success(response)
+            //完成的回调页面效果处理
+            when (type) {
+                RequestDisplay.NULL -> {
+                }
+                RequestDisplay.TOAST -> {
+                    viewState.dismissDialogProgress.call()
+                }
+                RequestDisplay.REPLACE -> {
+                    viewState.restore.call()
+                }
+            }
+        }
+    }
+
+    /**
      * 网络异常，状态码异常，未设置成功状态码
      */
-    private fun onNetWorkError(
+    private fun onError(
         type: RequestDisplay,
-        errorMsg: String = this.errorMsg,
+        msg: String? = errorMsg,
         reTry: () -> Unit = {}
     ) {
         when (type) {
             RequestDisplay.NULL -> {
             }
             RequestDisplay.TOAST -> {
-                viewState.showToast.value = errorMsg
-                viewState.dismissDialog.call()
+                viewState.showToast.value = msg
+                viewState.dismissDialogProgress.call()
             }
             RequestDisplay.REPLACE -> {
+                viewState.showError.value = msg
                 this.listener = View.OnClickListener {
                     reTry()
                 }
-                viewState.showNetworkError.value = errorMsg
             }
         }
     }
 
     /**
-     * 返回code错误
-     */
-    protected fun onReturnCodeError(
-        type: RequestDisplay,
-        message: String?,
-        reTry: () -> Unit = {}
-    ) {
-        when (type) {
-            RequestDisplay.NULL -> {
-            }
-            RequestDisplay.TOAST -> {
-                viewState.showToast.value = message
-                viewState.dismissDialog.call()
-            }
-            RequestDisplay.REPLACE -> {
-                this.listener = View.OnClickListener {
-                    reTry()
-                }
-                viewState.showNetworkError.call()
-            }
-        }
-    }
-
-    /**
-     * 判断是否被拦截
+     * 异常code拦截
      */
     protected fun isIntercepted(t: Throwable): Boolean {
-        //是否被拦截了
         var isIntercepted = false
         for (interceptor: IReturnCodeErrorInterceptor in AppConfig.getRetCodeInterceptors()) {
             if (interceptor.intercept((t as ReturnCodeException).returnCode)) {

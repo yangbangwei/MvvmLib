@@ -12,13 +12,13 @@ class CouponViewModel : BaseViewModel<ApiService>() {
 
     var mData = MutableLiveData<List<CouponData>>()
 
-    public override fun onStart() {
+    override fun onStart() {
         launchOnlyResult(
             block = {
                 getApiService().couponList()
             },
             success = {
-                mData.value = it
+                mData.value = it.getBaseResult()
             }
         )
     }
