@@ -247,10 +247,10 @@ abstract class BaseViewModel<API> : ViewModel(), LifecycleObserver {
                 viewState.dismissDialogProgress.call()
             }
             RequestDisplay.REPLACE -> {
-                viewState.showError.value = msg
                 this.listener = View.OnClickListener {
                     reTry()
                 }
+                viewState.showError.value = msg
             }
         }
     }

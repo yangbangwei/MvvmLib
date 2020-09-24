@@ -29,7 +29,7 @@ class HotFragment : BaseListFragment<HotViewModel, FragmentHotBinding,
         mSmartRefreshLayout = smartRefreshLayout
         mRecyclerView = recyclerView
         mAdapter = HotAdapter()
-        mAdapter?.setOnItemClickListener { _, _, _ ->
+        mAdapter.setOnItemClickListener { _, _, _ ->
             WebActivity.launch(mContext,null,"https://home.meishichina.com/recipe-559721.html")
         }
     }

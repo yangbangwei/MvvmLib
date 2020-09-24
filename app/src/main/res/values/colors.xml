@@ -6,20 +6,21 @@
     <color name="colorPrimaryDark">#FFFFFF</color>
     <!--选中效果-->
     <color name="colorAccent">#21A953</color>
-
-    <color name="windowBackground">#888888</color>
-
+    <!--背景颜色-->
+    <color name="windowBackground">#F9F9F9</color>
+    <!--主色调-->
     <color name="main_color">#21A953</color>
 
+    <!--首页文字效果-->
     <color name="colorTextPrimary">#21A953</color>
     <color name="colorTextSecondary">#888888</color>
 
-    <color name="bg_default">#F9F9F9</color>
-
+    <!--文字颜色-->
     <color name="text_gray">#AFAFAF</color>
     <color name="text_black">#000000</color>
     <color name="text_red">#FC363E</color>
 
+    <!--其他颜色-->
     <color name="mEEFAF0">#EEFAF0</color>
     <color name="mBAE7CD">#BAE7CD</color>
 

@@ -11,6 +11,7 @@ import com.library.common.base.BaseActivity
 import com.library.common.extension.setOnClickListener
 import com.library.common.view.CommonDialog
 import com.yangbw.libtest.R
+import com.yangbw.libtest.common.CommonViewModel
 import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivityUserInfoBinding
 import com.yangbw.libtest.dialog.LogoutDialog
@@ -25,7 +26,7 @@ import utils.ActionBarUtils
  * @author :yangbw
  * @date :2020/9/1
  */
-class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding>() {
+class UserInfoActivity : BaseActivity<CommonViewModel, ActivityUserInfoBinding>() {
 
     companion object {
         fun launch(context: Context) {
@@ -63,7 +64,7 @@ class UserInfoActivity : BaseActivity<UserInfoViewModel, ActivityUserInfoBinding
                     }
                     groupWeixin -> {
                         CommonDialog.Builder(mContext)
-                            .setMessage("确定要解除绑定吗？")
+                            .setMessage(context.getString(R.string.confirm_unbind))
                             .setNegativeButton(getString(R.string.dialog_cancel), null)
                             .setPositiveButton(getString(R.string.dialog_confirm),
                                 object : CommonDialog.OnDialogClickListener {

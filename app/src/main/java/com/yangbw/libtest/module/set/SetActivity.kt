@@ -13,6 +13,8 @@ import com.library.common.view.CommonDialog
 import com.yangbw.libtest.R
 import com.yangbw.libtest.common.LiveEventBusKey
 import com.yangbw.libtest.databinding.ActivitySetBinding
+import com.yangbw.libtest.module.common.WebActivity
+import com.yangbw.libtest.utils.CacheUtils
 import com.yangbw.libtest.utils.UserInfoUtils
 import kotlinx.android.synthetic.main.activity_set.*
 import kotlinx.android.synthetic.main.layout_set_toolbar.*
@@ -53,8 +55,32 @@ class SetActivity : BaseActivity<SetViewModel, ActivitySetBinding>() {
         ActionBarUtils.setToolBarTitleText(toolbar, getString(R.string.set))
 
         mBinding.run {
-            setOnClickListener(groupSetPwd, tvExit) {
+            tvExit.visibility = if (UserInfoUtils.isLogin()) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+            tvSize.text = CacheUtils.getTotalCacheSize(mContext)
+            setOnClickListener(
+                groupSetPwd, gpProtocol1, gpProtocol2, gpProtocol3,
+                gpPrivacy, gpClear, tvExit
+            ) {
                 when (this) {
+                    gpProtocol1, gpProtocol2, gpProtocol3 -> {
+                        WebActivity.launch(
+                            context,
+                            null,
+                            "https://admin.qidian.qq.com/template/blue/website/agreement.html"
+                        )
+                    }
+                    gpClear -> {
+                        CacheUtils.clearAllCache(mContext)
+                        tvSize.text = getString(R.string.default_size)
+                        showToast(mContext.getString(R.string.clear_suc))
+                    }
+                    groupSetPwd, gpPrivacy -> {
+                        showToast(R.string.fun_no_support)
+                    }
                     tvExit -> {
                         CommonDialog.Builder(mContext)
                             .setMessage(getString(R.string.exit_tips))
@@ -71,6 +97,7 @@ class SetActivity : BaseActivity<SetViewModel, ActivitySetBinding>() {
                                     }
                                 }).show()
                     }
+
                 }
             }
         }

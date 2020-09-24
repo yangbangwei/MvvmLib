@@ -1,4 +1,4 @@
-package com.yangbw.libtest.utils
+package com.yangbw.libtest.view
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable

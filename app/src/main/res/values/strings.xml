@@ -123,4 +123,8 @@
     <string name="please_input_code">请输入验证码</string>
     <string name="new_phone">新手机号</string>
     <string name="please_input_new_phone">请输入新手机号</string>
+    <string name="confirm_unbind">确定要解除绑定吗？</string>
+
+    <string name="default_size">0.00MB</string>
+    <string name="clear_suc">清除成功</string>
 </resources>

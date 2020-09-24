@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/bg_default</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
 
@@ -26,8 +26,7 @@
         <item name="android:textColor">#ffffff</item><!--toolbar标题字体颜色-->
     </style>
 
-
-    <!-- Toolbar -->
+    <!-- 输入框 -->
     <style name="etCode">
         <item name="android:width">60dp</item>
         <item name="android:height">60dp</item>

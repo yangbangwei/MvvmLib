@@ -49,20 +49,27 @@
 - [ ] Paging3使用
 - [ ] 相机功能
 - [ ] 重新整理第三方框架
-- [ ] 蓝牙模块lib
-- [ ] 串口通讯lib
 - [ ] 单元测试
+- [ ] Android Profiler
+- [ ] LeakCanary检测
+- [ ] GPU过渡绘制，GUP呈现模式分析
 - [ ] 功能完善后，将lib提交jCenter,jitPack
 
 ## 常用开发平台封装
-- [ ] ShareSdk
+- [ ] 分享
 - [ ] 个推
 - [ ] 热修补
+- [ ] Bug收集
+- [ ] 搞得地图
+- [ ] 蓝牙模块
+- [ ] 串口通讯
+- [ ] 打印机
+- [ ] 身份证
 - [ ] 等等
 
 ## 模板功能使用
 支持快速生成页面相关的基类。
-1. 下载目录template下所有文件。
+1. 拷贝项目MvvmLib/template下所有文件。
 2. 放入AndroidStudio 模板路径。
 
     Windows：AS安装目录/plugins/android/lib/templates/gradle-projects
@@ -72,7 +79,6 @@
 3. 重启AndroidStudio。
 4. 鼠标右键 —— New —— AndroidMVVM —— Base基类，填写对应的参数。
 5. 可根据个人习惯进行调整。修改BaseActivity/root/src/app_package文件即可。
-
 
 ## 常用工具
 1. [阿里巴巴矢量图](https://www.iconfont.cn/)

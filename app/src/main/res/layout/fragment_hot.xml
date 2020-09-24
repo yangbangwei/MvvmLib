@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_hot"
         android:layout_width="match_parent"
-        android:background="@color/bg_default"
         android:layout_height="match_parent">
 
         <com.scwang.smart.refresh.layout.SmartRefreshLayout

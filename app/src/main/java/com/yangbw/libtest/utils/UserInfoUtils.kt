@@ -46,7 +46,7 @@ class UserInfoUtils {
          * 获取Token
          */
         fun getToken(): String {
-            return if (getUser() == null) "" else getUser()!!.token!!
+            return if (getUser() == null) "" else getUser()!!.token
         }
 
         /**

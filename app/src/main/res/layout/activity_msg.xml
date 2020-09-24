@@ -308,7 +308,7 @@
                 app:srcCompat="@mipmap/icon_sys_notification" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -324,8 +324,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/no_msg"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                app:layout_constraintStart_toStartOf="@+id/textView42"
-                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+                app:layout_constraintStart_toStartOf="@+id/tv_size"
+                app:layout_constraintTop_toBottomOf="@+id/tv_size" />
 
             <ImageView
                 android:id="@+id/imageView16"
@@ -334,7 +334,7 @@
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView43"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView42"
+                app:layout_constraintTop_toTopOf="@+id/tv_size"
                 app:srcCompat="@mipmap/icon_common_arrow_right_gray" />
 
             <TextView

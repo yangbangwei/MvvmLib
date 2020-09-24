@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.yangbw.libtest.module.discover.hot
+package com.yangbw.libtest.module.discover
 
 import com.flyco.tablayout.listener.CustomTabEntity
 
 /**
- * 与CommonTabLayout搭配使用的实体类。
- *
- * @author vipyinzhiwei
- * @since  2020/5/10
+ * @author :yangbw
+ * @date :2020/9/24
  */
-class TabEntity(private var title: String, private var selectedIcon: Int = 0, private var unSelectedIcon: Int = 0) : CustomTabEntity {
+class TabEntity(
+    private var title: String, private var selectedIcon: Int = 0,
+    private var unSelectedIcon: Int = 0
+) : CustomTabEntity {
 
     override fun getTabTitle(): String {
         return title

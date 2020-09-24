@@ -32,7 +32,7 @@
                 android:textColor="@color/text_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group7" />
+                app:layout_constraintTop_toBottomOf="@+id/gp_clear" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/group"
@@ -83,8 +83,10 @@
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/textView28"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView28" />
+                app:layout_constraintTop_toTopOf="@+id/textView28"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -118,7 +120,7 @@
                 app:srcCompat="@mipmap/icon_common_arrow_right_gray" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group3"
+                android:id="@+id/gp_protocol1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -153,10 +155,10 @@
                 style="@style/div_hor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group3" />
+                app:layout_constraintTop_toBottomOf="@+id/gp_protocol1" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group4"
+                android:id="@+id/gp_protocol2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -190,10 +192,10 @@
                 style="@style/div_hor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/group4" />
+                app:layout_constraintTop_toBottomOf="@+id/gp_protocol2" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group5"
+                android:id="@+id/gp_protocol3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -225,7 +227,7 @@
 
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group6"
+                android:id="@+id/gp_privacy"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -254,10 +256,10 @@
                 android:paddingBottom="15dp"
                 android:text="@string/privacy"
                 app:layout_constraintStart_toStartOf="@+id/textView39"
-                app:layout_constraintTop_toBottomOf="@+id/group5" />
+                app:layout_constraintTop_toBottomOf="@+id/gp_protocol3" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/group7"
+                android:id="@+id/gp_clear"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@color/white"
@@ -275,18 +277,19 @@
                 android:paddingBottom="15dp"
                 android:text="@string/clear_cache"
                 app:layout_constraintStart_toStartOf="@+id/textView40"
-                app:layout_constraintTop_toBottomOf="@+id/group6" />
+                app:layout_constraintTop_toBottomOf="@+id/gp_privacy" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/sp12"
                 app:layout_constraintBottom_toBottomOf="@+id/textView41"
-                app:layout_constraintEnd_toEndOf="@+id/group7"
-                app:layout_constraintTop_toTopOf="@+id/textView41" />
+                app:layout_constraintEnd_toEndOf="@+id/gp_clear"
+                app:layout_constraintTop_toTopOf="@+id/textView41"
+                tools:text="12.20M" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

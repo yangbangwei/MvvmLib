@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.size
 import com.library.common.R
 
 /**
@@ -18,7 +17,7 @@ class VaryViewHelper(override val replaceView: View) : IVaryViewHelper {
     /**
      * 替换view的父view容器
      */
-    private var parentView: ViewGroup? = null
+    private var mParentView: ViewGroup? = null
 
     /**
      * 当前显示的view
@@ -44,22 +43,22 @@ class VaryViewHelper(override val replaceView: View) : IVaryViewHelper {
      * @param view
      */
     override fun showView(view: View) {
-        if (parentView == null) {
+        if (mParentView == null) {
             init()
         }
         if (mCurrentView != view) {
             //移除旧的View
             if (mCurrentView != null) {
-                parentView?.removeView(mCurrentView)
+                mParentView?.removeView(mCurrentView)
             }
             //添加新的View
             mCurrentView = view
-            parentView?.addView(mCurrentView, parentView?.layoutParams)
+            mParentView?.addView(mCurrentView, mParentView?.layoutParams)
         }
     }
 
     private fun init() {
-        parentView =
+        mParentView =
             if (replaceView.parent != null) {
                 replaceView as ViewGroup
             } else {
@@ -82,7 +81,7 @@ class VaryViewHelper(override val replaceView: View) : IVaryViewHelper {
     override fun restoreView() {
         //移除旧的View
         if (mCurrentView != null) {
-            parentView?.removeView(mCurrentView)
+            mParentView?.removeView(mCurrentView)
             mCurrentView = null
         }
     }
