@@ -25,6 +25,7 @@
 13. [`FlycoTabLayout` tabLayout页签](https://github.com/H07000223/FlycoTabLayout)
 14. [`PermissionX` 动态权限管理](https://github.com/guolindev/PermissionX)
 15. [`photoView` 图片预览](https://github.com/chrisbanes/PhotoView)
+16. [`MMKV` ——基于 mmap 的高性能通用 key-value 组件](https://github.com/Tencent/MMKV)
 
 ## 后续完善部分
 - [x] 重新调整，优化流程，精简代码
@@ -50,6 +51,7 @@
 - [ ] 相机功能
 - [ ] 重新整理第三方框架
 - [ ] 单元测试
+- [ ] MMKV——基于 mmap 的高性能通用 key-value 组件
 - [ ] Android Profiler
 - [ ] LeakCanary检测
 - [ ] GPU过渡绘制，GUP呈现模式分析
@@ -60,7 +62,7 @@
 - [ ] 个推
 - [ ] 热修补
 - [ ] Bug收集
-- [ ] 搞得地图
+- [ ] 高德地图
 - [ ] 蓝牙模块
 - [ ] 串口通讯
 - [ ] 打印机
