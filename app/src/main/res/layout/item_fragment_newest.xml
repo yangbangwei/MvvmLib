@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.yangbw.libtest.module.discover.newest.NewestListData" />
+            type="com.yangbw.libtest.entity.NewestListData" />
 
     </data>
 

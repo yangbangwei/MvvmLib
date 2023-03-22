@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.yangbw.libtest.module.discover.hot.HotListData" />
+            type="com.yangbw.libtest.entity.HotListData" />
     </data>
 
     <RelativeLayout
@@ -48,7 +48,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:text="@{data.name}"
                 android:textSize="@dimen/sp12"
                 app:layout_constraintBottom_toTopOf="@+id/tv_date"

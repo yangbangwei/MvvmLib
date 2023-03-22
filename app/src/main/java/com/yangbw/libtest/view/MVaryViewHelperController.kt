@@ -19,7 +19,7 @@ class MVaryViewHelperController private constructor(private val helper: VaryView
     //是否已经调用过restore方法
     private var hasRestore: Boolean = false
 
-    constructor(replaceView: View) : this(VaryViewHelper(replaceView)) {}
+    constructor(replaceView: View) : this(VaryViewHelper(replaceView))
 
 
     override fun showLoading() {
@@ -30,7 +30,7 @@ class MVaryViewHelperController private constructor(private val helper: VaryView
         hasRestore = false
         val layout = helper.inflate(R.layout.layout_page_menu_load)
         msg?.let {
-            val tvMsg = layout.findViewById<TextView>(com.library.common.R.id.tv_msg)
+            val tvMsg = layout.findViewById<TextView>(R.id.tv_msg)
             tvMsg.text = it
         }
         helper.showView(layout)

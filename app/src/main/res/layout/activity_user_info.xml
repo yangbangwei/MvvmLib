@@ -8,7 +8,7 @@
 
         <variable
             name="data"
-            type="com.yangbw.libtest.module.login.UserData" />
+            type="com.yangbw.libtest.entity.UserData" />
 
     </data>
 

@@ -1,5 +1,6 @@
 package com.yangbw.libtest
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.android.aachulk.interceptor.RequestHeaderInterceptor
 import com.library.common.base.BaseApplication
@@ -9,8 +10,8 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.yangbw.libtest.api.interceptor.SessionInterceptor
 import com.yangbw.libtest.common.Constant
-import com.yangbw.libtest.interceptor.SessionInterceptor
 import okhttp3.logging.HttpLoggingInterceptor
 
 /**
@@ -22,6 +23,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 class App : BaseApplication() {
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
 
@@ -43,8 +45,7 @@ class App : BaseApplication() {
         context = this
         AppConfig.builder()
             //单地址和多地址设置
-            .setBaseUrl(Constant.BASE_URL)
-            .setRetSuccess(Constant.CODE_SUCCESS)
+            .setBaseUrl(Constant.BASE_URL).setRetSuccess(Constant.CODE_SUCCESS)
             //日志开关
             .setLogOpen(Constant.OPEN_LOG)
             //请求头拦截器
@@ -55,14 +56,12 @@ class App : BaseApplication() {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             )
             // returnCode非正常态拦截器
-            .addRetCodeInterceptors(SessionInterceptor())
-            .setRetrofit(
+            .addRetCodeInterceptors(SessionInterceptor()).setRetrofit(
                 ApiClient.getInstance().getRetrofit(
                     ApiClient.getInstance().getOkHttpClient(
                         AppConfig.getOkHttpInterceptors()
                     )
                 )
-            )
-            .build()
+            ).build()
     }
 }

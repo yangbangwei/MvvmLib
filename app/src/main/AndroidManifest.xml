@@ -18,29 +18,31 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup"
         tools:targetApi="n">
-        <activity android:name=".module.common.SplashActivity">
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.menu.MenuActivity" />
-        <activity android:name=".module.msg.MsgActivity" />
-        <activity android:name=".module.set.SetActivity" />
-        <activity android:name=".module.userInfo.UserInfoActivity" />
-        <activity android:name=".module.details.DetailsActivity" />
-        <activity android:name=".module.login.LoginActivity" />
-        <activity android:name=".module.login.PhoneActivity" />
-        <activity android:name=".module.common.MainActivity" />
-        <activity android:name=".module.login.CodeActivity" />
-        <activity android:name=".module.userInfo.ChangePhoneActivity" />
-        <activity android:name=".module.userInfo.NewPhoneActivity"/>
+        <activity android:name=".ui.activity.MenuActivity" />
+        <activity android:name=".ui.activity.MsgActivity" />
+        <activity android:name=".ui.activity.SetActivity" />
+        <activity android:name=".ui.activity.UserInfoActivity" />
+        <activity android:name=".ui.activity.DetailsActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.PhoneActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.CodeActivity" />
+        <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.NewPhoneActivity" />
         <activity
-            android:name=".module.userInfo.ChangeNameActivity"
+            android:name=".ui.activity.ChangeNameActivity"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".module.common.WebActivity"
+            android:name=".ui.activity.WebActivity"
             android:launchMode="singleTop" /> <!-- 屏幕适配 -->
         <meta-data
             android:name="design_width_in_dp"

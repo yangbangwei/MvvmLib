@@ -3,18 +3,18 @@ ext {
     //查看错误信息 ./gradlew compileDebug --stacktrace -info      ./gradlew compileDebugSource --stacktrace -info
     //应用配置
     android = [
-            compileSdkVersion: 29,
-            buildToolsVersion: "29.0.3",
+            compileSdkVersion: 30,
+            buildToolsVersion: "30.0.3",
             minSdkVersion    : 21,
-            targetSdkVersion : 29,
-            kotlinVersion    : "1.4.10",
+            targetSdkVersion : 30,
+            kotlinVersion    : "1.6.10",
             versionCode      : 100,
             versionName      : "1.0.0",
             applicationId    : "com.library.common"
     ]
 
     version = [
-            androidSupportSdkVersion: "29.0.3",
+            androidSupportSdkVersion: "30.0.3",
             okhttpSdkVersion        : "4.4.1",
             retrofitSdkVersion      : "2.7.2",
             roomSdkVersion          : "1.1.1",
@@ -89,7 +89,8 @@ ext {
             //权限管理
             "permissionx"               : "com.permissionx.guolindev:permissionx:1.3.0",
             //图片缩放
-            "photoView"                 : "com.github.chrisbanes:PhotoView:2.3.0"
-
+            "photoView"                 : "com.github.chrisbanes:PhotoView:2.3.0",
+            //缓存
+            "mmkv"                      : "com.tencent:mmkv:1.2.15"
     ]
 }

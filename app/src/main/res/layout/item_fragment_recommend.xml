@@ -7,7 +7,7 @@
     <data>
         <variable
             name="item"
-            type="com.yangbw.libtest.module.discover.recommend.RecommendListData" />
+            type="com.yangbw.libtest.entity.RecommendListData" />
 
     </data>
 

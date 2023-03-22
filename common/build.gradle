@@ -10,12 +10,6 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-        //ARouter添加的
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
-            }
-        }
     }
 
     buildFeatures {
@@ -101,6 +95,8 @@ dependencies {
     api rootProject.ext.dependencies["permissionx"]
     //图片缩放
     api rootProject.ext.dependencies["photoView"]
+    //缓存
+    api rootProject.ext.dependencies["mmkv"]
 }
 repositories {
     mavenCentral()

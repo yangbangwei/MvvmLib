@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.yangbw.libtest.module.home.HomeData" />
+            type="com.yangbw.libtest.entity.HomeData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,12 +19,12 @@
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:scaleType="fitCenter"
             app:loadRoundImage="@{data.img}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -51,7 +51,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:text="@{data.img}"
             android:singleLine="true"
             android:ellipsize="end"

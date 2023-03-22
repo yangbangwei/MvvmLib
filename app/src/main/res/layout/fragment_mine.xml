@@ -9,7 +9,7 @@
 
         <variable
             name="mineData"
-            type="com.yangbw.libtest.module.mine.MineData" />
+            type="com.yangbw.libtest.entity.MineData" />
     </data>
 
 
@@ -105,7 +105,6 @@
                 android:id="@+id/tv_payment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_fragment_mine_wait_payment"
                 android:drawablePadding="3dp"
                 android:text="@string/mine_wait"
                 android:textColor="@color/black"
@@ -113,13 +112,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/tv_receiving"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                app:drawableTopCompat="@mipmap/ic_fragment_mine_wait_payment"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_receiving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_fragment_mine_wait_receiving"
                 android:drawablePadding="3dp"
                 android:text="@string/mine_wait_receiving"
                 android:textColor="@color/black"
@@ -127,13 +126,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/tv_payment"
+                app:drawableTopCompat="@mipmap/ic_fragment_mine_wait_receiving"
                 app:layout_constraintTop_toTopOf="@+id/tv_payment" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_fragment_mine_wait_comment"
                 android:drawablePadding="3dp"
                 android:text="@string/mine_remain"
                 android:textColor="@color/black"
@@ -141,13 +140,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView6"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/tv_receiving"
+                app:drawableTopCompat="@mipmap/ic_fragment_mine_wait_comment"
                 app:layout_constraintTop_toTopOf="@+id/tv_receiving" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_fragment_mine_wait_all_order"
                 android:drawablePadding="3dp"
                 android:text="@string/mine_order_all"
                 android:textColor="@color/black"
@@ -155,6 +154,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:drawableTopCompat="@mipmap/ic_fragment_mine_wait_all_order"
                 app:layout_constraintTop_toTopOf="@+id/textView5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -285,7 +285,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:drawableTop="@mipmap/ic_fragment_mine_invite"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_invite_reward"
@@ -294,13 +293,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView7"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                app:drawableTopCompat="@mipmap/ic_fragment_mine_invite"
                 app:layout_constraintTop_toTopOf="@+id/textView7" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/icon_mine_page_address"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_address"
@@ -309,13 +308,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView9"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:drawableTopCompat="@mipmap/icon_mine_page_address"
                 app:layout_constraintTop_toTopOf="@+id/textView9" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/icon_mine_page_receipt"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_invoice"
@@ -324,6 +323,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView10"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView7"
+                app:drawableTopCompat="@mipmap/icon_mine_page_receipt"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
 
             <TextView
@@ -332,7 +332,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
-                android:drawableTop="@mipmap/icon_mine_page_service"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_service"
@@ -340,6 +339,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:drawableTopCompat="@mipmap/icon_mine_page_service"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -347,7 +347,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:drawableTop="@mipmap/icon_mine_page_collection"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_collcetion"
@@ -355,13 +354,13 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView10"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:drawableTopCompat="@mipmap/icon_mine_page_collection"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/icon_mine_page_reminder"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_arrival"
@@ -370,13 +369,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView11"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
+                app:drawableTopCompat="@mipmap/icon_mine_page_reminder"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/icon_mine_page_help"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_help"
@@ -385,13 +384,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView12"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
+                app:drawableTopCompat="@mipmap/icon_mine_page_help"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_gift_card"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_card"
@@ -400,6 +399,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView13"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:drawableTopCompat="@mipmap/ic_gift_card"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />
 
             <TextView
@@ -408,7 +408,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="20dp"
-                android:drawableTop="@mipmap/icon_mine_page_service"
                 android:drawablePadding="3dp"
                 android:text="@string/mine_service"
                 android:textSize="@dimen/sp10"
@@ -417,13 +416,13 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView11"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
+                app:drawableTopCompat="@mipmap/icon_mine_page_service"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_share_pupu"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_share"
@@ -432,13 +431,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView15"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView17"
+                app:drawableTopCompat="@mipmap/ic_share_pupu"
                 app:layout_constraintTop_toTopOf="@+id/textView15" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_mine_fragment_about_pupu"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_about"
@@ -447,13 +446,13 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView16"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textView18"
+                app:drawableTopCompat="@mipmap/ic_mine_fragment_about_pupu"
                 app:layout_constraintTop_toTopOf="@+id/textView16" />
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:drawableTop="@mipmap/ic_recruit"
                 android:drawablePadding="3dp"
                 android:gravity="center"
                 android:text="@string/mine_bring_in"
@@ -462,6 +461,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView17"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
+                app:drawableTopCompat="@mipmap/ic_recruit"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

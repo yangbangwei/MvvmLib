@@ -1,16 +1,7 @@
 package com.yangbw.libtest.api
 
 import com.yangbw.libtest.common.BaseRes
-import com.yangbw.libtest.dialog.coupon.CouponData
-import com.yangbw.libtest.module.details.DetailsData
-import com.yangbw.libtest.module.discover.hot.HotListData
-import com.yangbw.libtest.module.discover.newest.NewestListData
-import com.yangbw.libtest.module.discover.recommend.RecommendListData
-import com.yangbw.libtest.module.home.BannerInfo
-import com.yangbw.libtest.module.home.UpdateVersion
-import com.yangbw.libtest.module.login.UserData
-import com.yangbw.libtest.module.menu.MenuData
-import com.yangbw.libtest.module.mine.MineData
+import com.yangbw.libtest.entity.*
 import retrofit2.http.*
 
 /**
@@ -34,8 +25,7 @@ interface ApiService {
     @POST("api/login")
     @FormUrlEncoded
     suspend fun login(
-        @Field("phone") username: String,
-        @Field("code") code: String
+        @Field("phone") username: String, @Field("code") code: String
     ): BaseRes<UserData>
 
     @POST("api/verifyCode")
@@ -45,8 +35,7 @@ interface ApiService {
     @POST("api/changePhone")
     @FormUrlEncoded
     suspend fun changePhone(
-        @Field("phone") phone: String,
-        @Field("code") code: String
+        @Field("phone") phone: String, @Field("code") code: String
     ): BaseRes<String>
 
     @GET("api/banners")

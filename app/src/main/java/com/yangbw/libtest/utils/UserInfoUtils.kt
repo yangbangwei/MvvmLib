@@ -2,8 +2,8 @@ package com.yangbw.libtest.utils
 
 import android.text.TextUtils
 import com.blankj.utilcode.util.GsonUtils
-import com.blankj.utilcode.util.SPUtils
-import com.yangbw.libtest.module.login.UserData
+import com.library.common.utils.MMKvUtils
+import com.yangbw.libtest.entity.UserData
 
 /**
  * 用户信息管理类
@@ -21,14 +21,14 @@ class UserInfoUtils {
          * 登录成功，缓存用户信息
          */
         fun setUser(userInfo: UserData) {
-            SPUtils.getInstance().put(USER_INFO, GsonUtils.toJson(userInfo))
+            MMKvUtils.put(USER_INFO, GsonUtils.toJson(userInfo))
         }
 
         /**
          * 获取用户信息
          */
         fun getUser(): UserData? {
-            val userInfo = SPUtils.getInstance().getString(USER_INFO)
+            val userInfo = MMKvUtils.getString(USER_INFO)
             if (TextUtils.isEmpty(userInfo)) {
                 return null
             }
@@ -53,7 +53,7 @@ class UserInfoUtils {
          * 退出登录
          */
         fun logout() {
-            SPUtils.getInstance().remove(USER_INFO)
+            MMKvUtils.removeKey(USER_INFO)
         }
     }
 }

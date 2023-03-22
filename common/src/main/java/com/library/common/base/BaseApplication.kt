@@ -1,8 +1,10 @@
 package com.library.common.base
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.tencent.mmkv.MMKV
 
 /**
  * BaseApplication封装
@@ -13,6 +15,7 @@ import androidx.multidex.MultiDex
 abstract class BaseApplication : Application() {
 
     companion object {
+        @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
 
@@ -21,9 +24,10 @@ abstract class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-        initConfig()
-        //分包
+        MMKV.initialize(this)
         MultiDex.install(this)
+
+        initConfig()
     }
 
 }

@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.yangbw.libtest.R
-import com.yangbw.libtest.module.common.WebActivity
+import com.yangbw.libtest.ui.activity.WebActivity
 
 
 /**
@@ -23,6 +23,7 @@ import com.yangbw.libtest.module.common.WebActivity
  * @author :yangbw
  * @date :2020/8/12
  */
+@Suppress("unused")
 class CommonUtils {
     companion object {
 

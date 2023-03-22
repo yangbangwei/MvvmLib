@@ -6,7 +6,7 @@
     <data>
         <variable
             name="detail"
-            type="com.yangbw.libtest.module.details.DetailsData" />
+            type="com.yangbw.libtest.entity.DetailsData" />
 
     </data>
 

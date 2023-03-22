@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.yangbw.libtest.module.menu.MenuData" />
+            type="com.yangbw.libtest.entity.MenuData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,7 +107,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:drawableTop="@mipmap/ic_like"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="@{item.like}"
@@ -117,6 +116,7 @@
             app:layout_constraintEnd_toEndOf="@+id/textView56"
             app:layout_constraintStart_toStartOf="@+id/textView56"
             app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+            app:drawableTopCompat="@mipmap/ic_like"
             tools:text="29" />
 
         <TextView
@@ -124,7 +124,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:drawableTop="@mipmap/ic_comment"
             android:drawablePadding="5dp"
             android:gravity="center"
             android:text="@{item.attention}"
@@ -134,6 +133,7 @@
             app:layout_constraintEnd_toEndOf="@+id/imageView25"
             app:layout_constraintStart_toStartOf="@+id/imageView25"
             app:layout_constraintTop_toBottomOf="@+id/textView55"
+            app:drawableTopCompat="@mipmap/ic_comment"
             tools:text="20" />
 
         <ImageView

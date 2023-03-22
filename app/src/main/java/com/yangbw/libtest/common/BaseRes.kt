@@ -11,9 +11,7 @@ import com.library.common.mvvm.IRes
  */
 @Keep
 data class BaseRes<T>(
-    val msg: String,
-    val code: String,
-    val `data`: T
+    val msg: String, val code: String, val `data`: T
 ) : IRes<T> {
     override fun getBaseMsg() = msg
     override fun getBaseCode() = code
